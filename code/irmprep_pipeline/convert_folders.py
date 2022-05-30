@@ -5,23 +5,23 @@
 @modified: romy
 """
 
-"riy"
-
 import os
 import os.path
 from os import path,makedirs,listdir
 from distutils.dir_util import copy_tree
 
-
-exe_path = os.path.join(*os.getcwd().split("/")[1:5])
-print('Running script in following environment : ',exe_path)
-
-try:
-    data_path = os.path.join(exe_path,'data')
-except:
-    data_path = '/mnt/data/romy/hynomed/MRI_raw' #data stored on the cluster intern
-
+data_path = '/mnt/data/romy/hypnomed/MRI_raw'
 print('Using data from ',data_path)
+
+# exe_path = os.path.join(*os.getcwd().split("/")[1:5])
+# print('Running script in following environment : ',exe_path)
+
+# try:
+#     data_path = os.path.join(exe_path,'data')
+# except:
+#     data_path = '/mnt/data/romy/hynomed/MRI_raw' #data stored on the cluster intern
+
+
 
 if not path.isdir(path.join(data_path,'DICOM')):
     makedirs(path.join(data_path,'DICOM'))
