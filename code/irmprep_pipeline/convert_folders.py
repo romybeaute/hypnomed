@@ -6,11 +6,13 @@
 """
 
 import os
+import os.path
 from os import path,makedirs,listdir
 from distutils.dir_util import copy_tree
 
-exe_path = os.getcwd()
-print('Running script in ',exe_path)
+
+exe_path = os.path.join(*os.getcwd().split("/")[1:5])
+print('Running script in following environment : ',exe_path)
 
 try:
     data_path = os.path.join(exe_path,'data')
