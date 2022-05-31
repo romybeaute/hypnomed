@@ -17,54 +17,53 @@ def infotodict(seqinfo):
     subindex: sub index within group
     """
 
-    t1w = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T1w')
+    #OLD KEYS   
+    # t1w = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T1w')
     
-    rest = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-rest_bold')
-    rest_sbref = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-rest_sbref')
+    # rest = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-rest_bold')
+    # rest_sbref = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-rest_sbref')
     
-    fa = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-fa_bold')
-    fa_sbref = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-fa_sbref')
+    # fa = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-fa_bold')
+    # fa_sbref = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-fa_sbref')
 
-    om = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-om_bold')
-    om_sbref = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-om_sbref')
+    # om = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-om_bold')
+    # om_sbref = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-om_sbref')
 
-    fmap_mag =  create_key('sub-{subject}/{session}/fmap/sub-{subject}_{session}_magnitude')
-    fmap_phase = create_key('sub-{subject}/{session}/fmap/sub-{subject}_{session}_phasediff')
+    # fmap_mag =  create_key('sub-{subject}/{session}/fmap/sub-{subject}_{session}_magnitude')
+    # fmap_phase = create_key('sub-{subject}/{session}/fmap/sub-{subject}_{session}_phasediff')
 
-    
-    info = {t1w: [],
-            rest: [], fa: [], om: [], 
-            rest_sbref: [], fa_sbref: [], om_sbref: [],
-            fmap_mag: [], fmap_phase: []
+    #NEW KEYS
+
+    #anat
+    # t1w = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T1w') #T1 (anatomique)
+    # t2w = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T2w') #T2 (anatomique)
+    # t2star = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T2starw') #T2* (anatomique)
+
+    #fmap
+
+    #func
+    rs_b1 = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-rs_run-1_bold') #resting state block 1
+    rs_b2 = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-rs_run-2_bold') #resting state block 2
+    rs_b3 = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-rs_run-3_bold') #resting state block 3
+
+
+    info = {
+            #t1w: [],
+            #t2w: [],
+            #t2star:[],
+            rs_b1: [], rs_b2: [], rs_b3: []
             }
     
 
     for s in seqinfo:
-        
-        if (s.dim1 == 320) and ('T1' in s.series_id) and ('NORM' in s.image_type):
-            info[t1w] = [s.series_id]
+            
+        if (('8' in s.series_id) | ('rs' in s.series_id)):
+            info[rs_b1] = [s.series_id] 
+        if (('16' in s.series_id) | ('rs' in s.series_id)):
+            info[rs_b2] = [s.series_id]
+        if (('22' in s.series_id) | ('rs' in s.series_id)):
+            info[rs_b3] = [s.series_id] 
             
             
-        if (s.dim4 == 450) and (('normal' in s.series_id) | ('rest' in s.series_id)):
-            info[rest] = [s.series_id] 
-        if (s.dim4 == 450) and (('ouvert' in s.series_id) | ('om' in s.series_id)):
-            info[om] = [s.series_id] 
-        if (s.dim4 == 450) and (('compas' in s.series_id) | ('fa' in s.series_id)):
-            info[fa] = [s.series_id] 
-            
-            
-        if (s.dim1 == 88) and (s.dim4 == 1) and (('normal' in s.series_id) | ('rest' in s.series_id)):
-            info[rest_sbref] = [s.series_id] 
-        if (s.dim1 == 88) and (s.dim4 == 1) and (('ouvert' in s.series_id) | ('om' in s.series_id)):
-            info[fa_sbref] = [s.series_id] 
-        if (s.dim1 == 88) and (s.dim4 == 1) and (('compas' in s.series_id) | ('fa' in s.series_id)):
-            info[om_sbref] = [s.series_id] 
-            
-            
-        if (s.dim3 == 104) and (s.dim4 == 1) and ('gre_field_mapping' in s.protocol_name):
-            info[fmap_mag] = [s.series_id]
-        if (s.dim3 == 52) and (s.dim4 == 1) and ('gre_field_mapping' in s.protocol_name):
-            info[fmap_phase] = [s.series_id]
-          
           
     return info

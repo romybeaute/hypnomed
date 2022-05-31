@@ -38,7 +38,7 @@ for sub_id,subject_folder in enumerate([data for data in listdir(data_path) if d
                 makedirs(session_folder_BIDS)
                 print('Created BIDS path folder : ',session_folder_BIDS)
         scans_path = path.join(data_path,subject_folder,'scans') #data before being organized in DICOM
-        
+
         for scan_folder in listdir(scans_path):
             if not (scan_folder.startswith('.')):
 
