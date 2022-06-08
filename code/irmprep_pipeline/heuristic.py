@@ -39,7 +39,8 @@ def infotodict(seqinfo):
     t2w = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T2w') #T2 (anatomique)
 
     #fmap
-    t2star = create_key('sub-{subject}/{session}/fmap/sub-{subject}_{session}_T2starw') #T2* (field map)
+    fmap_mag = create_key('sub-{subject}/{session}/fmap/sub-{subject}_{session}_magnitude') #T2* 1st file (field map)
+    fmap_phase = create_key('sub-{subject}/{session}/fmap/sub-{subject}_{session}_phasediff') #T2* 2nd file (field map)
 
     #func
     rs_b1 = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-rs_run-1_bold') #resting state block 1
@@ -47,14 +48,10 @@ def infotodict(seqinfo):
     rs_b3 = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-rs_run-3_bold') #resting state block 3
 
 
-    info = {
-            t1w: [],
-            t2w: [],
-            t2star:[],
-            rs_b1: [], 
-            rs_b2: [], 
-            rs_b3: []
-            }
+    info = {t1w: [], t2w: [], #anat
+            fmap_mag: [], fmap_phase: [], #fmap
+            rs_b1: [], rs_b2: [], rs_b3: []} #func
+            
     
 
     for s in seqinfo:
@@ -68,8 +65,10 @@ def infotodict(seqinfo):
             info[t2w] = [s.series_id]
 
         # T2*
+        if (('12' in s.series_id) | ('t2star' in s.series_id)):
+            info[fmap_mag] = [s.series_id]
         if (('13' in s.series_id) | ('t2star' in s.series_id)):
-            info[t2star] = [s.series_id]
+            info[fmap_phase] = [s.series_id]
             
         # RS blocks
         if (('8' in s.series_id) | ('rs' in s.series_id)):
