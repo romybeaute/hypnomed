@@ -8,7 +8,7 @@
 
 BIDSDIR='/mnt/data/romy/hypnomed/MRI_raw/BIDS/'
 OUTDIR='/mnt/data/romy/hypnomed/recon_all'
-IMG='/mnt/data/romy/singularity_images/fmriprep.simg'
+IMG='/mnt/data/romy/singularity_images/fmriprep-21.0.2.simg'
 
 SUBJ=(`find $BIDSDIR -mindepth 1 -maxdepth 1  -name sub* -type d`)
 
