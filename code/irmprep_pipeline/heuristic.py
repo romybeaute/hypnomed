@@ -39,7 +39,7 @@ def infotodict(seqinfo):
     t2w = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T2w') #T2 (anatomique)
 
     #fmap
-    t2star = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T2starw') #T2* (field map)
+    t2star = create_key('sub-{subject}/{session}/fmap/sub-{subject}_{session}_T2starw') #T2* (field map)
 
     #func
     rs_b1 = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-rs_run-1_bold') #resting state block 1
