@@ -35,11 +35,11 @@ def infotodict(seqinfo):
     #NEW KEYS
 
     #anat
-    # t1w = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T1w') #T1 (anatomique)
-    # t2w = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T2w') #T2 (anatomique)
-    # t2star = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T2starw') #T2* (anatomique)
+    t1w = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T1w') #T1 (anatomique)
+    t2w = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T2w') #T2 (anatomique)
 
     #fmap
+    t2star = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_T2starw') #T2* (field map)
 
     #func
     rs_b1 = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-rs_run-1_bold') #resting state block 1
@@ -48,15 +48,30 @@ def infotodict(seqinfo):
 
 
     info = {
-            #t1w: [],
-            #t2w: [],
-            #t2star:[],
-            rs_b1: [], rs_b2: [], rs_b3: []
+            t1w: [],
+            t2w: [],
+            t2star:[],
+            rs_b1: [], 
+            rs_b2: [], 
+            rs_b3: []
             }
     
 
     for s in seqinfo:
+        
+        # T1
+        if (('21' in s.series_id) | ('3DT1' in s.series_id)):
+            info[t1w] = [s.series_id]
+
+        # T2
+        if (('15' in s.series_id) | ('3DT2' in s.series_id)):
+            info[t2w] = [s.series_id]
+
+        # T2*
+        if (('13' in s.series_id) | ('t2star' in s.series_id)):
+            info[t2star] = [s.series_id]
             
+        # RS blocks
         if (('8' in s.series_id) | ('rs' in s.series_id)):
             info[rs_b1] = [s.series_id] 
         if (('16' in s.series_id) | ('rs' in s.series_id)):
