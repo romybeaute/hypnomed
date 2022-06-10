@@ -54,7 +54,13 @@ def infotodict(seqinfo):
             
     
 
+# if (('rest' in s.series_id) and ((max(s.total_files_till_now)):
+
+
+
     for s in seqinfo:
+
+        print(s)
         
         # T1
         if (('21' in s.series_id) | ('3DT1' in s.series_id)):
