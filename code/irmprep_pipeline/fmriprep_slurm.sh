@@ -15,8 +15,8 @@ export BIDS_DIR="$STUDY/MRI_raw/BIDS"
 DERIVS_DIR="derivatives/fmriprep-latest"
 
 # Prepare some writeable bind-mount points.
-TEMPLATEFLOW_HOST_HOME=$STUDY/scripts/pre.cache/templateflow
-FMRIPREP_HOST_CACHE=$STUDY/scripts/.cache/fmriprep
+TEMPLATEFLOW_HOST_HOME=$STUDY/git/code/pre.cache/templateflow
+FMRIPREP_HOST_CACHE=$STUDY/git/code/.cache/fmriprep
 
 mkdir -p ${TEMPLATEFLOW_HOST_HOME}
 mkdir -p ${FMRIPREP_HOST_CACHE}
