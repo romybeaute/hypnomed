@@ -1,0 +1,44 @@
+sub number;sub code;version ;ER runs;RS runs;comments;reorient;movement;quality check preproc (does the wT1 match the wwraRUN and MNI);Exclude >1.5mm movement;ER Level 1 ;RS level 1
+1;KA001;B;12  20  26;8  18  24;;x;ok;x;;ok;ok
+5;AV005;A;10  18  24;8  16  22;excl run M;x;several big spikes in run M;x;Run M;run M not visible;too much movement
+7;AV007;A;10  18  24;8  16  22;;x;ok;x;;ok;ok
+14;JC014;B;10  16  24;8  14  22;;x;ok;x;;ok;ok
+21;GM021;B;10  16  24;8  14  22;t2 refaite à la fin du protocole;x;ok;x;;ok;much movement in M
+24;PM024;A;10  18  24;8  16  22;resp signal fluctuant;x;ok;x;;ok;very clear acti
+25;CS025;B;10  18  24;8  16  22;;x;ok ;x;;ok;ok
+29;NJ029;B;10  18  24;8  16  22;;x;ok;x;;ok;ok (activation in eyes)
+34;HR034;B;10  16  24;8  14  22;petit mouvement dans dernière ER bloc 3 (micro-endormissement);x;ok;x;;ok;movement in M
+38;BO038;A;10  16  24;8  14  22;;x;Large spikes, esp in RunH;x; run H;run M not well visible;movement in H
+41;MA041;B;10  16  24;8  14  22;respi un peu faible pendant bloc 1;x;ok;x;;ok;ok
+43;BA043;A;10  18  24;8  16  22;petit cervelet;x;ok;x;;almost none in control;much movement in M
+44;SR044;A;10  18  24;8  16  22;2 coupes superieures manquantes => make mask;x;ok;x;;ok;ok
+46;PV046;A;10  16  24;8  14  22;;x;ok;x;;none in run M;almost nothing
+50;SC050;B;10  18  24;8  16  22;;x;ok;x;;ok;ok
+51;PJ051;B;10  18  24;8  16  22;;x;ok;x;;ok;ok
+52;GN052;A;10  18  24;8  16  22;;x;ok;x;;ok;ok
+56;CE056;A;10  18  24;8  16  22;;x;ok;x;;almost none in M and none in H;ok
+60;LA060;B;10  (18) 31 35;8 (16) 29 33;arret du protocole pour tachycardie;x;ok;x;;almost none in M and none in H;ok
+62;CT062;B;12  20  26;10 18  24;;x;ok;x;;ok;ok
+64;FV064;B;10  18  31;8  16  29;pause protocole (toilettes) entre 2 et 3;x;ok;x;;ok;ok
+67;BL067;A;17  23  31;15 21 29;;x;ok;x;;none in C;ok (activation in CSF)
+70;EH070;B;10  18  24;8  16  22;bougé pendant T1, refait, utiliser 26/27;x;ok (small spikes);x;run M > exclude first part;almost none in H;ok
+73;BF073;A;10  16  24;8  14  22;;x;ok;x;;none in M;ok
+76;HM076;A;10  18  24;8  16  22;;x;ok;x;;ok;ok
+78;MG078;B;10  18  24;8  16  22;leger mouvement T1;x;ok;x;;ok;much movement in M
+81;CF081;B;11 (17) 28 36;9 (15) 26 34 ; pause protocole (toilettes) pendant images bloc 2. Refait Bloc 2 RS+ER. Quelques mouvements pendant la deuxième fois.  ;x;some big spikes;x;run M and Run H;ok;exclude for movement
+82;BC082;A;10  18  25;8  16  22;beaucoup de mouvement lors du troisieme run ER. Mouvement sur T1. Perturbé par le bruit.;x;big spikes on run H, run M ok;x;run H;none in H;movement in M&H
+84;EC084;A;10  16  24;8  14  22;;x;ok;x;;almost none in M, none in H;some movement, activation in nasal cavity
+85;FM085;A;10  18  24;8  16  22;;x;ok (oscillations);x;;ok;ok
+86;RJ086;A;10  16  24;8  14  22;signal respi faible;x;ok;x;;ok (patchy);ok
+87;LP087;A;10  18  24;8  16  22;;x;ok;x;;ok;ok
+89;VJ089;B;10  16  24;8  14  22;micro pas fermé pendant le bloc 1. ;x;ok;x;;ok;ok
+91;MP091;A;10  18  24;8  16  22;Micro-endormissements;x;ok (some spikes);x;;ok;ok
+93;BA093;B;16  24 30;14 22  28;reboot machine avant début;x;ok;x;;ok;ok (some movement)
+94;LD094;B;10  18  24;8  16  22;;x;ok;x;;ok;ok
+96;BR096;A;10  16  24;8  14  22;quelques petits mouvements sur ER et RS;x;ok (some spikes);x;;patchy..;ok
+100;GP100;A;10  16  24;8  14  22;probleme d’audio pendant le Bloc 3, son fluctuant;x;ok;x;;ok;ok
+101;DM101;B;10  18  24;8  16  22;;x;several large spikes in runH and run M => exclude?;x;run M and Run H, run C?;none in M and H;ok
+102;AB102;B;13  21  27 ;11 19 25;Probleme trigger lors de audio A, repris Audio A sans intro A. Respiration: plus de signal à partir de la 3ieme expo des images;x;ok ;x;;ok;ok
+;;;;;;;;;;;
+;;version A= CMH;;;;;;;;;
+;;version B= CHM;;;;;;;;;
