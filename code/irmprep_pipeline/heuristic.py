@@ -59,31 +59,50 @@ def infotodict(seqinfo):
 
 
     for s in seqinfo:
-
-        print(s)
         
-        # T1
-        if (('21' in s.series_id) | ('3DT1' in s.series_id)):
+        # # T1
+        # if (('21' in s.series_id) | ('3DT1' in s.series_id)):
+        #     info[t1w] = [s.series_id]
+
+        # # T2
+        # if (('15' in s.series_id) | ('3DT2' in s.series_id)):
+        #     info[t2w] = [s.series_id]
+
+        # # T2*
+        # if (('12' in s.series_id) | ('t2star' in s.series_id)):
+        #     info[fmap_mag] = [s.series_id]
+        # if (('13' in s.series_id) | ('t2star' in s.series_id)):
+        #     info[fmap_phase] = [s.series_id]
+            
+        # # RS blocks
+        # if (('8' in s.series_id) | ('rs' in s.series_id)):
+        #     info[rs_b1] = [s.series_id] 
+        # if (('16' in s.series_id) | ('rs' in s.series_id)):
+        #     info[rs_b2] = [s.series_id]
+        # if (('22' in s.series_id) | ('rs' in s.series_id)):
+        #     info[rs_b3] = [s.series_id] 
+            
+                # T1
+        if ('3DT1' in s.series_id) and ('NORM' in s.image_type):
             info[t1w] = [s.series_id]
 
         # T2
-        if (('15' in s.series_id) | ('3DT2' in s.series_id)):
+        if ('3DT2' in s.series_id) and ('NORM' in s.image_type):
             info[t2w] = [s.series_id]
 
         # T2*
-        if (('12' in s.series_id) | ('t2star' in s.series_id)):
-            info[fmap_mag] = [s.series_id]
-        if (('13' in s.series_id) | ('t2star' in s.series_id)):
+        if ('t2star' in s.series_id) and ('NORM' in s.image_type):
+            info[fmap_mag] = [s.series_id] 
+        if ('t2star' in s.series_id) and ('P' in s.image_type):
             info[fmap_phase] = [s.series_id]
             
         # RS blocks
-        if (('8' in s.series_id) | ('rs' in s.series_id)):
+        if (s.total_files_till_now < 1000) and ('rs' in s.series_id):
             info[rs_b1] = [s.series_id] 
-        if (('16' in s.series_id) | ('rs' in s.series_id)):
+        if ((s.total_files_till_now >= 1200) and (s.total_files_till_now <= 2300)) and ('rs' in s.series_id):
             info[rs_b2] = [s.series_id]
-        if (('22' in s.series_id) | ('rs' in s.series_id)):
+        if (s.total_files_till_now > 2500) and ('rs' in s.series_id):
             info[rs_b3] = [s.series_id] 
-            
             
           
     return info
