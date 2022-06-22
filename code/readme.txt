@@ -132,4 +132,16 @@ solution : regarder dans le csv 'MRI_database_logs.csv' (crée depuis le fichier
 
 
 
+********* INFOS FICHIERS *********
+
+VOIR mri_logs_pbs.txt (tout expliqué dedans)
+
+- creation fichier "dicom_deleted" dans /mnt/data/romy/hypnomed/MRI_raw/dicom_deleted)
+==> ce fichier store les fichiers que j'ai supprimés quand il y avait des problèmes. Stockés par id du sujet, donc re-utilisables si nécessaires
+
+- suppression des fichiers à problèmes directement dans /mnt/data/romy/hypnomed/MRI_raw/DICOM
+
+- relance BIDS_conversion.sh à partir de là
+
+
 
