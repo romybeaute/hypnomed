@@ -103,7 +103,9 @@ Quand fmriprep a fini (ou crash), il crée un fichier .html pour chaque sujet
 
 Scripts de visualisation : https://github.com/romybeaute/hypnomed/tree/main/code/Visualize
 
-1. Create visualisation folder, where we will store all the necessary infos for each participant : /mnt/data/romy/hypnomed/MRI_raw/fmri_infos
+1. Create visualisation folder, where we will store all the necessary infos for each participant
+- input : /mnt/data/romy/hypnomed/MRI_raw/DICOM (va regarder les infos de chaque fichier DICOM pour chaque participant)
+- output : /mnt/data/romy/hypnomed/MRI_raw/fmri_infos
 Ce dont on a besoin, pour chaque participant : 
 
 
@@ -117,6 +119,14 @@ Ce dont on a besoin, pour chaque participant :
 --------------------------------------------------------------------------------------------------------
 ********** fmri_infos.ipynb ********** 
 --------------------------------------------------------------------------------------------------------
+Si tout est normal, on devrait avoir : 
+- 3 'rs'
+- 2 'T1'
+- 2 'T2'
+- 2 'T2*'
+
+--> si certains fichiers ont beugués, il est possible que nous en ayons plus (eg 4 T1)
+solution : regarder dans le csv 'MRI_database_logs.csv' (crée depuis le fichier log de Prisca), et enlever ceux que l'on ne veux pas en se référrant aux ids des participants
 
 
 
