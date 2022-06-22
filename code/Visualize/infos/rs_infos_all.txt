@@ -1,0 +1,245 @@
+***** rs informations *****
+
+ sub-01 : EH070
+ total_files_till_now:
+- file 8 : 394
+- file 16 : 2001
+- file 22 : 2801
+
+ sub-02 : LP087
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2005
+- file 22 : 2807
+
+ sub-03 : HM076
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2006
+- file 22 : 2807
+
+ sub-04 : BA043
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2006
+- file 22 : 2808
+
+ sub-05 : BA093
+ total_files_till_now:
+- file 14 : 601
+- file 22 : 2200
+- file 28 : 3001
+
+ sub-06 : MP091
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2010
+- file 22 : 2809
+
+ sub-07 : BL067
+ total_files_till_now:
+- file 15 : 573
+- file 21 : 1375
+- file 29 : 2976
+
+ sub-08 : GM021
+ total_files_till_now:
+- file 8 : 404
+- file 14 : 1208
+- file 22 : 2813
+
+ sub-09 : NJ029
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2004
+- file 22 : 2805
+
+ sub-10 : BC082
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2007
+- file 22 : 2814
+
+ sub-11 : GP100
+ total_files_till_now:
+- file 8 : 404
+- file 14 : 1207
+- file 22 : 2815
+
+ sub-12 : FV064
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2007
+- file 29 : 2976
+
+ sub-13 : GN052
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2003
+- file 22 : 2805
+
+ sub-14 : PV046
+ total_files_till_now:
+- file 8 : 404
+- file 14 : 1209
+- file 22 : 2810
+
+ sub-15 : VJ089
+ total_files_till_now:
+- file 8 : 404
+- file 14 : 1208
+- file 22 : 2806
+
+ sub-16 : LA060
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2009
+- file 29 : 2959
+- file 33 : 3344
+
+ sub-17 : PM024
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2009
+- file 22 : 2810
+
+ sub-18 : LD094
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2009
+- file 22 : 2812
+
+ sub-19 : BF073
+ total_files_till_now:
+- file 8 : 404
+- file 14 : 1205
+- file 22 : 2806
+
+ sub-20 : BO038
+ total_files_till_now:
+- file 8 : 404
+- file 14 : 1200
+- file 22 : 2799
+
+ sub-21 : CS025
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2008
+- file 22 : 2822
+
+ sub-22 : FM085
+ total_files_till_now:
+- file 8 : 384
+- file 16 : 1953
+- file 22 : 2723
+
+ sub-23 : MA041
+ total_files_till_now:
+- file 8 : 404
+- file 14 : 1203
+- file 22 : 2810
+
+ sub-24 : AB102
+ total_files_till_now:
+- file 11 : 401
+- file 19 : 1916
+- file 25 : 2717
+
+ sub-25 : KA001
+ total_files_till_now:
+- file 8 : 404
+- file 18 : 2005
+- file 24 : 2806
+
+ sub-26 : RJ086
+ total_files_till_now:
+- file 8 : 404
+- file 14 : 1209
+- file 22 : 2811
+
+ sub-27 : CF081
+ total_files_till_now:
+- file 9 : 404
+- file 15 : 1207
+- file 26 : 1681
+- file 34 : 3282
+
+ sub-28 : EC084
+ total_files_till_now:
+- file 8 : 404
+- file 14 : 1210
+- file 22 : 2811
+
+ sub-29 : HR034
+ total_files_till_now:
+- file 8 : 404
+- file 14 : 1209
+- file 22 : 2808
+
+ sub-30 : CT062
+ total_files_till_now:
+- file 10 : 405
+- file 18 : 2007
+- file 24 : 2812
+
+ sub-31 : DM101
+ total_files_till_now:
+- file 8 : 384
+- file 16 : 1954
+- file 22 : 2722
+
+ sub-32 : SR044
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2004
+- file 22 : 2805
+- file 101 : 3048
+- file 5003 : 3057
+
+ sub-33 : JC014
+ total_files_till_now:
+- file 8 : 404
+- file 14 : 1209
+- file 22 : 2811
+
+ sub-34 : AV007
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2009
+- file 22 : 2810
+
+ sub-35 : PJ051
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2005
+- file 22 : 2802
+
+ sub-36 : CE056
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 1645
+- file 22 : 2447
+
+ sub-37 : MG078
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2012
+- file 22 : 2813
+
+ sub-38 : SC050
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2006
+- file 22 : 2812
+
+ sub-39 : BR096
+ total_files_till_now:
+- file 8 : 404
+- file 14 : 1207
+- file 22 : 2810
+
+ sub-40 : AV005
+ total_files_till_now:
+- file 8 : 395
+- file 16 : 1994
+- file 22 : 2792

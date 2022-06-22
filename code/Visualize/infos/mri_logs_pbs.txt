@@ -1,0 +1,184 @@
+Suppression des fichiers à erreurs directement dans : /mnt/data/romy/hypnomed/MRI_raw/DICOM
+Aussi voir : /home/romy.beaute/projects/hypnomed/code/Visualize/infos/MRI_database_logs.csv
+
+
+***  sub-01 (EH070) *** :
+"bougé pendant T1, refait, utiliser 26/27"
+==> suppression 20_anat_3DT1_0.9iso & 21_anat_3DT1_0.9iso
+
+
+
+***  sub-16 (LA060) *** :
+"arret du protocole pour tachycardie"
+"RS : 8 (16) 29 33"
+==> suppression 16_RUNx_rs_3mmiso_TR2.4_44cpe
+
+
+
+***  sub-27 (CF081) *** :
+"pause protocole (toilettes) pendant images bloc 2. Refait Bloc 2 RS+ER. Quelques mouvements pendant la deuxième fois."
+"RS : 9 (15) 26 34"
+==> suppression 15_RUNx_rs_3mmiso_TR2.4_44cpe
+
+
+
+
+
+
+------------------------------------------------------------
+EH070
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** rs *****
+sub-01 : NEUCOSE_ELSES07842 
+
+8      8_RUNx_rs_3mmiso_TR2.4_44cpe
+16    16_RUNx_rs_3mmiso_TR2.4_44cpe
+22    22_RUNx_rs_3mmiso_TR2.4_44cpe
+Name: dcm_dir_name, dtype: object
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** 3DT1 *****
+sub-01 : NEUCOSE_ELSES07842 
+
+20    20_anat_3DT1_0.9iso
+21    21_anat_3DT1_0.9iso
+26    26_anat_3DT1_0.9iso
+27    27_anat_3DT1_0.9iso
+Name: dcm_dir_name, dtype: object
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** 3DT2 *****
+sub-01 : NEUCOSE_ELSES07842 
+
+14    14_anat_3DT2_0.9iso
+15    15_anat_3DT2_0.9iso
+Name: dcm_dir_name, dtype: object
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** t2star *****
+sub-01 : NEUCOSE_ELSES07842 
+
+12    12_anat_t2star_2iso
+13    13_anat_t2star_2iso
+Name: dcm_dir_name, dtype: object
+
+
+
+
+
+------------------------------------------------------------
+GM021
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** rs *****
+sub-08 : NEUCOSE_MAUGI07290 
+
+8      8_RUNx_rs_3mmiso_TR2.4_44cpe
+14    14_RUNx_rs_3mmiso_TR2.4_44cpe
+22    22_RUNx_rs_3mmiso_TR2.4_44cpe
+Name: dcm_dir_name, dtype: object
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** 3DT1 *****
+sub-08 : NEUCOSE_MAUGI07290 
+
+12    12_anat_3DT1_0.9iso
+13    13_anat_3DT1_0.9iso
+Name: dcm_dir_name, dtype: object
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** 3DT2 *****
+sub-08 : NEUCOSE_MAUGI07290 
+
+20    20_anat_3DT2_0.9iso
+21    21_anat_3DT2_0.9iso
+Name: dcm_dir_name, dtype: object
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** t2star *****
+sub-08 : NEUCOSE_MAUGI07290 
+
+18    18_anat_t2star_2iso
+19    19_anat_t2star_2iso
+Name: dcm_dir_name, dtype: object
+
+
+
+
+------------------------------------------------------------
+LA060
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** rs *****
+sub-16 : NEUCOSE_LUNAN07942 
+
+8      8_RUNx_rs_3mmiso_TR2.4_44cpe
+16    16_RUNx_rs_3mmiso_TR2.4_44cpe
+29    29_RUNx_rs_3mmiso_TR2.4_44cpe
+33    33_RUNx_rs_3mmiso_TR2.4_44cpe
+Name: dcm_dir_name, dtype: object
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** 3DT1 *****
+sub-16 : NEUCOSE_LUNAN07942 
+
+27    27_anat_3DT1_0.9iso
+28    28_anat_3DT1_0.9iso
+Name: dcm_dir_name, dtype: object
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** 3DT2 *****
+sub-16 : NEUCOSE_LUNAN07942 
+
+14    14_anat_3DT2_0.9iso
+15    15_anat_3DT2_0.9iso
+Name: dcm_dir_name, dtype: object
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** t2star *****
+sub-16 : NEUCOSE_LUNAN07942 
+
+12    12_anat_t2star_2iso
+13    13_anat_t2star_2iso
+Name: dcm_dir_name, dtype: object
+
+
+
+
+------------------------------------------------------------
+CF081
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** rs *****
+sub-27 : NEUCOSE_CAMFA08095 
+
+9      9_RUNx_rs_3mmiso_TR2.4_44cpe
+15    15_RUNx_rs_3mmiso_TR2.4_44cpe
+26    26_RUNx_rs_3mmiso_TR2.4_44cpe
+34    34_RUNx_rs_3mmiso_TR2.4_44cpe
+Name: dcm_dir_name, dtype: object
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** 3DT1 *****
+sub-27 : NEUCOSE_CAMFA08095 
+
+13    13_anat_3DT1_0.9iso
+14    14_anat_3DT1_0.9iso
+Name: dcm_dir_name, dtype: object
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** 3DT2 *****
+sub-27 : NEUCOSE_CAMFA08095 
+
+32    32_anat_3DT2_0.9iso
+33    33_anat_3DT2_0.9iso
+Name: dcm_dir_name, dtype: object
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+ ***** t2star *****
+sub-27 : NEUCOSE_CAMFA08095 
+
+30    30_anat_t2star_2iso
+31    31_anat_t2star_2iso
+Name: dcm_dir_name, dtype: object
