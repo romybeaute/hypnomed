@@ -1,3 +1,19 @@
+"""
+Ressources (git):
+- https://github.com/nipy/heudiconv/blob/master/heudiconv/heuristics/test_b0dwi_for_fmap.py
+- https://github.com/nipy/heudiconv
+
+
+Ressources (perso):
+https://github.com/romybeaute/hypnomed/tree/main/code/Visualize
+To define criterium of selection for sequinfo, you can use :
+- function heuridiconv_infos.ipynb (in Visualize section)
+- fichier rs_infos_all.txt (generated from heuriconv_infos.ipynb)
+- also report to MRI-database_logs.csv (to see if some beugs when recording)
+
+"""
+
+
 import os 
 
 def create_key(template, outtype=('nii.gz',), annotation_classes=None):
@@ -97,11 +113,12 @@ def infotodict(seqinfo):
             info[fmap_phase] = [s.series_id]
             
         # RS blocks
-        if (s.total_files_till_now < 1000) and ('rs' in s.series_id):
+        if (s.total_files_till_now < 700) and ('rs' in s.series_id):
             info[rs_b1] = [s.series_id] 
-        if ((s.total_files_till_now >= 1200) and (s.total_files_till_now <= 2300)) and ('rs' in s.series_id):
+        # if ((s.total_files_till_now >= 1200) and (s.total_files_till_now <= 2300)) and ('rs' in s.series_id) | (s.series_uid == '1.3.12.2.1107.5.2.43.66012.2018073011525955642013644.0.0.0'):
+        if ('rs' in s.series_id) and ((s.total_files_till_now >= 1200) and ((s.total_files_till_now <= 2300)  | (s.series_uid == '1.3.12.2.1107.5.2.43.66012.2018073011525955642013644.0.0.0'))):
             info[rs_b2] = [s.series_id]
-        if (s.total_files_till_now > 2500) and ('rs' in s.series_id):
+        if (s.total_files_till_now > 2350) and ('rs' in s.series_id):
             info[rs_b3] = [s.series_id] 
             
           
