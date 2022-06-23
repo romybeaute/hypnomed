@@ -1,201 +1,201 @@
-***** 3DT2 informations *****
+***** 3DT1 informations *****
 
  sub-01 : EH070
  total_files_till_now:
-- file 14 : 1558
-- file 15 : 1766
+- file 26 : 2741
+- file 27 : 2949
 
  sub-02 : LP087
  total_files_till_now:
-- file 14 : 1562
-- file 15 : 1770
+- file 20 : 2364
+- file 21 : 2572
 
  sub-03 : HM076
  total_files_till_now:
-- file 14 : 1563
-- file 15 : 1771
+- file 20 : 2364
+- file 21 : 2572
 
  sub-04 : BA043
- total_files_till_now:
-- file 14 : 1563
-- file 15 : 1771
-
- sub-05 : BA093
- total_files_till_now:
-- file 20 : 1757
-- file 21 : 1965
-
- sub-06 : MP091
- total_files_till_now:
-- file 14 : 1567
-- file 15 : 1775
-
- sub-07 : BL067
- total_files_till_now:
-- file 27 : 2533
-- file 28 : 2741
-
- sub-08 : GM021
- total_files_till_now:
-- file 20 : 2370
-- file 21 : 2578
-
- sub-09 : NJ029
- total_files_till_now:
-- file 14 : 1561
-- file 15 : 1769
-
- sub-10 : BC082
- total_files_till_now:
-- file 14 : 1564
-- file 15 : 1772
-
- sub-11 : GP100
- total_files_till_now:
-- file 20 : 2372
-- file 21 : 2580
-
- sub-12 : FV064
- total_files_till_now:
-- file 14 : 1564
-- file 15 : 1772
-
- sub-13 : GN052
- total_files_till_now:
-- file 14 : 1560
-- file 15 : 1768
-
- sub-14 : PV046
- total_files_till_now:
-- file 20 : 2367
-- file 21 : 2575
-
- sub-15 : VJ089
- total_files_till_now:
-- file 20 : 2363
-- file 21 : 2571
-
- sub-16 : LA060
- total_files_till_now:
-- file 14 : 1566
-- file 15 : 1774
-
- sub-17 : PM024
- total_files_till_now:
-- file 14 : 1566
-- file 15 : 1774
-
- sub-18 : LD094
- total_files_till_now:
-- file 14 : 1566
-- file 15 : 1774
-
- sub-19 : BF073
- total_files_till_now:
-- file 20 : 2363
-- file 21 : 2571
-
- sub-20 : BO038
- total_files_till_now:
-- file 20 : 2356
-- file 21 : 2564
-
- sub-21 : CS025
- total_files_till_now:
-- file 14 : 1565
-- file 15 : 1773
-
- sub-22 : FM085
- total_files_till_now:
-- file 14 : 1526
-- file 15 : 1718
-
- sub-23 : MA041
- total_files_till_now:
-- file 20 : 2367
-- file 21 : 2575
-
- sub-24 : AB102
- total_files_till_now:
-- file 17 : 1473
-- file 18 : 1681
-
- sub-25 : KA001
- total_files_till_now:
-- file 16 : 1562
-- file 17 : 1770
-
- sub-26 : RJ086
- total_files_till_now:
-- file 20 : 2368
-- file 21 : 2576
-
- sub-27 : CF081
- total_files_till_now:
-- file 32 : 2604
-- file 33 : 2812
-
- sub-28 : EC084
- total_files_till_now:
-- file 20 : 2368
-- file 21 : 2576
-
- sub-29 : HR034
  total_files_till_now:
 - file 20 : 2365
 - file 21 : 2573
 
- sub-30 : CT062
+ sub-05 : BA093
  total_files_till_now:
-- file 16 : 1564
-- file 17 : 1772
+- file 26 : 2558
+- file 27 : 2766
 
- sub-31 : DM101
+ sub-06 : MP091
  total_files_till_now:
-- file 14 : 1527
-- file 15 : 1719
+- file 20 : 2366
+- file 21 : 2574
 
- sub-32 : SR044
+ sub-07 : BL067
  total_files_till_now:
-- file 14 : 1561
-- file 15 : 1769
+- file 19 : 932
+- file 20 : 1140
 
- sub-33 : JC014
+ sub-08 : GM021
  total_files_till_now:
-- file 20 : 2368
-- file 21 : 2576
+- file 12 : 765
+- file 13 : 973
 
- sub-34 : AV007
+ sub-09 : NJ029
  total_files_till_now:
-- file 14 : 1566
-- file 15 : 1774
+- file 20 : 2362
+- file 21 : 2570
 
- sub-35 : PJ051
+ sub-10 : BC082
  total_files_till_now:
-- file 14 : 1562
-- file 15 : 1770
+- file 20 : 2371
+- file 21 : 2579
 
- sub-36 : CE056
+ sub-11 : GP100
  total_files_till_now:
-- file 14 : 1202
-- file 15 : 1410
+- file 12 : 764
+- file 13 : 972
 
- sub-37 : MG078
+ sub-12 : FV064
  total_files_till_now:
-- file 14 : 1569
-- file 15 : 1777
+- file 27 : 2533
+- file 28 : 2741
 
- sub-38 : SC050
+ sub-13 : GN052
  total_files_till_now:
-- file 14 : 1563
-- file 15 : 1771
+- file 20 : 2362
+- file 21 : 2570
 
- sub-39 : BR096
+ sub-14 : PV046
+ total_files_till_now:
+- file 12 : 766
+- file 13 : 974
+
+ sub-15 : VJ089
+ total_files_till_now:
+- file 12 : 765
+- file 13 : 973
+
+ sub-16 : LA060
+ total_files_till_now:
+- file 27 : 2281
+- file 28 : 2489
+
+ sub-17 : PM024
  total_files_till_now:
 - file 20 : 2367
 - file 21 : 2575
 
+ sub-18 : LD094
+ total_files_till_now:
+- file 20 : 2369
+- file 21 : 2577
+
+ sub-19 : BF073
+ total_files_till_now:
+- file 12 : 762
+- file 13 : 970
+
+ sub-20 : BO038
+ total_files_till_now:
+- file 12 : 757
+- file 13 : 965
+
+ sub-21 : CS025
+ total_files_till_now:
+- file 20 : 2379
+- file 21 : 2587
+
+ sub-22 : FM085
+ total_files_till_now:
+- file 20 : 2296
+- file 21 : 2488
+
+ sub-23 : MA041
+ total_files_till_now:
+- file 12 : 760
+- file 13 : 968
+
+ sub-24 : AB102
+ total_files_till_now:
+- file 23 : 2274
+- file 24 : 2482
+
+ sub-25 : KA001
+ total_files_till_now:
+- file 22 : 2363
+- file 23 : 2571
+
+ sub-26 : RJ086
+ total_files_till_now:
+- file 12 : 766
+- file 13 : 974
+
+ sub-27 : CF081
+ total_files_till_now:
+- file 13 : 764
+- file 14 : 972
+
+ sub-28 : EC084
+ total_files_till_now:
+- file 12 : 767
+- file 13 : 975
+
+ sub-29 : HR034
+ total_files_till_now:
+- file 12 : 766
+- file 13 : 974
+
+ sub-30 : CT062
+ total_files_till_now:
+- file 22 : 2369
+- file 23 : 2577
+
+ sub-31 : DM101
+ total_files_till_now:
+- file 20 : 2295
+- file 21 : 2487
+
+ sub-32 : SR044
+ total_files_till_now:
+- file 20 : 2362
+- file 21 : 2570
+
+ sub-33 : JC014
+ total_files_till_now:
+- file 12 : 766
+- file 13 : 974
+
+ sub-34 : AV007
+ total_files_till_now:
+- file 20 : 2367
+- file 21 : 2575
+
+ sub-35 : PJ051
+ total_files_till_now:
+- file 20 : 2359
+- file 21 : 2567
+
+ sub-36 : CE056
+ total_files_till_now:
+- file 20 : 2004
+- file 21 : 2212
+
+ sub-37 : MG078
+ total_files_till_now:
+- file 20 : 2370
+- file 21 : 2578
+
+ sub-38 : SC050
+ total_files_till_now:
+- file 20 : 2369
+- file 21 : 2577
+
+ sub-39 : BR096
+ total_files_till_now:
+- file 12 : 764
+- file 13 : 972
+
  sub-40 : AV005
  total_files_till_now:
-- file 14 : 1551
-- file 15 : 1759
+- file 20 : 2349
+- file 21 : 2557

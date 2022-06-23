@@ -23,6 +23,17 @@ Aussi voir : /home/romy.beaute/projects/hypnomed/code/Visualize/infos/MRI_databa
 
 
 
+/!\  sub-32 : SR044 /!\ 
+"2 coupes superieures manquantes => make mask"
+Voir quoi faire avec lui
+ total_files_till_now:
+- file 8 : 404
+- file 16 : 2004
+- file 22 : 2805
+- file 101 : 3048
+- file 5003 : 3057
+
+
 
 
 ------------------------------------------------------------

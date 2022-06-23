@@ -4,7 +4,7 @@
  total_files_till_now:
 - file 8 : 394
 - file 16 : 2001
-- file 22 : 2801
+- file 22 : 2385
 
  sub-02 : LP087
  total_files_till_now:
@@ -93,9 +93,8 @@
  sub-16 : LA060
  total_files_till_now:
 - file 8 : 404
-- file 16 : 2009
-- file 29 : 2959
-- file 33 : 3344
+- file 29 : 2724
+- file 33 : 3109
 
  sub-17 : PM024
  total_files_till_now:
@@ -160,9 +159,8 @@
  sub-27 : CF081
  total_files_till_now:
 - file 9 : 404
-- file 15 : 1207
-- file 26 : 1681
-- file 34 : 3282
+- file 26 : 1446
+- file 34 : 3047
 
  sub-28 : EC084
  total_files_till_now:

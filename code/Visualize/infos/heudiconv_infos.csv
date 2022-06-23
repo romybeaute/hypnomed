@@ -2,7 +2,7 @@
 sub-01,"    total_files_till_now                                   example_dcm_file  \
 8                    394  1.3.12.2.1107.5.2.43.66012.3000001806040846088...   
 16                  2001  1.3.12.2.1107.5.2.43.66012.3000001806040846088...   
-22                  2801  1.3.12.2.1107.5.2.43.66012.3000001806040846088...   
+22                  2385  1.3.12.2.1107.5.2.43.66012.3000001806040846088...   
 
                         series_id                   dcm_dir_name unspecified2  \
 8    8-RUNx_rs_3mmiso_TR2.4_44cpe   8_RUNx_rs_3mmiso_TR2.4_44cpe            -   
@@ -35,42 +35,30 @@ sub-01,"    total_files_till_now                                   example_dcm_f
 22  1.3.12.2.1107.5.2.43.66012.2018060412404426549...  
 
 [3 rows x 26 columns]",NEUCOSE_ELSES07842,EH070,"    total_files_till_now                                   example_dcm_file  \
-20                  2358  1.3.12.2.1107.5.2.43.66012.3000001806040846088...   
-21                  2566  1.3.12.2.1107.5.2.43.66012.3000001806040846088...   
-26                  3157  1.3.12.2.1107.5.2.43.66012.3000001806040846088...   
-27                  3365  1.3.12.2.1107.5.2.43.66012.3000001806040846088...   
+26                  2741  1.3.12.2.1107.5.2.43.66012.3000001806040846088...   
+27                  2949  1.3.12.2.1107.5.2.43.66012.3000001806040846088...   
 
               series_id         dcm_dir_name unspecified2 unspecified3  dim1  \
-20  20-anat_3DT1_0.9iso  20_anat_3DT1_0.9iso            -            -   256   
-21  21-anat_3DT1_0.9iso  21_anat_3DT1_0.9iso            -            -   256   
 26  26-anat_3DT1_0.9iso  26_anat_3DT1_0.9iso            -            -   256   
 27  27-anat_3DT1_0.9iso  27_anat_3DT1_0.9iso            -            -   256   
 
     dim2  dim3  dim4  ...  study_description  referring_physician_name  \
-20   256   208     1  ...    HUMAINS^NEUCOSE                       NaN   
-21   256   208     1  ...    HUMAINS^NEUCOSE                       NaN   
 26   256   208     1  ...    HUMAINS^NEUCOSE                       NaN   
 27   256   208     1  ...    HUMAINS^NEUCOSE                       NaN   
 
    series_description  sequence_name  \
-20   anat_3DT1_0.9iso   *tfl3d1_16ns   
-21   anat_3DT1_0.9iso   *tfl3d1_16ns   
 26   anat_3DT1_0.9iso   *tfl3d1_16ns   
 27   anat_3DT1_0.9iso   *tfl3d1_16ns   
 
                                     image_type accession_number patient_age  \
-20          ('ORIGINAL', 'PRIMARY', 'M', 'ND')       ELSES07842        028Y   
-21  ('ORIGINAL', 'PRIMARY', 'M', 'ND', 'NORM')       ELSES07842        028Y   
 26          ('ORIGINAL', 'PRIMARY', 'M', 'ND')       ELSES07842        028Y   
 27  ('ORIGINAL', 'PRIMARY', 'M', 'ND', 'NORM')       ELSES07842        028Y   
 
     patient_sex      date                                         series_uid  
-20            M  20180604  1.3.12.2.1107.5.2.43.66012.2018060412403654883...  
-21            M  20180604  1.3.12.2.1107.5.2.43.66012.2018060412332821465...  
 26            M  20180604  1.3.12.2.1107.5.2.43.66012.2018060413075790841...  
 27            M  20180604  1.3.12.2.1107.5.2.43.66012.2018060413004922073...  
 
-[4 rows x 26 columns]","    total_files_till_now                                   example_dcm_file  \
+[2 rows x 26 columns]","    total_files_till_now                                   example_dcm_file  \
 14                  1558  1.3.12.2.1107.5.2.43.66012.3000001806040846088...   
 15                  1766  1.3.12.2.1107.5.2.43.66012.3000001806040846088...   
 
@@ -1633,49 +1621,42 @@ sub-15,"    total_files_till_now                                   example_dcm_f
 [2 rows x 26 columns]"
 sub-16,"    total_files_till_now                                   example_dcm_file  \
 8                    404  1.3.12.2.1107.5.2.43.66012.3000001807300919537...   
-16                  2009  1.3.12.2.1107.5.2.43.66012.3000001807300919537...   
-29                  2959  1.3.12.2.1107.5.2.43.66012.3000001807300919537...   
-33                  3344  1.3.12.2.1107.5.2.43.66012.3000001807300919537...   
+29                  2724  1.3.12.2.1107.5.2.43.66012.3000001807300919537...   
+33                  3109  1.3.12.2.1107.5.2.43.66012.3000001807300919537...   
 
                         series_id                   dcm_dir_name unspecified2  \
 8    8-RUNx_rs_3mmiso_TR2.4_44cpe   8_RUNx_rs_3mmiso_TR2.4_44cpe            -   
-16  16-RUNx_rs_3mmiso_TR2.4_44cpe  16_RUNx_rs_3mmiso_TR2.4_44cpe            -   
 29  29-RUNx_rs_3mmiso_TR2.4_44cpe  29_RUNx_rs_3mmiso_TR2.4_44cpe            -   
 33  33-RUNx_rs_3mmiso_TR2.4_44cpe  33_RUNx_rs_3mmiso_TR2.4_44cpe            -   
 
    unspecified3  dim1  dim2  dim3  dim4  ...  study_description  \
 8             -    72    74    44   235  ...    HUMAINS^NEUCOSE   
-16            -    72    74    44   235  ...    HUMAINS^NEUCOSE   
 29            -    72    74    44   235  ...    HUMAINS^NEUCOSE   
 33            -    72    74    44   235  ...    HUMAINS^NEUCOSE   
 
     referring_physician_name          series_description  sequence_name  \
 8                        NaN  RUNx_rs_3mmiso_TR2.4_44cpe    epfid2d1_72   
-16                       NaN  RUNx_rs_3mmiso_TR2.4_44cpe    epfid2d1_72   
 29                       NaN  RUNx_rs_3mmiso_TR2.4_44cpe    epfid2d1_72   
 33                       NaN  RUNx_rs_3mmiso_TR2.4_44cpe    epfid2d1_72   
 
                                            image_type accession_number  \
 8   ('ORIGINAL', 'PRIMARY', 'M', 'ND', 'NORM', 'MO...       LUNAN07942   
-16  ('ORIGINAL', 'PRIMARY', 'M', 'ND', 'NORM', 'MO...       LUNAN07942   
 29  ('ORIGINAL', 'PRIMARY', 'M', 'ND', 'NORM', 'MO...       LUNAN07942   
 33  ('ORIGINAL', 'PRIMARY', 'M', 'ND', 'NORM', 'MO...       LUNAN07942   
 
    patient_age  patient_sex      date  \
 8         050Y            F  20180730   
-16        050Y            F  20180730   
 29        050Y            F  20180730   
 33        050Y            F  20180730   
 
                                            series_uid  
 8   1.3.12.2.1107.5.2.43.66012.2018073010383996688...  
-16  1.3.12.2.1107.5.2.43.66012.2018073011103790497...  
 29  1.3.12.2.1107.5.2.43.66012.2018073011525955642...  
 33  1.3.12.2.1107.5.2.43.66012.2018073012275131524...  
 
-[4 rows x 26 columns]",NEUCOSE_LUNAN07942,LA060,"    total_files_till_now                                   example_dcm_file  \
-27                  2516  1.3.12.2.1107.5.2.43.66012.3000001807300919537...   
-28                  2724  1.3.12.2.1107.5.2.43.66012.3000001807300919537...   
+[3 rows x 26 columns]",NEUCOSE_LUNAN07942,LA060,"    total_files_till_now                                   example_dcm_file  \
+27                  2281  1.3.12.2.1107.5.2.43.66012.3000001807300919537...   
+28                  2489  1.3.12.2.1107.5.2.43.66012.3000001807300919537...   
 
               series_id         dcm_dir_name unspecified2 unspecified3  dim1  \
 27  27-anat_3DT1_0.9iso  27_anat_3DT1_0.9iso            -            -   256   
@@ -2828,47 +2809,40 @@ sub-26,"    total_files_till_now                                   example_dcm_f
 [2 rows x 26 columns]"
 sub-27,"    total_files_till_now                                   example_dcm_file  \
 9                    404  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
-15                  1207  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
-26                  1681  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
-34                  3282  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
+26                  1446  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
+34                  3047  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
 
                         series_id                   dcm_dir_name unspecified2  \
 9    9-RUNx_rs_3mmiso_TR2.4_44cpe   9_RUNx_rs_3mmiso_TR2.4_44cpe            -   
-15  15-RUNx_rs_3mmiso_TR2.4_44cpe  15_RUNx_rs_3mmiso_TR2.4_44cpe            -   
 26  26-RUNx_rs_3mmiso_TR2.4_44cpe  26_RUNx_rs_3mmiso_TR2.4_44cpe            -   
 34  34-RUNx_rs_3mmiso_TR2.4_44cpe  34_RUNx_rs_3mmiso_TR2.4_44cpe            -   
 
    unspecified3  dim1  dim2  dim3  dim4  ...  study_description  \
 9             -    72    74    44   235  ...    HUMAINS^NEUCOSE   
-15            -    72    74    44   235  ...    HUMAINS^NEUCOSE   
 26            -    72    74    44   235  ...    HUMAINS^NEUCOSE   
 34            -    72    74    44   235  ...    HUMAINS^NEUCOSE   
 
     referring_physician_name          series_description  sequence_name  \
 9                        NaN  RUNx_rs_3mmiso_TR2.4_44cpe    epfid2d1_72   
-15                       NaN  RUNx_rs_3mmiso_TR2.4_44cpe    epfid2d1_72   
 26                       NaN  RUNx_rs_3mmiso_TR2.4_44cpe    epfid2d1_72   
 34                       NaN  RUNx_rs_3mmiso_TR2.4_44cpe    epfid2d1_72   
 
                                            image_type accession_number  \
 9   ('ORIGINAL', 'PRIMARY', 'M', 'ND', 'NORM', 'MO...       CAMFA08095   
-15  ('ORIGINAL', 'PRIMARY', 'M', 'ND', 'NORM', 'MO...       CAMFA08095   
 26  ('ORIGINAL', 'PRIMARY', 'M', 'ND', 'NORM', 'MO...       CAMFA08095   
 34  ('ORIGINAL', 'PRIMARY', 'M', 'ND', 'NORM', 'MO...       CAMFA08095   
 
    patient_age  patient_sex      date  \
 9         042Y            F  20181112   
-15        042Y            F  20181112   
 26        042Y            F  20181112   
 34        042Y            F  20181112   
 
                                            series_uid  
 9   1.3.12.2.1107.5.2.43.66012.2018111209292961631...  
-15  1.3.12.2.1107.5.2.43.66012.2018111210000735500...  
 26  1.3.12.2.1107.5.2.43.66012.2018111210365994285...  
 34  1.3.12.2.1107.5.2.43.66012.2018111211093191355...  
 
-[4 rows x 26 columns]",NEUCOSE_CAMFA08095,CF081,"    total_files_till_now                                   example_dcm_file  \
+[3 rows x 26 columns]",NEUCOSE_CAMFA08095,CF081,"    total_files_till_now                                   example_dcm_file  \
 13                   764  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
 14                   972  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
 
@@ -2893,8 +2867,8 @@ sub-27,"    total_files_till_now                                   example_dcm_f
 14            F  20181112  1.3.12.2.1107.5.2.43.66012.2018111209524196851...  
 
 [2 rows x 26 columns]","    total_files_till_now                                   example_dcm_file  \
-32                  2839  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
-33                  3047  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
+32                  2604  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
+33                  2812  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
 
               series_id         dcm_dir_name unspecified2 unspecified3  dim1  \
 32  32-anat_3DT2_0.9iso  32_anat_3DT2_0.9iso            -            -   256   
@@ -2917,8 +2891,8 @@ sub-27,"    total_files_till_now                                   example_dcm_f
 33            F  20181112  1.3.12.2.1107.5.2.43.66012.2018111211091813787...  
 
 [2 rows x 26 columns]","    total_files_till_now                                   example_dcm_file  \
-30                  2231  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
-31                  2631  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
+30                  1996  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
+31                  2396  1.3.12.2.1107.5.2.43.66012.3000001811120823427...   
 
               series_id         dcm_dir_name unspecified2 unspecified3  dim1  \
 30  30-anat_t2star_2iso  30_anat_t2star_2iso            -            -   108   
