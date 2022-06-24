@@ -36,7 +36,8 @@ subj_dir = [ name for name in subj_dir if 'sub' in name ]
 start_time = time.time()
 for subj in subj_dir:
     for state in p.states_name:
-        data_name = f'{subj}_ses-1_task-{state}_desc-confounds_regressors.tsv'
+        # data_name = f'{subj}_ses-1_task-{state}_desc-confounds_regressors.tsv'
+        data_name = f'{subj}_ses-001_task-{state}_desc-confounds_timeseries.tsv'
         df = pd.read_csv(os.path.join(p.sub_path,subj,p.data_path,data_name),sep='\t',
                          usecols=['framewise_displacement'])
         df = df.drop([0])
