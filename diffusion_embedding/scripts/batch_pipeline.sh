@@ -13,6 +13,7 @@
 
 #SBATCH --array=1-76
 
+echo Directory pipeline : ${SUBJ[$SLURM_ARRAY_TASK_ID-1]}
 
 python pipeline.py ${SUBJ[$SLURM_ARRAY_TASK_ID-1]}
 
