@@ -15,7 +15,7 @@ export SUBJDIRS='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-lates
 
 
 subject=${1}
-echo subject
+echo ${1}
 #Set the path to your FMRIPREP output
 FMRIPREP_ROOT='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest'
 #Set the path to your output
