@@ -8,11 +8,12 @@ source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 #export subject from batch_vol2surf.sh
 subject=${1}
+print(subject)
 #Set the path to your FMRIPREP output
 FMRIPREP_ROOT='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest'
 #Set the path to your output
 # output=/mnt/data/sebastien/LONGIMED/embedding/vol2surf_derivatives
-output = '/mnt/data/romy/hypnomed/git/diffusion_embedding/vol2surf_derivatives'
+output = /mnt/data/romy/hypnomed/git/diffusion_embedding/vol2surf_derivatives
 
 # for ses in ses-001 ses-002 ses-003;do
 for ses in ses-001;do
