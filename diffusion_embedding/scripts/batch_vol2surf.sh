@@ -17,6 +17,6 @@ FMRIPREP_ROOT='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest'
 SUBJDIRS=(`find $FMRIPREP_ROOT -mindepth 1 -maxdepth 1  -name sub* -type d`)
 
 
-./x.mri_vol2surf_test.sh ${SUBJDIRS[$SLURM_ARRAY_TASK_ID-1]}
-
+# ./x.mri_vol2surf_test.sh ${SUBJDIRS[$SLURM_ARRAY_TASK_ID-1]}
+./x.mri_vol2surf.sh ${SUBJDIRS[$SLURM_ARRAY_TASK_ID-1]}
 
