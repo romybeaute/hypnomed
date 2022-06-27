@@ -2,7 +2,7 @@
 #!/bin/python
 
 import sys, os
-sys.path.append("/mnt/data/sebastien/diffusion_embedding_step/")
+sys.path.append("/mnt/data/romy/hypnomed/git/diffusion_embedding") #("/mnt/data/sebastien/diffusion_embedding_step/")
 from load_fs import load_fs
 import numpy as np
 import nibabel as nib
@@ -21,11 +21,13 @@ def run_perc(data, thresh):
     return data
  
 def main(subj):
-    for ses in ["ses-001", "ses-002", "ses-003"]:
-        for state in ["fa", "om", "rest"]:
-            if os.path.isfile(f'/mnt/data/sebastien/diffusion_embedding_step/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy'):
+    for ses in ["ses-001"]:
+    # for ses in ["ses-001", "ses-002", "ses-003"]:
+        for state in ["rs1", "rs2", "rs3"]:
+            if os.path.isfile(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy'):
+            # if os.path.isfile(f'/mnt/data/sebastien/diffusion_embedding_step/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy'):
 
-                emb = np.load(f'/mnt/data/sebastien/diffusion_embedding_step/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy')
+                emb = np.load(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy')
 
             else:
 
@@ -49,8 +51,8 @@ def main(subj):
                 emb, res = embed.compute_diffusion_map(aff, alpha = 0.5, n_components=5, skip_checks=True, overwrite=True, eigen_solver=eigsh, return_result=True)
                 del aff
 
-                np.save(f'/mnt/data/sebastien/diffusion_embedding_step/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy', emb)
-                np.save(f'/mnt/data/sebastien/diffusion_embedding_step/emb_output/embedding_dense_res.{subj}.{ses}.{state}.npy', res)
+                np.save(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy', emb)
+                np.save(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output/embedding_dense_res.{subj}.{ses}.{state}.npy', res)
 
 if __name__ == "__main__":
      main(sys.argv[1])

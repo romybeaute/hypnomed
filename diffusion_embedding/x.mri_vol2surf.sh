@@ -3,21 +3,23 @@
 ####### Should be launched from batch_vol2surf.sh ####################
 
 # Load Freesurfer functions
-export FREESURFER_HOME='/mnt/data/sebastien/packages/freesurfer'
+export FREESURFER_HOME='/mnt/data/romy/packages/freesurfer'
 source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 #export subject from batch_vol2surf.sh
 subject=${1}
 #Set the path to your FMRIPREP output
-FMRIPREP_ROOT='/mnt/data/sebastien/LONGIMED/raw_data/BIDS/derivatives/fmriprep-latest'
+FMRIPREP_ROOT='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest'
 #Set the path to your output
-output=/mnt/data/sebastien/LONGIMED/embedding/vol2surf_derivatives
+# output=/mnt/data/sebastien/LONGIMED/embedding/vol2surf_derivatives
+output = '/mnt/data/romy/hypnomed/git/diffusion_embedding/embedding/vol2surf_derivatives'
 
-for ses in ses-001 ses-002 ses-003;do
+# for ses in ses-001 ses-002 ses-003;do
+for ses in ses-001;do
 mkdir -p ${output}/${subject}/${ses}
 
   #get the functional scans of your subject
-  for scan in task-rest task-fa task-om;do
+  for scan in task-rs1 task-rs2 task-rs3;do
 
     for hemi in lh rh;do
 

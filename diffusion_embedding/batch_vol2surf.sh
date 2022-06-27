@@ -11,7 +11,7 @@
 #SBATCH --array=1-76
 
 # where the output of fmriprep is located
-FMRIPREP_ROOT='/mnt/data/sebastien/LONGIMED/raw_data/BIDS/derivatives/fmriprep-latest'
+FMRIPREP_ROOT='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest'
 
 # find all DICOM directories that start with "voice"
 SUBJDIRS=(`find $FMRIPREP_ROOT -mindepth 1 -maxdepth 1  -name sub* -type d`)
