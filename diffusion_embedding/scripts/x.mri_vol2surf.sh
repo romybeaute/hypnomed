@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#SBATCH --output=x.mri_vol2.txt
+
+#SBATCH --error=x.mri_vol2.err
+
 ####### Should be launched from batch_vol2surf.sh ####################
 
 # Load Freesurfer functions
