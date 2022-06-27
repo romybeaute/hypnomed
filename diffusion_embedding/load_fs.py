@@ -6,8 +6,10 @@ def load_fs(subject, ses, state):
     import nibabel as nib
     import numpy as np
 
-    vol2surf_path = '/mnt/data/sebastien/LONGIMED/embedding/vol2surf_derivatives'
-    freesurfer_output ='/mnt/data/sebastien/LONGIMED/raw_data/BIDS/derivatives/fmriprep-latest/sourcedata/freesurfer'
+    vol2surf_path = '/mnt/data/romy/hypnomed/git/diffusion_embedding/embedding/vol2surf_derivatives' #'/mnt/data/sebastien/LONGIMED/embedding/vol2surf_derivatives'
+
+    freesurfer_output = '/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest/sourcedata/freesurfer'
+    #'/mnt/data/sebastien/LONGIMED/raw_data/BIDS/derivatives/fmriprep-latest/sourcedata/freesurfer'
 
 
     data = []
