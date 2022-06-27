@@ -11,6 +11,9 @@ export FREESURFER_HOME='/mnt/data/romy/packages/freesurfer'
 source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 #export subject from batch_vol2surf.sh
+export SUBJDIRS='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest'
+
+
 subject=${1}
 echo subject
 #Set the path to your FMRIPREP output
