@@ -26,7 +26,8 @@ mkdir -p ${output}/${subject}/${ses}
 
 
     # To run from MRI space:
-    mri_vol2surf --mov $FMRIPREP_ROOT/$subject/${ses}/func/${subject}_${ses}_${scan}_space-MNI152NLin6Asym_desc-smoothAROMAnonaggr_bold.nii.gz \
+    # mri_vol2surf --mov $FMRIPREP_ROOT/$subject/${ses}/func/${subject}_${ses}_${scan}_space-MNI152NLin6Asym_desc-smoothAROMAnonaggr_bold.nii.gz \
+    mri_vol2surf --mov $FMRIPREP_ROOT/${subject}/${ses}/func/${subject}_${ses}_${scan}_space-MNI152NLin6Asym_desc-smoothAROMAnonaggr_bold.nii.gz \
       --mni152reg \
       --projfrac-avg 0.2 0.8 0.1 \
       --trgsubject fsaverage5 \
