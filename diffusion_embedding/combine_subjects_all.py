@@ -36,7 +36,7 @@ df = pd.read_csv('/mnt/data/romy/hypnomed/git/data/subject_list.txt', header=Non
 sublist = np.asarray(df).flatten()
 
 # data_folder = '/mnt/data/sebastien/diffusion_embedding_step/emb_output'
-data_folder = '/mnt/data/hypnomed/git/diffusion_embedding/emb_output'
+data_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output'
 template = load_template('/mnt/data/romy/hypnomed/git/data/template/fsaverage')
 #for state in ["compassion","openmonitoring","restingstate"]:
 #for state in ["rs1","rs2","rs3"]:
