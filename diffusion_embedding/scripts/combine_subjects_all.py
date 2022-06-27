@@ -32,7 +32,8 @@ def load_template(template_path):
     return template
 
 # df = pd.read_csv('/mnt/data/sebastien/scripts/subject_list.txt', header=None)
-df = pd.read_csv('/mnt/data/romy/hypnomed/git/data/subject_list.txt', header=None)
+# df = pd.read_csv('/mnt/data/romy/hypnomed/git/data/subject_list.txt', header=None)
+df = pd.read_csv('/mnt/data/romy/hypnomed/git/diffusion_embedding/scripts/subject_list.txt', header=None)
 sublist = np.asarray(df).flatten()
 
 # data_folder = '/mnt/data/sebastien/diffusion_embedding_step/emb_output'
