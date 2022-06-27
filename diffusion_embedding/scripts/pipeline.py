@@ -55,7 +55,9 @@ def main(subj):
                 np.save(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy', emb)
                 np.save(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output/embedding_dense_res.{subj}.{ses}.{state}.npy', res)
 
-print("sys.arg : ",vsys.argv)
-print("sys.argv[1]",sys.argv[1])
+
 if __name__ == "__main__":
-     main(sys.argv[1])
+    try:
+        main(sys.argv[1])
+    except:
+        main(sys.argv[0])
