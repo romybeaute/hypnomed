@@ -21,6 +21,7 @@ def run_perc(data, thresh):
     return data
  
 def main(subj):
+    print(subj)
     for ses in ["ses-001"]:
     # for ses in ["ses-001", "ses-002", "ses-003"]:
         for state in ["rs1", "rs2", "rs3"]:
