@@ -8,7 +8,7 @@ source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 #export subject from batch_vol2surf.sh
 subject=${1}
-print(subject)
+echo subject
 #Set the path to your FMRIPREP output
 FMRIPREP_ROOT='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest'
 #Set the path to your output
