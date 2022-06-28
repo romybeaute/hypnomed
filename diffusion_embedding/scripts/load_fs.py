@@ -26,5 +26,3 @@ def load_fs(subject, ses, state):
     data = (data.T / np.nanstd(data, axis = 1)).T
 
     return data
-
-#c
