@@ -6,9 +6,11 @@
 
 #SBATCH --error=vol2surf_step_1_trial_1.err
 
-#SBATCH --cpus-per-task=2
+#SBATCH --cpus-per-task=3
 
-#SBATCH --array=1-76
+#SBATCH --mem=20G
+
+#SBATCH --array=1-40
 
 """
 1. Project volume to surface using FreeSurfer
