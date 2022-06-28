@@ -77,6 +77,6 @@ echo subjdirs: ${SUBJDIRS}
 
 while read SUBJDIRS;
 do
-  ./x.mri_vol2surf.sh ${SUBJDIRS[$SLURM_ARRAY_TASK_ID-1]}
+  ./x.mri_vol2surf.sh ${SUBJDIRS}
   echo ${SUBJDIRS[$SLURM_ARRAY_TASK_ID-1]}
 done <subject_list.txt
