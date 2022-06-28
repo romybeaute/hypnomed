@@ -2,7 +2,7 @@
 #!/bin/python
 
 import sys, os
-sys.path.append("/mnt/data/romy/hypnomed/git/diffusion_embedding") #("/mnt/data/sebastien/diffusion_embedding_step/")
+sys.path.append("/mnt/data/romy/hypnomed/git/diffusion_embedding/") #("/mnt/data/sebastien/diffusion_embedding_step/")
 from load_fs import load_fs
 import numpy as np
 import nibabel as nib

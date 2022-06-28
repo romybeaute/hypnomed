@@ -40,7 +40,7 @@ sublist = np.asarray(df).flatten()
 data_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output'
 template = load_template('/mnt/data/romy/hypnomed/git/data/template/fsaverage')
 #for state in ["compassion","openmonitoring","restingstate"]:
-#for state in ["rs1","rs2","rs3"]:
+#for state in ["rs_run-1", "rs_run-2", "rs_run-3"]:
 embeddings = []
 subs = []
 for s in sublist:
@@ -49,9 +49,9 @@ for s in sublist:
         # embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.compassion.npy' % s))
         # embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.openmonitoring.npy' % s))
         # embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.restingstate.npy' % s))
-        embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.rs1.npy' % s))
-        embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.rs2.npy' % s))
-        embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.rs3.npy' % s))
+        embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.rs_run-1.npy' % s))
+        embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.rs_run-2.npy' % s))
+        embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.rs_run-3.npy' % s))
         print(s)
     except:
         print(s)

@@ -40,6 +40,8 @@ def infotodict(seqinfo):
     
 
     for s in seqinfo:
+
+        print(s)
         
         if (s.dim1 == 320) and ('T1' in s.series_id) and ('NORM' in s.image_type):
             info[t1w] = [s.series_id]

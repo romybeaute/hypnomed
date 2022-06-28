@@ -3,15 +3,20 @@
 """
 Created on Thu Jul  8 11:48:54 2021
 
+###########
+#permet d'ajouter les champs manquants dans les .json des fichiers fmaps d'après les spécifications BIDS pour qu'ils soient utilisables par fmriprep.
+###########
+
 * modify the .json files of fieldmaps files to use them in fmriprep
 * see for ref. https://bids-specification.readthedocs.io/en/stable/04-modality-specific-files/01-magnetic-resonance-imaging-data.html#types-of-fieldmaps
 * this script corresponds to the case 1 from the above link
 @author: sebastien
+@modif: romy
 """
 import os 
 import json
 
-working_path = '/mnt/data/sebastien/LONGIMED/raw_data/BIDS'
+working_path = '/mnt/data/romy/hypnomed/MRI_raw/BIDS' #path where BIDS data
 
 def get_func_nii(path,ses_folder):
     #return a list with all the functional nifti files
