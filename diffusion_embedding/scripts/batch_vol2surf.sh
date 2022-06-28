@@ -11,10 +11,8 @@
 #SBATCH --array=1-76
 
 """
-Project volume to surface using FreeSurfer
+1. Project volume to surface using FreeSurfer
 """
-
-
 
 
 # where the output of fmriprep is located

@@ -61,4 +61,4 @@ if __name__ == "__main__":
     try:
         main(sys.argv[1])
     except:
-        main(sys.argv[0])
+        print('error with sys.argv[1] : ',sys.argv[1])
