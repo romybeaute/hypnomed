@@ -24,7 +24,8 @@ def main(subj):
     print(subj)
     for ses in ["ses-001"]:
     # for ses in ["ses-001", "ses-002", "ses-003"]:
-        for state in ["rs1", "rs2", "rs3"]:
+        # for state in ["rs1", "rs2", "rs3"]:
+        for state in ["rs_run-1", "rs_run-2", "rs_run-3"]:
             if os.path.isfile(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy'):
             # if os.path.isfile(f'/mnt/data/sebastien/diffusion_embedding_step/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy'):
 
