@@ -27,7 +27,8 @@ for ses in ses-001;do
 mkdir -p ${output}/${subject}/${ses}
 
   #get the functional scans of your subject
-  for scan in task-rs1 task-rs2 task-rs3;do
+
+  for scan in task-rs_run-1 task-rs_run-2 task-rs_run-3;do
 
     for hemi in lh rh;do
 
