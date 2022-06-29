@@ -20,7 +20,7 @@ echo ${1}
 FMRIPREP_ROOT='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest'
 #Set the path to your output
 # output=/mnt/data/sebastien/LONGIMED/embedding/vol2surf_derivatives
-output =/mnt/data/romy/hypnomed/git/diffusion_embedding/vol2surf_derivatives
+output =/mnt/data/romy/hypnomed/git/diffusion_embedding/scripts/vol2surf_derivatives
 
 
 # for ses in ses-001 ses-002 ses-003;do
