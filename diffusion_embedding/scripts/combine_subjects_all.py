@@ -1,3 +1,7 @@
+"""
+Step 3 : Rotate and gather all subjects into a matrix
+"""
+
 import nibabel as nib
 import numpy as np
 import os, glob
