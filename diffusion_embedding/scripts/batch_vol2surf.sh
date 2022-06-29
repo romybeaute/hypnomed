@@ -18,7 +18,7 @@
 
 
 # where the output of fmriprep is located
-FMRIPREP_ROOT='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest'
+FMRIPREP_ROOT='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest/'
 echo output directory: ${FMRIPREP_ROOT}
 
 # find all DICOM directories that start with "voice"
