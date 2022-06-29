@@ -11,21 +11,24 @@ export FREESURFER_HOME='/mnt/data/romy/packages/freesurfer'
 source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 #export subject from batch_vol2surf.sh
-export SUBJDIRS='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest'
+export SUBJDIRS
+echo ${SUBJDIRS}
 
 
-subject=${1}
-echo ${1}
+# subject=${1}
+
+subject=${SUBJDIRS##*/}
+echo ${subject}
+
 #Set the path to your FMRIPREP output
 FMRIPREP_ROOT='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest'
 #Set the path to your output
 # output=/mnt/data/sebastien/LONGIMED/embedding/vol2surf_derivatives
-output =/mnt/data/romy/hypnomed/git/diffusion_embedding/scripts/vol2surf_derivatives
-
+dir=/mnt/data/romy/hypnomed/git/diffusion_embedding/vol2surf_derivatives
 
 # for ses in ses-001 ses-002 ses-003;do
 for ses in ses-001;do
-mkdir -p ${output}/${subject}/${ses}
+mkdir -p ${dir}/${subject}/${ses}
 
   #get the functional scans of your subject
 
@@ -43,7 +46,7 @@ mkdir -p ${output}/${subject}/${ses}
       --interp nearest \
       --hemi ${hemi} \
       --surf-fwhm 6.0 --cortex --noreshape \
-      --o ${output}/${subject}/${ses}/${subject}_${ses}_${scan}.fsa5.${hemi}.mgz
+      --o ${dir}/${subject}/${ses}/${subject}_${ses}_${scan}.fsa5.${hemi}.mgz
 
     done
 
