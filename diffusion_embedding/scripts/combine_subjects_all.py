@@ -6,10 +6,8 @@ from scipy.io import savemat
 from scipy.io import loadmat
 from nilearn import surface
 
-def run_realign(emb, tar, firstpass = False):
+def run_realign(emb, tar):
     realign = []
-    if firstpass:
-        realign.append(tar)
     for i, embed in enumerate(emb):
         u, s, v = np.linalg.svd(tar.T.dot(embed), full_matrices=False)
         xfm = v.T.dot(u.T)
@@ -19,7 +17,6 @@ def run_realign(emb, tar, firstpass = False):
 
 def load_template(template_path):
     cortex = loadmat('/mnt/data/romy/hypnomed/git/data/cortex.mat')
-    #('/mnt/data/sebastien/data/cortex.mat')
     cortex = np.squeeze(cortex['cortex'])
     template = np.zeros([20484,5])
     for grad_id in range(5):
@@ -31,39 +28,34 @@ def load_template(template_path):
     template = template/np.std(template,0)
     return template
 
-# df = pd.read_csv('/mnt/data/sebastien/scripts/subject_list.txt', header=None)
-# df = pd.read_csv('/mnt/data/romy/hypnomed/git/data/subject_list.txt', header=None)
 df = pd.read_csv('/mnt/data/romy/hypnomed/git/diffusion_embedding/scripts/subject_list.txt', header=None)
 sublist = np.asarray(df).flatten()
 
-# data_folder = '/mnt/data/sebastien/diffusion_embedding_step/emb_output'
 data_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output'
 template = load_template('/mnt/data/romy/hypnomed/git/data/template/fsaverage')
-#for state in ["compassion","openmonitoring","restingstate"]:
-#for state in ["rs_run-1", "rs_run-2", "rs_run-3"]:
+
 embeddings = []
 subs = []
-for s in sublist:
+for sub in sublist:
     try:
-        subs.append(s)
-        # embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.compassion.npy' % s))
-        # embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.openmonitoring.npy' % s))
-        # embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.restingstate.npy' % s))
-        embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.rs_run-1.npy' % s))
-        embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.rs_run-2.npy' % s))
-        embeddings.append(np.load(data_folder+'/embedding_dense_emb.%s.rs_run-3.npy' % s))
-        print(s)
+        subs.append(sub)
+        # embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.fa.npy'))
+        # embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.om.npy'))
+        # embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.rest.npy'))
+        embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.rs_run-1.npy'))
+        embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.rs_run-2.npy'))
+        embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.rs_run-3.npy'))
+        print(sub)
     except:
-        print(s)
+        print(sub)
 
-    # np.shape(embeddings)
 
-realigned = run_realign(embeddings[1:], template, firstpass=True)
+realigned = run_realign(embeddings, template)
 for i in range(5):
-    realigned = run_realign(realigned, np.asarray(np.mean(realigned, axis=0).squeeze()), firstpass = False)
+    realigned = run_realign(realigned, np.asarray(np.mean(realigned, axis=0).squeeze()))
 
 savemat(data_folder+'/rs1_rs2_r3_group_embedding_new.mat', mdict={'emb': realigned, 'subs': subs})
     
-f = loadmat(data_folder+'/rs1_rs2_r3_group_embedding_new.mat')
-print(len(f['subs']))
-print(f['subs'])
+# f = loadmat(data_folder+'/co_om_rs_group_embedding_new.mat')
+# print(len(f['subs']))
+# print(f['subs'])
