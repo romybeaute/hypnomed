@@ -20,12 +20,15 @@ NB : This command will call load_fs.py to read in the data. This is the most tim
 """
 
 
-echo Directory pipeline : ${SUBJ[$SLURM_ARRAY_TASK_ID-1]}
+# echo Directory pipeline : ${SUBJ[$SLURM_ARRAY_TASK_ID-1]}
 
-python pipeline.py ${SUBJ[$SLURM_ARRAY_TASK_ID-1]}
+# python pipeline.py ${SUBJ[$SLURM_ARRAY_TASK_ID-1]}
 
 
-# while read subject;
-# do
-#   python pipeline.py ${subject}
+
+
+while read ${SUBJ[$SLURM_ARRAY_TASK_ID-1]};
+do
+  python pipeline.py ${SUBJ[$SLURM_ARRAY_TASK_ID-1]}
+  echo ${SUBJ[$SLURM_ARRAY_TASK_ID-1]}
 # done <subject_list.txt
