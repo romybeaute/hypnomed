@@ -77,6 +77,6 @@ def selected_embedding(statelist,sublist):
 
         
     f = loadmat(outcome_folder+'/{}_group_embedding_new.mat'.format(title))
-    print('Group matrix succeded and saved in {}'.format(outcome_folder+'/{}_group_embedding_new.mat'))
+    print('Group matrix succeded and saved in {}'.format(outcome_folder+'/{}_group_embedding_new.mat'.format(title)))
     # print(len(f['subs']))
     # print(f['subs'])
