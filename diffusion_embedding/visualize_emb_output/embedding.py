@@ -38,7 +38,7 @@ def load_template(template_path):
 
 def selected_embedding(statelist,sublist):
 
-    outcome_folder = '/home/romy.beaute/projects/hypnomed/diffusion_embedding/visualize_emb_output/partial_embeddings'
+    outcome_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/partial_embeddings'
     data_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output'
 
     # template = load_template('/mnt/data/romy/hypnomed/git/data/template/fsaverage')
