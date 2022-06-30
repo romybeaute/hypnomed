@@ -57,6 +57,8 @@ try:
     a= np.zeros(20484)
     a[lab]=np.mean(b['emb'],axis=0)[:,0]
     nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/lh.inflated',a[:10242],cmap='jet', vmax=5.5, output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/diffusion_map_group_%s_lh.png' % state)
+    nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/rh.inflated',a[10242:],cmap='jet', vmax=5.5, output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/diffusion_map_group_%s_rh.png' % state)
+
     #nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/lh.inflated',np.mean(b['emb'],axis=0)[:,0],cmap='jet', vmax=5.5, output_file='diffusion_map_group_%s_lh.png' % state)
 
     print("%s completed" % group_emb_map)
