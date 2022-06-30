@@ -49,7 +49,7 @@ def selected_embedding(statelist,sublist):
     states = []
     title = str()
     for _,s in enumerate(statelist):
-        title += '_{}'.format(s)
+        title += '{}_'.format(s)
         
     
 
@@ -73,11 +73,20 @@ def selected_embedding(statelist,sublist):
     for i in range(5):
         realigned = run_realign(realigned, np.asarray(np.mean(realigned, axis=0).squeeze()))
 
-    savemat(outcome_folder+'/{}_group_embedding_new.mat'.format(title), mdict={'emb': realigned, 'subs': subs, 'states':states})
-
+    
+    if len(sublist)==1:
+        path = outcome_folder+'/{}_{}group_embedding.mat'.format(sub,title)
         
-    f = loadmat(outcome_folder+'/{}_group_embedding_new.mat'.format(title))
-    print('Group matrix succeded and saved in {}'.format(outcome_folder+'/{}_group_embedding_new.mat'.format(title)))
+    elif len(sublist) != 40:
+        path = outcome_folder+'/{}subjects_{}group_embedding.mat'.format(len(sublist),title)
+
+    else:
+        path = outcome_folder+'/all_{}group_embedding.mat'.format(title)
+    
+    savemat(path, mdict={'emb': realigned, 'subs': subs, 'states':states})
+    f = loadmat(path)
+
+    print('Group matrix succeded and saved in {}'.format())
     # print(len(f['subs']))
     # print(f['subs'])
     return f
