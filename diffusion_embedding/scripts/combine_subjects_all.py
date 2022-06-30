@@ -1,5 +1,8 @@
 """
 STEP 3 : Rotate and gather all subjects into a matrix
+
+
+NB : A single file with all individual embeddings is created that can be read into another software for group-level analyses.
 """
 
 import nibabel as nib
