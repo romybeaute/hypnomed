@@ -86,7 +86,7 @@ def selected_embedding(statelist,sublist):
     savemat(path, mdict={'emb': realigned, 'subs': subs, 'states':states})
     f = loadmat(path)
 
-    print('Group matrix succeded and saved in {}'.format())
+    print('Group matrix succeded and saved in {}'.format(path))
     # print(len(f['subs']))
     # print(f['subs'])
     return f
