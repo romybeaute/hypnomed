@@ -33,11 +33,30 @@ print('Keeping following states : ',select_states)
 
 emb_all   = selected_embedding(statelist=select_states,sublist=sublist)
 
+try:
+    emb_all['emb'].shape
+    a= np.zeros(20484)
+    a[lab]=np.mean(emb_all['emb'],axis=0)[:,0]
+    nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/lh.inflated',a[:10242],colorbar=True, cmap='jet', vmax=5.5,title='{}_diffusion_map_group_lh'.format(select_states),output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/partial_embeddings/diffusion_map_group_%s_lh.png' % select_states)
+
+    #lh_fig.show()
+    nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/rh.inflated',a[10242:],colorbar=True, cmap='jet', vmax=5.5,  title='{}_diffusion_map_group_lh'.format(select_states),output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/partial_embeddings/diffusion_map_group_%s_rh.png' % select_states)
+
+    #nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/lh.inflated',np.mean(b['emb'],axis=0)[:,0],cmap='jet', vmax=5.5, output_file='diffusion_map_group_%s_lh.png' % state)
+
+    #print("%s completed" % group_emb_map)
+#except:
+    #print("%s failed" % group_emb_map)
+except:
+    print('failed')
+
 # selected_embedding(statelist=select_states,sublist=select_sub)
 
 for s in sublist:
     for state in select_states:
         emb_indiv  = selected_embedding([s],[select_states])
+
+
 
 
 
