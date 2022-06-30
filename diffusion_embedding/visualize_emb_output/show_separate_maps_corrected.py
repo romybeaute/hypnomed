@@ -19,16 +19,14 @@ sublist = np.asarray(df).flatten()
 one_subject = [sublist[0]]
 
 for s in one_subject:
-    for state in  ["compassion","openmonitoring","restingstate"]:
+    for state in ["rs_run-1", "rs_run-2", "rs_run-3"]:
         # Note: another loop could be included to create image for each embedding component...
         # for example: for component in range(X): # where X is the number of components... 
         component = 0
         
         # Load embedding vector for subject/state
-        if subject_wanted=='experts':
-            emb_all   = loadmat('/dycog/meditation/ERC/Analyses/MINCOM/diffusion_embedding_step/matrix_data/separate_subj_matrices/experts/%s_%s_embedding.mat' % (state,s))['emb']
-        elif subject_wanted=='novices':
-            emb_all   = loadmat('/dycog/meditation/ERC/Analyses/MINCOM/diffusion_embedding_step/matrix_data/separate_subj_matrices/novices/%s_%s_embedding.mat' % (state,s))['emb']
+
+        emb_all   = loadmat('/dycog/meditation/ERC/Analyses/MINCOM/diffusion_embedding_step/matrix_data/separate_subj_matrices/novices/%s_%s_embedding.mat' % (state,s))['emb']
 
         emb       = np.zeros(20484)
         emb[lab]  = emb_all[:,:,component] # took mean before, but now will run for each subject & state
