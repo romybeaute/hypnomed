@@ -36,7 +36,8 @@ df = pd.read_csv('/mnt/data/romy/hypnomed/git/diffusion_embedding/scripts/subjec
 sublist = np.asarray(df).flatten()
 
 data_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output'
-template = load_template('/mnt/data/romy/hypnomed/git/data/template/fsaverage')
+# template = load_template('/mnt/data/romy/hypnomed/git/data/template/fsaverage')
+template = load_template('/mnt/data/romy/hypnomed/git/data/template')
 
 embeddings = []
 subs = []
