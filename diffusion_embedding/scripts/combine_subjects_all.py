@@ -1,5 +1,5 @@
 """
-Step 3 : Rotate and gather all subjects into a matrix
+STEP 3 : Rotate and gather all subjects into a matrix
 """
 
 import nibabel as nib
@@ -32,7 +32,7 @@ def load_template(template_path):
     template = template/np.std(template,0)
     return template
 
-df = pd.read_csv('/mnt/data/romy/hypnomed/git/diffusion_embedding/scripts/subject_list.txt', header=None)
+df = pd.read_csv('/mnt/data/romy/hypnomed/git/diffusion_embedding/scripts/subject_list.txt', header=None) #list of the subjects we have
 sublist = np.asarray(df).flatten()
 
 data_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output'
@@ -47,9 +47,9 @@ for sub in sublist:
         # embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.fa.npy'))
         # embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.om.npy'))
         # embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.rest.npy'))
-        embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.rs_run-1.npy'))
-        embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.rs_run-2.npy'))
-        embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.rs_run-3.npy'))
+        embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.ses-001.rs_run-1.npy'))
+        embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.ses-001.rs_run-2.npy'))
+        embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.ses-001.rs_run-3.npy'))
         print(sub)
     except:
         print(sub)
@@ -60,7 +60,9 @@ for i in range(5):
     realigned = run_realign(realigned, np.asarray(np.mean(realigned, axis=0).squeeze()))
 
 savemat(data_folder+'/rs1_rs2_r3_group_embedding_new.mat', mdict={'emb': realigned, 'subs': subs})
+
     
-# f = loadmat(data_folder+'/co_om_rs_group_embedding_new.mat')
+f = loadmat(data_folder+'/rs1_rs2_r3_group_embedding_new.mat')
+print('Group matrix succeded and saved in {}'.format(data_folder+'/rs1_rs2_r3_group_embedding_new.mat'))
 # print(len(f['subs']))
 # print(f['subs'])
