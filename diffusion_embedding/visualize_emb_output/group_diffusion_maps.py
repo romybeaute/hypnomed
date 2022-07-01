@@ -21,6 +21,8 @@ import numpy as np
 import nibabel as nib
 import pandas as pd
 
+
+
 mesh = 'fsaverage5' #the low-resolution fsaverage5 mesh (10242 nodes)
 fsaverage_path = '/mnt/data/romy/packages/freesurfer/subjects/{}/label'.format(mesh)
 
