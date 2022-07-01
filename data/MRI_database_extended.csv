@@ -1,4 +1,4 @@
-sub number;sub code;sub-heudi;Neucose-id;version ;ER runs;RS runs;check_FD (>0.15);comments;reorient;movement;quality check preproc (does the wT1 match the wwraRUN and MNI);Exclude >1.5mm movement;ER Level 1 ;RS level 1
+sub_number;sub_name;sub_code;neucose_id;version ;ER runs;RS runs;check_FD (>0.15);comments;reorient;movement;quality check preproc (does the wT1 match the wwraRUN and MNI);Exclude >1.5mm movement;ER Level 1 ;RS level 1
 70;EH070;sub-01;NEUCOSE_ELSES07842;B;10  18  24;8  16  22;;bougé pendant T1, refait, utiliser 26/27;x;ok (small spikes);x;run M > exclude first part;almost none in H;ok
 87;LP087;sub-02;NEUCOSE_LECPA07862;A;10  18  24;8  16  22;;;x;ok;x;;ok;ok
 76;HM076;sub-03;NEUCOSE_HARMA07939;A;10  18  24;8  16  22;;;x;ok;x;;ok;ok
