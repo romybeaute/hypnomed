@@ -90,3 +90,46 @@ def selected_embedding(statelist,sublist):
     # print(len(f['subs']))
     # print(f['subs'])
     return f
+
+
+
+def selected_embedding_reordered(condition,sublist):
+
+    outcome_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/partial_embeddings_reordered'
+    data_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output'
+
+    template = load_template('/mnt/data/romy/hypnomed/git/data/template')
+
+    embeddings = []
+    subs = []
+
+    for sub in sublist:
+            subs.append(sub)
+
+            try:
+
+                embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.ses-001.{condition}.npy'))
+                print(sub)
+                print(condition)
+            except:
+                print(sub)
+                print(condition)
+
+
+    realigned = run_realign(embeddings, template)
+    for i in range(5):
+        realigned = run_realign(realigned, np.asarray(np.mean(realigned, axis=0).squeeze()))
+
+
+    if len(sublist)==1: #for single subject analysis
+        path = outcome_folder+'/{}_{}_embedding.mat'.format(condition,sub)
+
+    else: #for group analysis
+        path = outcome_folder+'/{}_group_embedding.mat'.format(condition)
+    
+    savemat(path, mdict={'emb': realigned, 'subs': subs, 'condition':condition})
+    f = loadmat(path)
+
+    print('Group matrix succeded and saved in {}'.format(path))
+
+    return f

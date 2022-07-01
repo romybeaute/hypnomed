@@ -28,9 +28,9 @@ fsaverage_path = '/mnt/data/romy/packages/freesurfer/subjects/{}/label'.format(m
 
 # fsaverage_path = '/mnt/data/romy/hypnomed/git/data/template/fsaverage/label'
 
-data_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output'
-group_emb_map = data_folder+'/rs1_rs2_r3_group_embedding_new.mat'
-state = 'rs1_rs2_r3'
+data_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output_reordered'
+group_emb_map = data_folder+'/cont_med_hyp_group_embedding_new.mat'
+state = 'control_hypnose_meditation'
 
 lab_lh = nib.freesurfer.read_label(fsaverage_path+'/lh.cortex.label') #Freesurfer fsaverage surface
 lab_rh = 10242 + nib.freesurfer.read_label(fsaverage_path+'/rh.cortex.label')
@@ -41,27 +41,17 @@ df = pd.read_csv('/mnt/data/romy/hypnomed/git/diffusion_embedding/scripts/subjec
 
 sublist = np.asarray(df).flatten()
 
-# for state in ["rs_run-1", "rs_run-2", "rs_run-3"]:
-#             try:
-#                 b= loadmat('%s_group_embedding.mat' % state)
-#                 b['emb'].shape
-#                 a= np.zeros(20484)
-#                 a[lab]=np.mean(b['emb'],axis=0)[:,0]
-#                 nilearn.plotting.plot_surf_stat_map('/home/loic/Documents/fsaverage5/surf/lh.inflated',a[:10242],cmap='jet', vmax=5.5, output_file='diffusion_map_group_%s_lh.png' % state)
-#                 print("%s completed" % state)
-#             except:
-#                 print("%s failed" % state)
-# for state in ["rs_run-1", "rs_run-2", "rs_run-3"]:
+
 try:
 
-    b= loadmat(data_folder+'/rs1_rs2_r3_group_embedding_new.mat')
+    b= loadmat(data_folder+'/cont_med_hyp_group_embedding_new.mat')
     b['emb'].shape
     a= np.zeros(20484)
     a[lab]=np.mean(b['emb'],axis=0)[:,0]
-    nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/lh.inflated',a[:10242],colorbar=True, cmap='jet', vmax=5.5,title='diffusion_map_group_lh',output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/diffusion_map_group_%s_lh.png' % state)
+    nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/lh.inflated',a[:10242],colorbar=True, cmap='jet', vmax=5.5,title='Diffusion map group level (control_hypnose_meditation) - Left Hem.',output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/diffusion_map_group_%s_lh.png' % state)
 
     #lh_fig.show()
-    nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/rh.inflated',a[10242:],colorbar=True, cmap='jet', vmax=5.5,  title='diffusion_map_group_rh',output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/diffusion_map_group_%s_rh.png' % state)
+    nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/rh.inflated',a[10242:],colorbar=True, cmap='jet', vmax=5.5,  title='Diffusion map group level (control_hypnose_meditation) - Right Hem.',output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/diffusion_map_group_%s_rh.png' % state)
 
     #nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/lh.inflated',np.mean(b['emb'],axis=0)[:,0],cmap='jet', vmax=5.5, output_file='diffusion_map_group_%s_lh.png' % state)
 
