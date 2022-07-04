@@ -49,6 +49,7 @@ def selected_embedding(condition,sublist,gradients_for):
     states = [state for state in condition.split('_')] 
     if gradients_for == 'blocks': #'run-1,run-2,run-3' : need to change the name to retrieve npy file (by adding 'rs_' prefix)
         states = ['rs_{}'.format(s) for s in states]
+    print('States : ',states)
 
         
     for sub in sublist:
