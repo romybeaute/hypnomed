@@ -48,7 +48,7 @@ npy_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_outputs/emb_ou
 
 mesh = 'fsaverage5' #the low-resolution fsaverage5 mesh (10242 nodes)
 fsaverage_path = '/mnt/data/romy/packages/freesurfer/subjects/{}/label'.format(mesh)
-image_output_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/images_gradients/'
+image_output_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/images_gradients/{}'.format(gradients_for)
 
 
 
@@ -74,8 +74,12 @@ def make_gradients_images(sublist,emb_condition):
         prefix = sublist[0] #indiv-level analysis
     print('Gradient for : ',prefix)
 
+    image_folder = os.path.join(image_output_folder,prefix)
+    if not os.path.isdir(image_folder):
+        os.makedirs(image_folder)
+
     mat_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_matrices/{}'.format(prefix)
-    if not os.path.isdir:
+    if not os.path.isdir(mat_folder):
         os.makedirs(mat_folder)
     mat_file = mat_folder+'/{}_{}_embedding.mat'.format(prefix, emb_condition)
 
@@ -90,28 +94,29 @@ def make_gradients_images(sublist,emb_condition):
         b['emb'].shape
         a= np.zeros(20484)
         a[lab]=np.mean(b['emb'],axis=0)[:,0]
-        nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/lh.inflated',a[:10242],colorbar=True, cmap='jet', vmax=5.5,title='{}_diffusion_map_{}_lh'.format(prefix,emb_condition),output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/images_gradients/{}/{}_diffusion_map_{}_lh.png'.format(prefix,prefix,emb_condition))
-        nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/rh.inflated',a[10242:],colorbar=True, cmap='jet', vmax=5.5,  title='{}_diffusion_map_{}_rh'.format(prefix,emb_condition),output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/images_gradients/{}/{}_diffusion_map_{}_rh.png'.format(prefix,prefix,emb_condition))
-        print("%s completed" % mat_file)
+        nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/lh.inflated',a[:10242],colorbar=True, cmap='jet', vmax=5.5,title='{}_diffusion_map_{}_lh'.format(prefix,emb_condition),output_file=image_folder+'/{}_diffusion_map_{}_lh.png'.format(prefix,emb_condition))
+        nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/rh.inflated',a[10242:],colorbar=True, cmap='jet', vmax=5.5,  title='{}_diffusion_map_{}_rh'.format(prefix,emb_condition),output_file=image_folder+'/{}_diffusion_map_{}_rh.png'.format(prefix,emb_condition))
+        print("Gradient image for %s completed" % mat_file)
     except:
-        print("%s failed" % mat_file)
+        print("/!\ Gradient image for %s failed /!\ " % mat_file)
 
 
 #Get gradient images for group level analysis   
 
-make_gradients_images(sublist,emb_condition)
+# emb_conditions = ['run-1','run-2','run-3']
+# for subject in sublist:
+#     for condition in emb_conditions:
+#         make_gradients_images(sublist=[subject],emb_condition=condition)
 
+# emb_conditions = ['control','meditation','hypnose']
+# for condition in emb_conditions:
+#     make_gradients_images(sublist,condition)
+
+
+# make_gradients_images(sublist=sublist,emb_condition='run-1_run-2_run-3')
 
 
     
 
-    
 
 
-
-
-# for subj in sublist:
-#     if not os.path.isdir(mat_folder+'/{}'):
-#         os.makedirs(mat_folder+'/{}'.format(subj))
-#     indiv_emb_map = mat_folder+'/{}/{}_{}_embedding.mat'.format(subj,subj,emb_condition)
-#     make_images_gradients(mat_file_path=indiv_emb_map)
