@@ -70,7 +70,7 @@ def selected_embedding(condition,sublist,gradients_for):
 
     
     if len(sublist)==1:
-        path = outcome_folder+'/{}_{}_embedding.mat'.format(sub,condition)
+        path = outcome_folder+'/{}/{}_{}_embedding.mat'.format(sub,sub,condition)
 
     else:
         path = outcome_folder+'/group_{}_embedding.mat'.format(condition)
@@ -85,44 +85,54 @@ def selected_embedding(condition,sublist,gradients_for):
 
 
 
-# def selected_embedding_reordered(condition,sublist):
 
-#     outcome_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_matrices'
-#     npy_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_outputs/emb_output_reordered'
+def select_embedding(emb_condition,sublist,gradients_for):
 
-#     template = load_template('/mnt/data/romy/hypnomed/git/data/template')
+    npy_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_outputs/emb_output_{}'.format(gradients_for)
+    template = load_template('/mnt/data/romy/hypnomed/git/data/template')
 
-#     embeddings = []
-#     subs = []
+    embeddings = []
+    subs = []
 
-#     for sub in sublist:
-#             subs.append(sub)
-#             try:
+    states = [state for state in emb_condition.split('_')] 
+    if gradients_for == 'blocks': #'run-1,run-2,run-3' : need to change the name to retrieve npy file (by adding 'rs_' prefix)
+        states = ['rs_{}'.format(s) for s in states]
+    print('States : ',states)
 
-#                 embeddings.append(np.load(npy_folder+f'/embedding_dense_emb.{sub}.ses-001.{condition}.npy'))
-#                 print(sub)
-#                 print(condition)
-#             except:
-#                 print(sub)
-#                 print(condition)
+        
+    for sub in sublist:
+            subs.append(sub)
+            for state in states:
+                try:
+                    embeddings.append(np.load(npy_folder+f'/embedding_dense_emb.{sub}.ses-001.{state}.npy'))
+                    print(sub)
+                    print(state)
+                except:
+                    print(sub)
+                    print(state)
 
 
-#     realigned = run_realign(embeddings, template)
-#     for i in range(5):
-#         realigned = run_realign(realigned, np.asarray(np.mean(realigned, axis=0).squeeze()))
+    realigned = run_realign(embeddings, template)
+    for i in range(5):
+        realigned = run_realign(realigned, np.asarray(np.mean(realigned, axis=0).squeeze()))
 
-
-#     if len(sublist)==1: #for single subject analysis
-#         path = outcome_folder+'/{}_{}_embedding.mat'.format(condition,sub)
-
-#     else: #for group analysis
-#         path = outcome_folder+'/{}_group_embedding.mat'.format(condition)
     
-#     savemat(path, mdict={'emb': realigned, 'subs': subs, 'condition':condition})
-#     f = loadmat(path)
+    if len(sublist) > 1:
+        prefix = 'group' #group-level analysis
+    else:
+        prefix = sublist[0] #indiv-level analysis
+    print('Gradient for : ',prefix)
 
-#     print('Group matrix succeded and saved in {}'.format(path))
+    mat_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_matrices/{}'.format(prefix)
+    if not os.path.isdir:
+        os.makedirs(mat_folder)
+    mat_file = mat_folder+'/{}_{}_embedding.mat'.format(prefix, emb_condition)
+    
+    
+    savemat(mat_file, mdict={'emb': realigned, 'subs': subs, 'states':states})
+    f = loadmat(mat_file)
 
-#     return f
-
-
+    print('{} matrix succeded and saved in {}'.format(prefix,mat_file))
+    # print(len(f['subs']))
+    # print(f['subs'])
+    return f
