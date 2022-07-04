@@ -36,26 +36,25 @@ def load_template(template_path):
     return template
 
 
-def selected_embedding(condition,sublist,npy_folder):
+def selected_embedding(condition,sublist,gradients_for):
 
     outcome_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_matrices'
+    npy_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_outputs/emb_output_{}'.format(gradients_for)
     
-    # template = load_template('/mnt/data/romy/hypnomed/git/data/template/fsaverage')
     template = load_template('/mnt/data/romy/hypnomed/git/data/template')
 
     embeddings = []
     subs = []
-    states = [state for state in condition.split('_')]
-        
-    
 
+    states = [state for state in condition.split('_')] 
+    if gradients_for == 'blocks': #'run-1,run-2,run-3' : need to change the name to retrieve npy file (by adding 'rs_' prefix)
+        states = ['rs_{}'.format(s) for s in states]
+
+        
     for sub in sublist:
             subs.append(sub)
             for state in states:
                 try:
-                    # embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.fa.npy'))
-                    # embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.om.npy'))
-                    # embeddings.append(np.load(data_folder+f'/embedding_dense_emb.{sub}.rest.npy'))
                     embeddings.append(np.load(npy_folder+f'/embedding_dense_emb.{sub}.ses-001.{state}.npy'))
                     print(sub)
                     print(state)
@@ -85,44 +84,44 @@ def selected_embedding(condition,sublist,npy_folder):
 
 
 
-def selected_embedding_reordered(condition,sublist):
+# def selected_embedding_reordered(condition,sublist):
 
-    outcome_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_matrices'
-    npy_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_outputs/emb_output_reordered'
+#     outcome_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_matrices'
+#     npy_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_outputs/emb_output_reordered'
 
-    template = load_template('/mnt/data/romy/hypnomed/git/data/template')
+#     template = load_template('/mnt/data/romy/hypnomed/git/data/template')
 
-    embeddings = []
-    subs = []
+#     embeddings = []
+#     subs = []
 
-    for sub in sublist:
-            subs.append(sub)
-            try:
+#     for sub in sublist:
+#             subs.append(sub)
+#             try:
 
-                embeddings.append(np.load(npy_folder+f'/embedding_dense_emb.{sub}.ses-001.{condition}.npy'))
-                print(sub)
-                print(condition)
-            except:
-                print(sub)
-                print(condition)
-
-
-    realigned = run_realign(embeddings, template)
-    for i in range(5):
-        realigned = run_realign(realigned, np.asarray(np.mean(realigned, axis=0).squeeze()))
+#                 embeddings.append(np.load(npy_folder+f'/embedding_dense_emb.{sub}.ses-001.{condition}.npy'))
+#                 print(sub)
+#                 print(condition)
+#             except:
+#                 print(sub)
+#                 print(condition)
 
 
-    if len(sublist)==1: #for single subject analysis
-        path = outcome_folder+'/{}_{}_embedding.mat'.format(condition,sub)
+#     realigned = run_realign(embeddings, template)
+#     for i in range(5):
+#         realigned = run_realign(realigned, np.asarray(np.mean(realigned, axis=0).squeeze()))
 
-    else: #for group analysis
-        path = outcome_folder+'/{}_group_embedding.mat'.format(condition)
+
+#     if len(sublist)==1: #for single subject analysis
+#         path = outcome_folder+'/{}_{}_embedding.mat'.format(condition,sub)
+
+#     else: #for group analysis
+#         path = outcome_folder+'/{}_group_embedding.mat'.format(condition)
     
-    savemat(path, mdict={'emb': realigned, 'subs': subs, 'condition':condition})
-    f = loadmat(path)
+#     savemat(path, mdict={'emb': realigned, 'subs': subs, 'condition':condition})
+#     f = loadmat(path)
 
-    print('Group matrix succeded and saved in {}'.format(path))
+#     print('Group matrix succeded and saved in {}'.format(path))
 
-    return f
+#     return f
 
 
