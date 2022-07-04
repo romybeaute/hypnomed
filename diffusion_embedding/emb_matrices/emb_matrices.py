@@ -38,7 +38,7 @@ def load_template(template_path):
 
 def selected_embedding(condition,sublist,npy_folder):
 
-    outcome_folder = '/home/romy.beaute/projects/hypnomed/diffusion_embedding/emb_matrices'
+    outcome_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_matrices'
     
     # template = load_template('/mnt/data/romy/hypnomed/git/data/template/fsaverage')
     template = load_template('/mnt/data/romy/hypnomed/git/data/template')
@@ -87,7 +87,7 @@ def selected_embedding(condition,sublist,npy_folder):
 
 def selected_embedding_reordered(condition,sublist):
 
-    outcome_folder = '/home/romy.beaute/projects/hypnomed/diffusion_embedding/emb_matrices'
+    outcome_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_matrices'
     npy_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_outputs/emb_output_reordered'
 
     template = load_template('/mnt/data/romy/hypnomed/git/data/template')
