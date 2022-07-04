@@ -90,8 +90,8 @@ def make_gradients_images(sublist,emb_condition):
         b['emb'].shape
         a= np.zeros(20484)
         a[lab]=np.mean(b['emb'],axis=0)[:,0]
-        nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/lh.inflated',a[:10242],colorbar=True, cmap='jet', vmax=5.5,title='diffusion_map_group_{}_lh'.format(emb_condition),output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/images_gradients/group/diffusion_map_group_%s_lh.png' % emb_condition)
-        nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/rh.inflated',a[10242:],colorbar=True, cmap='jet', vmax=5.5,  title='diffusion_map_group_{}_rh'.format(emb_condition),output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/images_gradients/group/diffusion_map_group_%s_rh.png' % emb_condition)
+        nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/lh.inflated',a[:10242],colorbar=True, cmap='jet', vmax=5.5,title='{}_diffusion_map_{}_lh'.format(prefix,emb_condition),output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/images_gradients/{}/{}_diffusion_map_{}_lh.png'.format(prefix,prefix,emb_condition))
+        nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/rh.inflated',a[10242:],colorbar=True, cmap='jet', vmax=5.5,  title='{}_diffusion_map_{}_rh'.format(prefix,emb_condition),output_file='/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/images_gradients/{}/{}_diffusion_map_{}_rh.png'.format(prefix,prefix,emb_condition))
         print("%s completed" % mat_file)
     except:
         print("%s failed" % mat_file)
