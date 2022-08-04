@@ -2,6 +2,10 @@
 STEP 3 : Rotate and gather all subjects into a matrix
 
 
+Build gradient across groups --> to compare it to each other 
+/!\ During dimensionality reduction steps the eigenvectors that we find might describe different subspaces.
+==> Need to align the gradients after decomposition (function_realign).
+
 NB : A single file with all individual embeddings is created that can be read into another software for group-level analyses.
 """
 
@@ -14,6 +18,10 @@ from scipy.io import loadmat
 from nilearn import surface
 
 def run_realign(emb, tar):
+    """
+    Align the gradients after dimmensionality reduction (for group analyses)
+    After realignement : gradients should be in the same space (then use realigned gradient for further analyses)
+    """
     realign = []
     for i, embed in enumerate(emb):
         u, s, v = np.linalg.svd(tar.T.dot(embed), full_matrices=False)
@@ -41,7 +49,7 @@ def selected_embedding(condition,sublist,gradients_for):
     outcome_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_matrices'
     npy_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_outputs/emb_output_{}'.format(gradients_for)
     
-    template = load_template('/mnt/data/romy/hypnomed/git/data/template')
+    template = load_template('/mnt/data/romy/hypnomed/git/data/template') #cortical template to project the gradients on cortical space
 
     embeddings = []
     subs = []
@@ -52,7 +60,7 @@ def selected_embedding(condition,sublist,gradients_for):
     print('States : ',states)
 
         
-    for sub in sublist:
+    for sub in sublist: #compute gradient for group of selected participants
             subs.append(sub)
             for state in states:
                 try:
@@ -64,15 +72,14 @@ def selected_embedding(condition,sublist,gradients_for):
                     print(state)
 
 
-    realigned = run_realign(embeddings, template)
+    realigned = run_realign(embeddings, template) #realign the gradients at the group-level 
     for i in range(5):
         realigned = run_realign(realigned, np.asarray(np.mean(realigned, axis=0).squeeze()))
-
     
-    if len(sublist)==1:
+    if len(sublist)==1: #individual-level
         path = outcome_folder+'/{}/{}_{}_embedding.mat'.format(sub,sub,condition)
 
-    else:
+    else: #group-level
         path = outcome_folder+'/group_{}_embedding.mat'.format(condition)
     
     savemat(path, mdict={'emb': realigned, 'subs': subs, 'states':states})
