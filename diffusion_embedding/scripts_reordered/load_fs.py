@@ -28,7 +28,7 @@ def load_fs(subject, ses, state):
 
     data = np.vstack((data[0][label[0],:],data[1][label[1],:])) #concatenation 2 hemispheres
     
-    #normalize data before the correlation (z-score)
+    #normalize data before the correlation (z-score normalization)
     data = (data.T - np.nanmean(data, axis = 1)).T #mean data
     data = (data.T / np.nanstd(data, axis = 1)).T #std data
 
