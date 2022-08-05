@@ -15,8 +15,12 @@ Ressources for diffusion map embedding steps :
 """
 
 import sys, os
-sys.path.append('/mnt/data/romy/hypnomed/git/diffusion_embedding/') #("/mnt/data/sebastien/diffusion_embedding_step/")
-sys.path.append('/home/romy.beaute/projects/hypnomed/') #("/mnt/data/sebastien/diffusion_embedding_step/")
+sys.path.append('/mnt/data/romy/hypnomed/git/diffusion_embedding/') 
+sys.path.append('/home/romy.beaute/projects/hypnomed/') 
+sys.path.append('/mnt/data/romy/hypnomed/git/diffusion_embedding/data/') 
+sys.path.append('/home/romy.beaute/projects/hypnomed/diffusion_embedding/data/') 
+
+
 from load_fs import load_fs
 import numpy as np
 import nibabel as nib
@@ -47,7 +51,8 @@ def run_perc(data, thresh):
 
 """
 
-DIFFUSION MAP EMBEDDING STEP (for non-linear dimensionality reduction)
+DIFFUSION MAP EMBEDDING STEP (for non-linear dimensionality reduction) 
+NB : Launch for each subject and each condition individually 
 
 Forms an affinity matrix given by the specified function and
 applies spectral decomposition to the corresponding graph laplacian.
@@ -102,3 +107,14 @@ def main(subj):
 
                 np.save(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output_reordered/embedding_dense_emb.{subj}.{ses}.{condition}.npy', emb)
                 np.save(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output_reordered/embedding_dense_res.{subj}.{ses}.{condition}.npy', res)
+
+                
+                
+                
+                
+"""
+To run the subjects : 
+for i in range(1,41):
+    subj = 'sub-{}'.format(i)
+    main(subj)
+"""
