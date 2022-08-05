@@ -39,6 +39,13 @@ def run_perc(data, thresh):
     return data
 
 
+"""
+
+NB :  if return_result == True       
+result = dict(lambdas=lambdas, vectors=vectors,
+               n_components=n_components, diffusion_time=diffusion_times,
+               n_components_auto=n_components_auto)
+"""
 
  
 def main(subj):
