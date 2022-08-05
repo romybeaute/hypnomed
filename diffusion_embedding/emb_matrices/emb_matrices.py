@@ -31,13 +31,21 @@ def run_realign(emb, tar):
 
 
 def load_template(template_path):
+    """
+    Load gradient template from HCP ressources 
+    Templates can be found here : https://github.com/romybeaute/hypnomed/tree/main/data/template
+    Load a total of 10 templates (R/L * 5 gradients)
+    Eg : hcp.embed.grad_1.L.fsa5.func.gii
+    """
+    
+    
     cortex = loadmat('/mnt/data/romy/hypnomed/git/data/cortex.mat')
     cortex = np.squeeze(cortex['cortex'])
     template = np.zeros([20484,5])
-    for grad_id in range(5):
-        template_L = surface.load_surf_data(os.path.join(template_path,'hcp.embed.grad_'+str(grad_id+1)+'.L.fsa5.func.gii'))
-        template_R = surface.load_surf_data(os.path.join(template_path,'hcp.embed.grad_'+str(grad_id+1)+'.R.fsa5.func.gii'))
-        template[:,grad_id] = np.hstack([template_L,template_R])
+    for grad_id in range(5): #load a template for each diffusion map dimension
+        template_L = surface.load_surf_data(os.path.join(template_path,'hcp.embed.grad_'+str(grad_id+1)+'.L.fsa5.func.gii')) #gradient template for Left Hemisphere
+        template_R = surface.load_surf_data(os.path.join(template_path,'hcp.embed.grad_'+str(grad_id+1)+'.R.fsa5.func.gii')) ##gradient template for Right Hemisphere
+        template[:,grad_id] = np.hstack([template_L,template_R]) #stack (right/left) arrays in sequence horizontally (column wise)
     template = template[cortex,:]
     template = template - np.mean(template,0)
     template = template/np.std(template,0)
@@ -49,7 +57,7 @@ def selected_embedding(condition,sublist,gradients_for):
     outcome_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_matrices'
     npy_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_outputs/emb_output_{}'.format(gradients_for)
     
-    template = load_template('/mnt/data/romy/hypnomed/git/data/template') #cortical template to project the gradients on cortical space
+    template = load_template('/mnt/data/romy/hypnomed/git/data/template') #hcp template for gradients
 
     embeddings = []
     subs = []
