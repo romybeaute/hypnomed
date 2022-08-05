@@ -151,3 +151,56 @@ def select_embedding(emb_condition,sublist,gradients_for):
     # print(len(f['subs']))
     # print(f['subs'])
     return f
+
+
+
+def create_mat_embeddings(emb_condition,sublist,gradients_for):
+
+    npy_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_outputs/emb_output_{}'.format(gradients_for)
+    template = load_template('/mnt/data/romy/hypnomed/git/data/template')
+
+    embeddings = []
+    subs = []
+
+    states = [state for state in emb_condition.split('_')] 
+    if gradients_for == 'blocks': #'run-1,run-2,run-3' : need to change the name to retrieve npy file (by adding 'rs_' prefix)
+        states = ['rs_{}'.format(s) for s in states]
+    print('States : ',states)
+
+    for state in states:
+        print('*** Generating embedding .mat file for {} ***'.format(state))
+        for sub in sublist:
+            subs.append(sub)
+            try:
+                embeddings.append(np.load(npy_folder+f'/embedding_dense_emb.{sub}.ses-001.{state}.npy'))
+                print(sub)
+                print(state)
+            except:
+                print(sub)
+                print(state)
+
+
+        realigned = run_realign(embeddings, template)
+        for i in range(5):
+            realigned = run_realign(realigned, np.asarray(np.mean(realigned, axis=0).squeeze()))
+
+        
+        if len(sublist) > 1:
+            prefix = 'group' #group-level analysis
+        else:
+            prefix = sublist[0] #indiv-level analysis
+        print('Gradient for : ',prefix)
+
+        mat_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_matrices/{}'.format(prefix)
+        if not os.path.isdir:
+            os.makedirs(mat_folder)
+        mat_file = mat_folder+'/{}_{}_embedding.mat'.format(prefix, emb_condition)
+        
+        
+        savemat(mat_file, mdict={'emb': realigned, 'subs': subs, 'states':states})
+        f = loadmat(mat_file)
+
+        print('{} matrix succeded and saved in {}'.format(prefix,mat_file))
+    # print(len(f['subs']))
+    # print(f['subs'])
+    #return f
