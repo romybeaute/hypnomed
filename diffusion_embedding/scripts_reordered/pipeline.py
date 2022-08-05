@@ -8,6 +8,10 @@ STEP 2 : Perform diffusion embedding / Correlate RS data across sessions and emb
 Ressources for computing correlation matrix : 
 - https://stackoverflow.com/questions/26524950/how-to-apply-corr2-functions-in-multidimentional-arrays-in-matlab/26526798#26526798
 - https://stackoverflow.com/questions/30143417/computing-the-correlation-coefficient-between-two-multi-dimensional-arrays
+
+Ressources for diffusion map embedding steps :
+- https://github.com/satra/mapalign/blob/master/mapalign/embed.py
+
 """
 
 import sys, os
@@ -27,11 +31,13 @@ from data.get_infos import get_rs_condition
 
 """
 Transform z to r correlation values with hypobolic tangent function 
+Generate percentile thresholds for 90th percentile
 For each raw of the matrix, keep only the values at the top 10% of connections
 """
 @jit(parallel=True)
 def run_perc(data, thresh):
     perc_all = np.zeros(data.shape[0])
+    # Threshold each row of the matrix by setting values below 90th percentile to 0
     for n,i in enumerate(data):
         data[n, i < np.percentile(i, thresh)] = 0. #values under the connection threshold (<top 10%) are zeroed
     for n,i in enumerate(data):
@@ -41,7 +47,13 @@ def run_perc(data, thresh):
 
 """
 
-NB :  if return_result == True       
+DIFFUSION MAP EMBEDDING STEP (for non-linear dimensionality reduction)
+
+Forms an affinity matrix given by the specified function and
+applies spectral decomposition to the corresponding graph laplacian.
+The resulting transformation is given by the value of the eigenvectors for each data point.
+
+NB  if return_result == True    :
 result = dict(lambdas=lambdas, vectors=vectors,
                n_components=n_components, diffusion_time=diffusion_times,
                n_components_auto=n_components_auto)
@@ -82,7 +94,7 @@ def main(subj):
                 #Step 4 : Compute similarity between all pairs of rows using cosine distance (resulting in positive, symmetrix affinity matrix aff)
                 norm = (K * K).sum(0, keepdims=True) ** .5 
                 K = K.T @ K #numerator (dot product)
-                aff = K / norm / norm.T #similarities (full affinity matrix)
+                aff = K / norm / norm.T #similarities (full affinity matrix) shape = (n_samples, n_samples)
                 del norm, K
 
                 emb, res = embed.compute_diffusion_map(aff, alpha = 0.5, n_components=5, skip_checks=True, overwrite=True, eigen_solver=eigsh, return_result=True) #Compute the diffusion maps of a symmetric similarity matrix
