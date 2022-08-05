@@ -48,7 +48,7 @@ npy_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_outputs/emb_ou
 
 mesh = 'fsaverage5' #the low-resolution fsaverage5 mesh (10242 nodes)
 fsaverage_path = '/mnt/data/romy/packages/freesurfer/subjects/{}/label'.format(mesh)
-image_output_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/images_gradients/{}'.format(gradients_for)
+image_output_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output/images_gradients/{}'.format(gradients_for) #where to store the visualisations of the gradient(s)
 
 
 
@@ -93,7 +93,7 @@ def make_gradients_images(sublist,emb_condition):
         print('Loading ',mat_file)
         b['emb'].shape
         a= np.zeros(20484)
-        a[lab]=np.mean(b['emb'],axis=0)[:,0]
+        a[lab]=np.mean(b['emb'],axis=0)[:,0] #check if corresponds to 1st gradient
         nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/lh.inflated',a[:10242],colorbar=True, cmap='jet', vmax=5.5,title='{}_diffusion_map_{}_lh'.format(prefix,emb_condition),output_file=image_folder+'/{}_diffusion_map_{}_lh.png'.format(prefix,emb_condition))
         nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/rh.inflated',a[10242:],colorbar=True, cmap='jet', vmax=5.5,  title='{}_diffusion_map_{}_rh'.format(prefix,emb_condition),output_file=image_folder+'/{}_diffusion_map_{}_rh.png'.format(prefix,emb_condition))
         print("Gradient image for %s completed" % mat_file)
