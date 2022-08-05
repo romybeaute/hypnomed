@@ -38,8 +38,8 @@ from emb_matrices.emb_matrices import *
 gradients_for = 'states' #'blocks'
 if gradients_for == 'states':
     emb_condition = 'control_meditation_hypnose'
-else:
-    emb_condition = emb_condition = 'run-1_run-2_run-3'
+else: #gradients_for == 'blocks' (controling for order effect)
+    emb_condition = 'run-1_run-2_run-3'
 
 
 #########################
@@ -85,8 +85,8 @@ def make_gradients_images(sublist,emb_condition):
 
 
     if not os.path.isfile(mat_file):
-        select_embedding(emb_condition,sublist,gradients_for)
-        print('Creating .mat file for {} conditions'.format(emb_condition))
+        select_embedding(emb_condition,sublist,gradients_for) #create .mat embedding file for specified sublist & condition
+        print('Creating .mat file for sublist : {} under {} condition(s)'.format(sublist,emb_condition))
 
     try:
         b = loadmat(mat_file)
@@ -101,19 +101,18 @@ def make_gradients_images(sublist,emb_condition):
         print("/!\ Gradient image for %s failed /!\ " % mat_file)
 
 
-#Get gradient images for group level analysis   
+"""
+Launch the script to get gradient images for group level analysis (have to select for block or states analysis) :
+"""
 
-# emb_conditions = ['run-1','run-2','run-3']
+# emb_conditions = emb_condition.split('_')
+# print('Making gradients for following conditions : ',emb_conditions)
+# print(sublist)
 # for subject in sublist:
 #     for condition in emb_conditions:
 #         make_gradients_images(sublist=[subject],emb_condition=condition)
 
-# emb_conditions = ['control','meditation','hypnose']
-# for condition in emb_conditions:
-#     make_gradients_images(sublist,condition)
 
-
-# make_gradients_images(sublist=sublist,emb_condition='run-1_run-2_run-3')
 
 
     
