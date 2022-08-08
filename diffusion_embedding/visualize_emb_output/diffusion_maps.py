@@ -23,6 +23,9 @@ import numpy as np
 import nibabel as nib
 import pandas as pd
 import os 
+from nilearn import plotting, datasets, surface
+
+
 
 os.chdir('/mnt/data/romy/hypnomed/git/diffusion_embedding/visualize_emb_output')
 print(os.getcwd())
@@ -35,7 +38,7 @@ from emb_matrices.emb_matrices import *
 
 
 ####### TO DEFINE #######
-gradients_for = 'states' #'blocks'
+gradients_for = 'blocks' #'blocks'
 if gradients_for == 'states':
     emb_condition = 'control_meditation_hypnose'
 else: #gradients_for == 'blocks' (controling for order effect)
@@ -187,6 +190,103 @@ def make_gradients_images_isolated_condition(sublist,indiv_emb_state,plot_n_dims
 
 
 
+
+
+
+def make_gradients_images_isolated_condition_surfmesh(sublist,indiv_emb_state,plot_n_dims=1):
+
+    plot_n_dims=1 
+    fsaverage = datasets.fetch_surf_fsaverage()
+    mesh_right = surface.load_surf_mesh(fsaverage.pial_right)
+    mesh_left = surface.load_surf_mesh(fsaverage.pial_left)
+
+    
+    if len(sublist) > 1:
+        prefix = 'group' #group-level analysis
+        image_folder = os.path.join(image_output_folder,prefix)
+    else:
+        prefix = sublist[0] #indiv-level analysis
+        image_folder = os.path.join(image_output_folder+'/indivs',prefix)
+    print('Gradient for : ',prefix)
+
+    image_folder = os.path.join(image_output_folder,prefix)
+    if not os.path.isdir(image_folder):
+        os.makedirs(image_folder)
+
+    mat_folder = '/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_matrices/{}'.format(prefix)
+    if not os.path.isdir(mat_folder):
+        os.makedirs(mat_folder)
+    mat_file = mat_folder+'/{}_{}_embedding.mat'.format(prefix, indiv_emb_state)
+
+
+    if not os.path.isfile(mat_file): #create .mat embedding file for specified sublist & condition
+        create_mat_embeddings(indiv_emb_state,sublist,gradients_for)
+        print('Creating .mat file for sublist : {} under {} condition'.format(sublist,indiv_emb_state))
+    
+    try:
+        b = loadmat(mat_file)
+
+        b['emb'].shape  #(n_subjects,n_nodes,n_dims)
+
+
+        print('Creating images for {} dims'.format(plot_n_dims))
+        for dim in range(plot_n_dims):
+
+            image_folder_dims = image_folder+'/Gradient_{}'.format(dim+1) 
+            if not os.path.isdir(image_folder_dims):
+                os.makedirs(image_folder_dims)
+
+            a = np.zeros(20484) #size concatenated vertices from fsaverage5 template
+            mean_embs = np.mean(b['emb'],axis=0) #mean embeddings for each dimension, across subjects (axis=0 signifies avg across subjects, which is the first dimension of b)
+            a[lab]=np.mean(b['emb'],axis=0)[:,dim] #check if corresponds to 1st gradient
+            stat_map_r = a[10242:] #Statistical map to be displayed on the surface mesh
+            stat_map_l = a[:10242] #Statistical map to be displayed on the surface mesh
+
+            fig_right = plotting.plot_surf_stat_map(
+                mesh_right, 
+                stat_map_r, 
+                hemi='right',  
+                view='lateral', 
+                colorbar=True, 
+                cmap='jet',
+                title='Principal Gradient {} (RH)'.format(indiv_emb_state),
+                #threshold=1.2,
+                vmax=5.5,  
+                bg_map=fsaverage.sulc_right, 
+                bg_scaling_factor=1.5,
+                engine='plotly',
+                output_file=image_folder_dims+'/PG_{}_surfmeshR.png'.format(indiv_emb_state))  
+            # fig_right.show() 
+
+            fig_left = plotting.plot_surf_stat_map(
+                mesh_left, 
+                stat_map_l, 
+                hemi='left',  
+                view='lateral', 
+                colorbar=True, 
+                cmap='jet',
+                title='Principal Gradient {} (LH)'.format(indiv_emb_state),
+                #threshold=1.2,
+                vmax=5.5,  
+                bg_map=fsaverage.sulc_left, 
+                bg_scaling_factor=1.5,
+                engine='plotly',
+                output_file=image_folder_dims+'/PG_{}_surfmeshL.png'.format(indiv_emb_state))  
+            # fig_left.show() 
+            
+
+
+
+            # nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/lh.inflated',a[:10242],colorbar=True, cmap='jet', vmax=5.5,title='{}_diffusion_map_{}_lh_DIMENSION#{}'.format(prefix,indiv_emb_state,dim+1),output_file=image_folder_dims+'/{}_diffusion_map_{}_lh_Dim#{}.png'.format(prefix,indiv_emb_state,dim+1))
+            # nilearn.plotting.plot_surf_stat_map('/mnt/data/romy/packages/freesurfer/subjects/fsaverage5/surf/rh.inflated',a[10242:],colorbar=True, cmap='jet', vmax=5.5, title='{}_diffusion_map_{}_rh_DIMENSION#{}'.format(prefix,indiv_emb_state,dim+1),output_file=image_folder_dims+'/{}_diffusion_map_{}_rh_Dim#{}.png'.format(prefix,indiv_emb_state,dim+1))
+            
+            print("Gradient image for %s completed" % mat_file)
+
+
+    except:
+        print("/!\ Gradient image for %s failed /!\ " % mat_file)
+
+
 """
 Launch the script to get gradient images for group level analysis (have to select for block or states analysis) :
 """
@@ -207,7 +307,7 @@ Option 2 : launch for individual embedding conditions (not mixed)
 indiv_emb_states = emb_condition.split('_')
 print(indiv_emb_states)
 for indiv_emb_state in indiv_emb_states:
-  make_gradients_images_isolated_condition(sublist,indiv_emb_state,plot_n_dims=5)
-
+  #make_gradients_images_isolated_condition(sublist,indiv_emb_state,plot_n_dims=5)
+  make_gradients_images_isolated_condition_surfmesh(sublist,indiv_emb_state,plot_n_dims=1)
 
 
