@@ -3,6 +3,8 @@ import numpy as np
 import os
 from PIL import Image
 import matplotlib.image as mpimg 
+import pathlib
+
 
 
 def img_is_color(img):
@@ -83,12 +85,11 @@ def show_image_list(list_images, list_titles=None, list_cmaps=None, grid=True, n
 
 
 
-def side2side(images_path,output_title):
+def side2side(imgs_path_list,output_title):
 
+    imgs_names = [pathlib.PurePath(imgs_path_list[i]).name for i in range(len(imgs_path_list))]
 
-    list_imgs = os.listdir(images_path)
-    list_titles = [list_imgs[t].split('.')[0] for t in range(len(list_imgs))]
-    path_images = [os.path.join(images_path,list_imgs[im]) for im in range(len(list_imgs))]
+    list_titles = [im.split('_')[1] for im in imgs_names]
 
 
     my_dpi = 300
@@ -99,33 +100,33 @@ def side2side(images_path,output_title):
 
     # ============ AX1 ============ 
     # PIL Image
-    ax1 = fig.add_subplot(2, 3, 1)
-    ax1.set_title("Control")
+    ax1 = fig.add_subplot(3, 2, 1)
+    ax1.set_title(imgs_names[0])
     # ax1.set_xlabel('Gradient 2')
     # ax1.set_ylabel('Gradient 1')
     ax1.set_xticks([])
     ax1.set_yticks([])
-    pil_img = Image.open(path_images[0])
+    pil_img = Image.open(imgs_path_list[0])
     ax1.imshow(pil_img)
 
     # ============ AX1 ============ 
     # PIL Image
-    ax2 = fig.add_subplot(2, 3, 2)
-    ax2.set_title("Hypnose")
+    ax2 = fig.add_subplot(3, 2, 2)
+    ax2.set_title(imgs_names[1])
     # ax2.set_xlabel('X label')
     # ax2.set_ylabel('Y label')
     ax2.set_xticks([])
     ax2.set_yticks([])
-    pil_img = Image.open(path_images[1])
+    pil_img = Image.open(imgs_path_list[1])
     ax2.imshow(pil_img)
 
     # ============ AX2 ============ 
     # mpimg image
-    ax3 = fig.add_subplot(2, 3, 3)
-    ax3.set_title("Meditation")
+    ax3 = fig.add_subplot(3, 2, 3)
+    ax3.set_title(imgs_names[2])
     ax3.set_xticks([])
     ax3.set_yticks([])
-    mpimg_img = mpimg.imread(path_images[3]) 
+    mpimg_img = mpimg.imread(imgs_path_list[2]) 
     ax3.imshow(mpimg_img)
 
 
@@ -135,36 +136,33 @@ def side2side(images_path,output_title):
 
     # ============ AX1 ============ 
     # PIL Image
-    ax4 = fig.add_subplot(2, 3, 4)
-    ax4.set_title("Run-1")
-    ax4.set_xlabel('Gradient 2')
-    ax4.set_ylabel('Gradient 1')
+    ax4 = fig.add_subplot(3, 2, 4)
+    ax4.set_title(imgs_names[3])
     ax4.set_xticks([])
     ax4.set_yticks([])
-    pil_img = Image.open(path_images[4])
+    pil_img = Image.open(imgs_path_list[3])
     ax4.imshow(pil_img)
 
     # ============ AX1 ============ 
     # PIL Image
-    ax5 = fig.add_subplot(2, 3, 5)
-    ax5.set_title("Run-2")
+    ax5 = fig.add_subplot(3, 2, 5)
+    ax5.set_title(imgs_names[4])
     # ax2.set_xlabel('X label')
     # ax2.set_ylabel('Y label')
     ax5.set_xticks([])
     ax5.set_yticks([])
-    pil_img = Image.open(path_images[5])
+    pil_img = Image.open(imgs_path_list[4])
     ax5.imshow(pil_img)
 
     # ============ AX2 ============ 
     # mpimg image
-    ax6 = fig.add_subplot(2, 3, 6)
-    ax6.set_title("Run-3")
+    ax6 = fig.add_subplot(3, 2, 6)
+    ax6.set_title(imgs_names[5])
     ax6.set_xticks([])
     ax6.set_yticks([])
-    mpimg_img = mpimg.imread(path_images[2]) 
+    mpimg_img = mpimg.imread(imgs_path_list[5]) 
     ax6.imshow(mpimg_img)
 
 
-
-    impath = "/home/romy.beaute/projects/hypnomed/diffusion_embedding/visualize_emb_output/scatter_embedded"
-    fig.savefig(impath+"/scatterplots_states&blocks.jpg", dpi='figure', bbox_inches='tight')
+    savepath = os.path.join(str(pathlib.PurePath(imgs_path_list[0]).parent),output_title)
+    fig.savefig(savepath, dpi='figure', bbox_inches='tight')
