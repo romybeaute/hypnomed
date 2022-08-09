@@ -21,8 +21,9 @@ end
 %plot of correlation coefficients
 X = linspace(0,1.5,1000);
 
-figure
+cf = figure
 corr_plot= histfit(squeeze(corr_emb(1,2,:)));
+saveas(cf,'/home/romy.beaute/projects/hypnomed/analysis/diffusion_embedding_analysis/corrplot_fisher.png')
 
 %plot of fisher z-transformed correlation coefficients
 
@@ -39,11 +40,12 @@ under_lim = mean_z - 1.6*std_z;
 super_lim = mean_z + 1.6*std_z;
 X = linspace(0,2,1000);
 
-figure
+h = figure
 density = histfit(Z , 50); % 'Normalization', 'Probability');
 line([mean_z mean_z], [0 120], 'color','r');
 line([under_lim under_lim], [0 120], 'color','r');
 line([super_lim super_lim], [0 120], 'color','r');
+saveas(h,'/home/romy.beaute/projects/hypnomed/analysis/diffusion_embedding_analysis/density_fisher.png')
 
 outliers = zeros(120,1);
 for i=1:120
@@ -408,3 +410,6 @@ disp(subjectsList(logical(outliers)))
 outliers =num2cell(outliers);
 
 out_tab = cat(2, subjectsList, outliers);
+
+filename = '/home/romy.beaute/projects/hypnomed/analysis/diffusion_embedding_analysis/outliers_fisher.csv';    %must end in csv
+writetable( cell2table(out_tab), filename, 'writevariablenames', false, 'quotestrings', true)

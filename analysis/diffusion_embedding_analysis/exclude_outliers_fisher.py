@@ -1,12 +1,35 @@
 import numpy as np
-emb = scipy.io.loadmat('/dycog/meditation/ERC/Analyses/MINCOM/diffusion_embedding_step/matrix_data/co_om_rs_group_embedding_minus_50.mat')
-subs_emb = emb.subs
-emb = emb.emb
-mean_emb = mean(emb,1)
-corr_emb = np.zeros((2,2,225))
+import scipy
+from scipy import io
+
+embmat_path = '/home/romy.beaute/projects/hypnomed/diffusion_embedding/emb_matrices'
+emb_states = '/home/romy.beaute/projects/hypnomed/diffusion_embedding/emb_matrices/group_control_meditation_hypnose_embedding.mat'
+emb_blocks = '/home/romy.beaute/projects/hypnomed/diffusion_embedding/emb_matrices/group_run-1_run-2_run-3_embedding.mat'
+
+
+
+# emb = scipy.io.loadmat('/dycog/meditation/ERC/Analyses/MINCOM/diffusion_embedding_step/matrix_data/co_om_rs_group_embedding_minus_50.mat')
+emb = scipy.io.loadmat(emb_blocks)
+
+#------------------------ informations embedding ------------------------
+print(emb.keys())
+print('States : ',emb['states'])
+print('n={} subjects',emb['subs'])
+print('Emb shape : ',emb['emb'].shape)
+#------------------------------------------------------------------------ 
+
+subs_emb = emb['subs']
+emb = emb['emb']
+# mean_emb= mean(emb,1)
+mean_emb = np.mean(emb,axis=0) #np.mean(emb,1)
+corr_emb = np.zeros(20484) #np.zeros((2,2,225))
 for i in np.arange(1,225+1).reshape(-1):
-    R,P = corrcoef(np.squeeze(mean_emb(:,:,1)),np.squeeze(emb(i,:,1)))
+    R,P = np.corrcoef(np.squeeze(mean_emb(:,:,1)),np.squeeze(emb(i,:,1))) #Return Pearson product-moment correlation coefficients.
+
+
     corr_emb[:,:,i] = R
+
+corr_emb = np.mean(emb,axis=0)[:,0]
 
 #plot of correlation coefficients
 X = np.linspace(0,1.5,1000)
