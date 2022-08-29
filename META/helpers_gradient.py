@@ -10,6 +10,10 @@ import pandas as pd
 from scipy.io import savemat
 from scipy.io import loadmat
 from nilearn import surface
+import os,sys
+from scipy.io import loadmat
+
+
 
 def run_realign(emb, tar):
     realign = []
@@ -32,3 +36,19 @@ def load_template(template_path):
     template = template - np.mean(template,0)
     template = template/np.std(template,0)
     return template
+
+
+
+
+
+def emb_path(condition,emb_outpath):
+  return os.path.join(emb_outpath,'group_{}_embedding.mat'.format(condition))
+
+
+def load_embmat(emb_path,show_infos=True):
+  b = loadmat(file_name=emb_path) #.mat file
+  if show_infos:
+    print(' - shape embedding (n_subjects, n_voxels, n_dims): {}\n - n = {} subjects\n - condition : {}\n - path : {}\n'.format(b['emb'].shape,len(b['subs']),b['states'],emb_path))
+  return b,b['emb']
+
+
