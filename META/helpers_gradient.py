@@ -40,15 +40,17 @@ def load_template(template_path):
 
 
 
-
 def emb_path(condition,emb_outpath):
   return os.path.join(emb_outpath,'group_{}_embedding.mat'.format(condition))
 
 
 def load_embmat(emb_path,show_infos=True):
+  '''
+  Return the principal gradient of the .mat file localised in emb_path
+  '''
   b = loadmat(file_name=emb_path) #.mat file
   if show_infos:
     print(' - shape embedding (n_subjects, n_voxels, n_dims): {}\n - n = {} subjects\n - condition : {}\n - path : {}\n'.format(b['emb'].shape,len(b['subs']),b['states'],emb_path))
-  return b,b['emb']
+  return b,b['emb'][:,:,0]
 
 
