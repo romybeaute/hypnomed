@@ -2,21 +2,16 @@
 %% Initialize variables
 
 % matlab -nodisplay -nosplash -nodesktop -r "run('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/EmbRoiAnalysisComp_radical.m');exit;"
+
+% matlab -nodisplay -nosplash -nodesktop -r "run('/mnt/data/romy/hypnomed/git/analysis/scripts_stats/EmbRoiAnalysisComp_radical.m');exit;"
     
 clear
 close all
 % addpath(genpath('/path/to/BrainStat/brainstat_matlab/'));
-addpath(genpath('./surfstat/'));
-addpath(genpath('./export_fig-master'));
+% addpath(genpath('./surfstat/'));
+% addpath(genpath('./export_fig-master'));
+addpath(genpath('/home/romy.beaute/projects/hypnomed/softwares/export_fig-master'));
 addpath(genpath('/home/romy.beaute/projects/hypnomed/softwares/surfstat/'));
-
-%%load TPJ mask 
-% mask_path = "G:\CosmoMVPA\scripts\data\TPJ_mask";
-% mask_path = "DATA"
-% R_TPJ =  niftiread(mask_path+"\fs5.R.func.nii");
-% L_TPJ = niftiread(mask_path+"\fs5.L.func.nii");
-% TPJ_mask = cat(1,L_TPJ,R_TPJ);
-% TPJ_mask = TPJ_mask~=0;
 
 
 
@@ -30,7 +25,7 @@ p.interaction = 0; %state_id to be removed from other state e.g. : OP-RS p.inter
 % p.groups_wanted = {'all'} %{'experts','experts'};
 %Define states to be compared
 % p.prefixe = 'Mixed_RS_exp_vs_OP_nov';
-p.prefixe = 'control_vs_meditation';
+p.prefixe = 'Mixed_control_vs_meditation';
 
 %exclude subjs 73 
 p.outliers = [27,32]; %subject number that you want to exclude from the analysis
@@ -52,8 +47,8 @@ d.emb = d.emb.emb;
 
 surfaces_path = '/home/romy.beaute/projects/hypnomed/data/template/fsaverage/surf';
 % d.surf.inflated = SurfStatReadSurf({['./lh.inflated'],['./rh.inflated']});
-d.surf.inflated = SurfStatReadSurf({['/home/romy.beaute/projects/hypnomed/data/template/fsaverage/surf/lh.inflated'],['/home/romy.beaute/projects/hypnomed/data/template/fsaverage/surf/rh.inflated']});
-d.surf.pial = SurfStatReadSurf({['/home/romy.beaute/projects/hypnomed/data/template/fsaverage/surf/lh.pial'],['/home/romy.beaute/projects/hypnomed/data/template/fsaverage/surf/rh.pial']});
+d.surf.inflated = SurfStatReadSurf({['/home/romy.beaute/projects/hypnomed/fsaverage5/surf/lh.inflated'],['/home/romy.beaute/projects/hypnomed/fsaverage5/surf/rh.inflated']});
+d.surf.pial = SurfStatReadSurf({['/home/romy.beaute/projects/hypnomed/fsaverage5/surf/lh.pial'],['/home/romy.beaute/projects/hypnomed/fsaverage5/surf/rh.pial']});
 
 d.cortex = load('/home/romy.beaute/projects/hypnomed/data/cortex.mat');
 d.cortex = squeeze(d.cortex.cortex') + 1;
@@ -134,13 +129,13 @@ for dim_id = 1:length(p.dims_wanted)
             peak.P = stats.clus.P(cluster_id);
             peak.kL = stats.clus.nverts(cluster_id); %nb of voxels
             term( peak ) + term( SurfStatInd2Coord( peak.vertid, d.surf.pial )', {'x','y','z'})
-            test_inTPJ = (stats.pval.C<=0.05)' + TPJ_mask;
+            % test_inTPJ = (stats.pval.C<=0.05)' + TPJ_mask;
 
             
         end
         
-        disp('Nb of voxels in TPJ mask:')
-        disp(sum(test_inTPJ == 2))
+        % disp('Nb of voxels in TPJ mask:')
+        % disp(sum(test_inTPJ == 2))
 
     end
     
@@ -223,6 +218,7 @@ end
 function [stats_p,stats_n,maskRoi] = get_mixed_effect(d,p,dim_id,used_contrast)
     mask = zeros(1,size(d.emb,2));
     mask(d.cortex) = 1;
+    mask = logical(mask);
     negative_contrast = used_contrast * -1;
     %add the identity matrix I to allow for independent "white" noise in every observation (this is added by default to any fixed effect model, but it must be specifically added to a mixed effects model)
     % M = 1 + d.expertise + d.state + d.expertise*d.state+ random(d.subject) + I;
