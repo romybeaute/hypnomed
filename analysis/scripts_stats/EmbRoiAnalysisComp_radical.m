@@ -1,5 +1,7 @@
 
 %% Initialize variables
+
+% matlab -nodisplay -nosplash -nodesktop -r "run('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/EmbRoiAnalysisComp_radical.m');exit;"
     
 clear
 close all
@@ -146,7 +148,6 @@ end
 
 
 
-
 function [emb_state,state_name] = get_state_group(d,state_wanted,interaction)
 
     if interaction>0
@@ -215,7 +216,7 @@ function [contrast,contrastsList] = get_contrast(d)
 
     contrastsList = {'control_vs_meditation', 'control_vs_hypnose', 'meditation_vs_hypnose'};
 
-end;
+end
 
 
 
@@ -223,7 +224,7 @@ function [stats_p,stats_n,maskRoi] = get_mixed_effect(d,p,dim_id,used_contrast)
     mask = zeros(1,size(d.emb,2));
     mask(d.cortex) = 1;
     negative_contrast = used_contrast * -1;
-%add the identity matrix I to allow for independent "white" noise in every observation (this is added by default to any fixed effect model, but it must be specifically added to a mixed effects model)
+    %add the identity matrix I to allow for independent "white" noise in every observation (this is added by default to any fixed effect model, but it must be specifically added to a mixed effects model)
     % M = 1 + d.expertise + d.state + d.expertise*d.state+ random(d.subject) + I;
     % M = 1 + d.state + d.expertise*d.state+ random(d.subject) + I;
     M = 1 + d.state + random(d.subject) + I;
@@ -267,124 +268,124 @@ end
 
 
 
-% function [tmp_file_name] = make_figs(p,d,dim_id,emb_states,state_names,stats_p,stats_n,maskRoi)
+function [tmp_file_name] = make_figs(p,d,dim_id,emb_states,state_names,stats_p,stats_n,maskRoi)
 
-%     report_description = {sprintf('%s analysis framework',p.analysis_framework),'',sprintf('Comparison between %s and %s (%s only)',state_names{1},state_names{2},p.prefixe)};
+    report_description = {sprintf('%s analysis framework',p.analysis_framework),'',sprintf('Comparison between %s and %s (%s only)',state_names{1},state_names{2},p.prefixe)};
 
-%     tmp_file_name = sprintf('figures/tmp_report_dim%0d', dim_id);
-%     mean_state1_dim = emb_states{1};
-%     mean_state1_dim = mean(squeeze(mean_state1_dim(:,:,dim_id)),1);
-%     mean_state2_dim = emb_states{2};
-%     mean_state2_dim = mean(squeeze(mean_state2_dim(:,:,dim_id)),1);
+    tmp_file_name = sprintf('figures/tmp_report_dim%0d', dim_id);
+    mean_state1_dim = emb_states{1};
+    mean_state1_dim = mean(squeeze(mean_state1_dim(:,:,dim_id)),1);
+    mean_state2_dim = emb_states{2};
+    mean_state2_dim = mean(squeeze(mean_state2_dim(:,:,dim_id)),1);
 
-%     figure('Position',[20 20 1280 720])
-%     text(0.5,0.5,report_description,'VerticalAlignment','middle','HorizontalAlignment','center','FontSize', 28);
-%     set(gca,'visible','off')
-%     export_fig(tmp_file_name,'-pdf') 
-%     close all
+    figure('Position',[20 20 1280 720])
+    text(0.5,0.5,report_description,'VerticalAlignment','middle','HorizontalAlignment','center','FontSize', 28);
+    set(gca,'visible','off')
+    export_fig(tmp_file_name,'-pdf') 
+    close all
 
-%     figure('Position',[20 20 1280 720])
-%     text(0.5,0.5,sprintf('Dimension %0d',dim_id),'VerticalAlignment','middle','HorizontalAlignment','center','FontSize', 28);
-%     set(gca,'visible','off')
-%     export_fig(tmp_file_name,'-pdf','-append')  
-%     close all
+    figure('Position',[20 20 1280 720])
+    text(0.5,0.5,sprintf('Dimension %0d',dim_id),'VerticalAlignment','middle','HorizontalAlignment','center','FontSize', 28);
+    set(gca,'visible','off')
+    export_fig(tmp_file_name,'-pdf','-append')  
+    close all
 
-%     %Mean gradient values for the compassion d.state
-%     figure('Position', [20 20 1280 720]); 
-%     axes = SurfStatView(mean_state1_dim, d.surf.pial,{'Mean gradient values'});
-%     SurfStatColormap('jet');
-%     SurfStatColLim(p.col_lim_dim);
-%     ttl=title(sprintf('%s Gradient (Dim%0d)',state_names{1},dim_id),'FontSize', 14);
-%     ttl.Parent = axes(2);
-%     set(ttl,'position',get(ttl,'position')+[0 87 0]);
-%     export_fig(tmp_file_name,'-pdf','-append')  
-%     close all
-
-
-%     %Mean gradient values for the resting d.state
-%     figure('Position', [20 20 1280 720]); 
-%     axes = SurfStatView(mean_state2_dim, d.surf.pial,{'Mean gradient values'});
-%     SurfStatColormap('jet');
-%     SurfStatColLim(p.col_lim_dim);
-%     ttl=title(sprintf('%s Gradient (Dim%0d)',state_names{2},dim_id),'FontSize', 14);
-%     ttl.Parent = axes(2);
-%     set(ttl,'position',get(ttl,'position')+[0 87 0]);
-%     export_fig(tmp_file_name,'-pdf','-append')  
-%     close all
+    %Mean gradient values for the compassion d.state
+    figure('Position', [20 20 1280 720]); 
+    axes = SurfStatView(mean_state1_dim, d.surf.pial,{'Mean gradient values'});
+    SurfStatColormap('jet');
+    SurfStatColLim(p.col_lim_dim);
+    ttl=title(sprintf('%s Gradient (Dim%0d)',state_names{1},dim_id),'FontSize', 14);
+    ttl.Parent = axes(2);
+    set(ttl,'position',get(ttl,'position')+[0 87 0]);
+    export_fig(tmp_file_name,'-pdf','-append')  
+    close all
 
 
-%     %positive contrast
-%     figure('Position', [20 20 1280 720]);
-%     axes = SurfStatView(stats_p.pval, d.surf.pial,{'Significant clusters', sprintf('Contrast: %s>%s',state_names{1},state_names{2})});
-%     ttl=title(sprintf('Significant clusters and vertices for dimension %0d (%s>%s)  (corrected with RFT)',dim_id,state_names{1},state_names{2}),'FontSize', 14);
-%     ttl.Parent = axes(2);
-%     set(ttl,'position',get(ttl,'position')+[0 87 0]);
-%     export_fig(tmp_file_name,'-pdf','-append')  
-%     close all
+    %Mean gradient values for the resting d.state
+    figure('Position', [20 20 1280 720]); 
+    axes = SurfStatView(mean_state2_dim, d.surf.pial,{'Mean gradient values'});
+    SurfStatColormap('jet');
+    SurfStatColLim(p.col_lim_dim);
+    ttl=title(sprintf('%s Gradient (Dim%0d)',state_names{2},dim_id),'FontSize', 14);
+    ttl.Parent = axes(2);
+    set(ttl,'position',get(ttl,'position')+[0 87 0]);
+    export_fig(tmp_file_name,'-pdf','-append')  
+    close all
 
 
-%     %negative contrast 
-%     figure('Position', [20 20 1280 720]);
-%     axes = SurfStatView(stats_n.pval, d.surf.pial,{'Significant clusters', sprintf('Contrast: %s<%s',state_names{1},state_names{2})});
-%     ttl=title(sprintf('Significant clusters and vertices for dimension %0d (%s<%s)  (corrected with RFT)',dim_id,state_names{1},state_names{2}),'FontSize', 14);
-%     ttl.Parent = axes(2);
-%     set(ttl,'position',get(ttl,'position')+[0 87 0]);
-%     export_fig(tmp_file_name,'-pdf','-append')  
-%     close all
+    %positive contrast
+    figure('Position', [20 20 1280 720]);
+    axes = SurfStatView(stats_p.pval, d.surf.pial,{'Significant clusters', sprintf('Contrast: %s>%s',state_names{1},state_names{2})});
+    ttl=title(sprintf('Significant clusters and vertices for dimension %0d (%s>%s)  (corrected with RFT)',dim_id,state_names{1},state_names{2}),'FontSize', 14);
+    ttl.Parent = axes(2);
+    set(ttl,'position',get(ttl,'position')+[0 87 0]);
+    export_fig(tmp_file_name,'-pdf','-append')  
+    close all
 
 
-%     %plot mean gradient values for the d.state 1 inside all significant
-%     %clusters
-%     figure('Position', [20 20 1280 720]); 
-%     axes = SurfStatView(mean_state1_dim.*maskRoi, d.surf.pial,{sprintf('Mean gradient values (Dim%0d)',dim_id)});
-%     SurfStatColormap('jet');
-%     SurfStatColLim(p.col_lim_dim);
-%     ttl=title(sprintf('%s gradient (significant clusters only)',state_names{1}),'FontSize', 14);
-%     ttl.Parent = axes(2);
-%     set(ttl,'position',get(ttl,'position')+[0 87 0]);
-%     export_fig(tmp_file_name,'-pdf','-append')  
-%     close all
+    %negative contrast 
+    figure('Position', [20 20 1280 720]);
+    axes = SurfStatView(stats_n.pval, d.surf.pial,{'Significant clusters', sprintf('Contrast: %s<%s',state_names{1},state_names{2})});
+    ttl=title(sprintf('Significant clusters and vertices for dimension %0d (%s<%s)  (corrected with RFT)',dim_id,state_names{1},state_names{2}),'FontSize', 14);
+    ttl.Parent = axes(2);
+    set(ttl,'position',get(ttl,'position')+[0 87 0]);
+    export_fig(tmp_file_name,'-pdf','-append')  
+    close all
 
 
-%     %%plot Difference between mean gradient values for the resting d.state of the Compassion and resting states inside all significant
-%     %clusters
-%     figure('Position', [20 20 1280 720]); 
-%     axes = SurfStatView((mean_state1_dim-mean_state2_dim).*maskRoi, d.surf.pial,{sprintf('%s - %s mean gradient values (Dim%0d)',state_names{1},state_names{2},dim_id)});
-%     SurfStatColormap('jet');
-%     SurfStatColLim(p.diff_lim);
-%     ttl=title(sprintf('Difference of gradient between %s and %s (significant clusters only)',state_names{1},state_names{2}),'FontSize', 14);
-%     ttl.Parent = axes(2);
-%     set(ttl,'position',get(ttl,'position')+[0 87 0]);
-%     export_fig(tmp_file_name,'-pdf','-append')  
-%     close all
-
-%     %%plot Difference between mean gradient values for the resting d.state of the
-%     %%Compassion and resting states across all voxels
-%     figure('Position', [20 20 1280 720]); 
-%     axes = SurfStatView((mean_state1_dim-mean_state2_dim), d.surf.pial,{sprintf('%s - %s mean gradient values (Dim%0d)',state_names{1},state_names{2}, dim_id)});
-%     SurfStatColormap('jet');
-%     SurfStatColLim(p.diff_lim);
-%     ttl=title(sprintf('Difference of gradient between %s and %s',state_names{1},state_names{2}),'FontSize', 14);
-%     ttl.Parent = axes(2);
-%     set(ttl,'position',get(ttl,'position')+[0 87 0]);
-%     export_fig(tmp_file_name,'-pdf','-append')  
-%     close all
+    %plot mean gradient values for the d.state 1 inside all significant
+    %clusters
+    figure('Position', [20 20 1280 720]); 
+    axes = SurfStatView(mean_state1_dim.*maskRoi, d.surf.pial,{sprintf('Mean gradient values (Dim%0d)',dim_id)});
+    SurfStatColormap('jet');
+    SurfStatColLim(p.col_lim_dim);
+    ttl=title(sprintf('%s gradient (significant clusters only)',state_names{1}),'FontSize', 14);
+    ttl.Parent = axes(2);
+    set(ttl,'position',get(ttl,'position')+[0 87 0]);
+    export_fig(tmp_file_name,'-pdf','-append')  
+    close all
 
 
-%     bins_nb = 50;
-%     figure('Position', [20 20 1280 720]);
-%     h1 = histfit(mean_state1_dim(d.cortex)',bins_nb,'kernel');
-%     h1(2).Color = [.2 .2 .9];
-%     hold on
-%     h2 = histfit(mean_state2_dim(d.cortex)',bins_nb,'kernel');
-%     h2(2).Color = [.9 .2 .2];
-%     xlabel(sprintf('Dimension %0d Mean Gradient Score',dim_id),'FontSize', 18)
-%     ylabel('\fontsize{18}Frequency')
-%     legend([h1(2),h2(2)],{state_names{1}, state_names{2}}, 'Fontsize',16)
-%     title(sprintf('Histogram of the %s and %s gradients (Dim%0d)',state_names{1},state_names{2},dim_id),'FontSize', 20);
-%     hold off
-%     alpha(0.4)
-%     export_fig(tmp_file_name,'-pdf','-append')  
-%     close all
+    %%plot Difference between mean gradient values for the resting d.state of the Compassion and resting states inside all significant
+    %clusters
+    figure('Position', [20 20 1280 720]); 
+    axes = SurfStatView((mean_state1_dim-mean_state2_dim).*maskRoi, d.surf.pial,{sprintf('%s - %s mean gradient values (Dim%0d)',state_names{1},state_names{2},dim_id)});
+    SurfStatColormap('jet');
+    SurfStatColLim(p.diff_lim);
+    ttl=title(sprintf('Difference of gradient between %s and %s (significant clusters only)',state_names{1},state_names{2}),'FontSize', 14);
+    ttl.Parent = axes(2);
+    set(ttl,'position',get(ttl,'position')+[0 87 0]);
+    export_fig(tmp_file_name,'-pdf','-append')  
+    close all
 
-% end
+    %%plot Difference between mean gradient values for the resting d.state of the
+    %%Compassion and resting states across all voxels
+    figure('Position', [20 20 1280 720]); 
+    axes = SurfStatView((mean_state1_dim-mean_state2_dim), d.surf.pial,{sprintf('%s - %s mean gradient values (Dim%0d)',state_names{1},state_names{2}, dim_id)});
+    SurfStatColormap('jet');
+    SurfStatColLim(p.diff_lim);
+    ttl=title(sprintf('Difference of gradient between %s and %s',state_names{1},state_names{2}),'FontSize', 14);
+    ttl.Parent = axes(2);
+    set(ttl,'position',get(ttl,'position')+[0 87 0]);
+    export_fig(tmp_file_name,'-pdf','-append')  
+    close all
+
+
+    bins_nb = 50;
+    figure('Position', [20 20 1280 720]);
+    h1 = histfit(mean_state1_dim(d.cortex)',bins_nb,'kernel');
+    h1(2).Color = [.2 .2 .9];
+    hold on
+    h2 = histfit(mean_state2_dim(d.cortex)',bins_nb,'kernel');
+    h2(2).Color = [.9 .2 .2];
+    xlabel(sprintf('Dimension %0d Mean Gradient Score',dim_id),'FontSize', 18)
+    ylabel('\fontsize{18}Frequency')
+    legend([h1(2),h2(2)],{state_names{1}, state_names{2}}, 'Fontsize',16)
+    title(sprintf('Histogram of the %s and %s gradients (Dim%0d)',state_names{1},state_names{2},dim_id),'FontSize', 20);
+    hold off
+    alpha(0.4)
+    export_fig(tmp_file_name,'-pdf','-append')  
+    close all
+
+end
