@@ -1,9 +1,9 @@
 
 %% Initialize variables
 
-% matlab -nodisplay -nosplash -nodesktop -r "run('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/EmbRoiAnalysisComp_radical.m');exit;"
+% matlab -nodisplay -nosplash -nodesktop -r "run('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/EmbRoiAnalysisComp_blocks.m');exit;"
 
-% matlab -nodisplay -nosplash -nodesktop -r "run('/mnt/data/romy/hypnomed/git/analysis/scripts_stats/EmbRoiAnalysisComp_radical.m');exit;"
+% matlab -nodisplay -nosplash -nodesktop -r "run('/mnt/data/romy/hypnomed/git/analysis/scripts_stats/EmbRoiAnalysisComp_blocks.m');exit;"
     
 clear
 close all
@@ -16,13 +16,13 @@ addpath(genpath('/home/romy.beaute/projects/hypnomed/softwares/surfstat/'));
 p.analysis_framework = 'Daniel';
 
 
-contrast_id = 1; %don't forget to set up contrast
-p.states_wanted = {'block-1','block-2'};
-p.prefixe = 'block-1_vs_block-2';
+% contrast_id = 1; %don't forget to set up contrast
+% p.states_wanted = {'block-1','block-2'};
+% p.prefixe = 'block-1_vs_block-2';
 
-% contrast_id = 2; %don't forget to set up contrast
-% p.states_wanted = {'block-1','block-3'};
-% p.prefixe = 'block-1_vs_block-3';
+contrast_id = 2; %don't forget to set up contrast
+p.states_wanted = {'block-1','block-3'};
+p.prefixe = 'block-1_vs_block-3';
 
 
 % contrast_id = 3; %don't forget to set up contrast
@@ -111,7 +111,9 @@ for dim_id = 1:length(p.dims_wanted)
             peak.clusid = cluster_id;
             peak.P = stats.clus.P(cluster_id);
             peak.kL = stats.clus.nverts(cluster_id); %nb of voxels
+            % term( peak ) + term( SurfStatInd2Coord( peak.vertid, d.surf.pial )', {'x','y','z'})
             term( peak ) + term( SurfStatInd2Coord( peak.vertid, d.surf.pial )', {'x','y','z'})
+        
             
         end
         
@@ -119,8 +121,7 @@ for dim_id = 1:length(p.dims_wanted)
     
 end
 
-
-% make_figs(p,d,dim_id,emb_states,state_names,stats_p,stats_n,maskRoi)
+make_figs(p,d,dim_id,emb_states,state_names,stats_p,stats_n,maskRoi)
 
 
 

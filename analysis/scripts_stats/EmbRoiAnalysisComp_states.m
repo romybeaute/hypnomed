@@ -1,9 +1,9 @@
 
 %% Initialize variables
 
-% matlab -nodisplay -nosplash -nodesktop -r "run('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/EmbRoiAnalysisComp_radical.m');exit;"
+% matlab -nodisplay -nosplash -nodesktop -r "run('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/EmbRoiAnalysisComp_states.m');exit;"
 
-% matlab -nodisplay -nosplash -nodesktop -r "run('/mnt/data/romy/hypnomed/git/analysis/scripts_stats/EmbRoiAnalysisComp_radical.m');exit;"
+% matlab -nodisplay -nosplash -nodesktop -r "run('/mnt/data/romy/hypnomed/git/analysis/scripts_stats/EmbRoiAnalysisComp_states.m');exit;"
     
 clear
 close all
@@ -120,7 +120,7 @@ for dim_id = 1:length(p.dims_wanted)
 end
 
 
-make_figs(p,d,dim_id,emb_states,state_names,stats_p,stats_n,maskRoi)
+% make_figs(p,d,dim_id,emb_states,state_names,stats_p,stats_n,maskRoi)
 
 
 
