@@ -4,10 +4,12 @@
 Created on Mon May 30 17:20:48 2022
 
 @author: sebastien
+@modified: romy
 """
 import numpy as np
-import os
+import os,sys
 from embedding import embedding
+sys.path.append('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats')
 from misc_functions import *
 import matplotlib.pyplot as plt 
 import pandas as pd
@@ -19,13 +21,13 @@ import time
 start_time = time.time()
 
 
-p.data_path = '/media/sebastien/LaCie/CosmoMVPA/scripts/data'
-p.results_path = '/media/sebastien/LaCie/CosmoMVPA/scripts/results/emb_decoding'
-p.surf_path = '/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest/sourcedata/freesurfer/fsaverage5'
-p.DMN_mask_path = '/mnt/data/romy/hypnomed/git/data/DMN_mask'
+p.data_path = '/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/data'
+p.results_path = '/home/romy.beaute/projects/hypnomed/analysis/results'
+p.surf_path = '/home/romy.beaute/projects/hypnomed/fsaverage5'
+p.DMN_mask_path = '/home/romy.beaute/projects/hypnomed/data/DMN_mask'
 
-# movements = [32,62,65,71,72,73,75,76,102,106]
-p.outliers = [50,73,32,65,90,102]
+
+p.outliers = [27,32]
 
 p.radius = 1
 
@@ -43,9 +45,12 @@ def radarchart(p):
     boot_rep = 10000
     yeo = np.load(os.path.join(p.DMN_mask_path,'yeo_DMN_IFG.npy'))
 
-    diff_emb, df_quest = load_data(p,0,states_wanted,group,score_wanted)
+    diff_emb = load_data(p,0,states_wanted)
     data = {}
-    exp_mask = diff_emb.expertise['Experts']==1
+    n_subjs = diff_emb.emb.shape[0]//2
+    # exp_mask = diff_emb.expertise['Experts']==1
+    cond_mask = diff_emb.states[states_wanted[0]]==1
+    
     labels = p.networks_wanted
     stat_list = np.zeros((len(labels),boot_rep))
 
@@ -53,11 +58,11 @@ def radarchart(p):
         network_mask = yeo==(p.networks_labels.index(label)+1)
         current_network = diff_emb.emb[:,network_mask]
         current_network = (current_network - np.mean(current_network))/np.std(current_network)
-        if interaction:
-            current_network = current_network[diff_emb.states[states_wanted[0]]==1,:] - current_network[diff_emb.states[states_wanted[1]]==1,:]
-            exp_mask = exp_mask[diff_emb.states[states_wanted[0]]==1]
+        # if interaction:
+        #     current_network = current_network[diff_emb.states[states_wanted[0]]==1,:] - current_network[diff_emb.states[states_wanted[1]]==1,:]
+        #     exp_mask = exp_mask[diff_emb.states[states_wanted[0]]==1]
             
-        x,y = np.median(current_network[exp_mask,:],1), np.median(current_network[~exp_mask,:],1)
+        x,y = np.median(current_network[:n_subjs],1), np.median(current_network[n_subjs:],1)
         print(label)
         stat_list[label_id,:],pval = two_sample_bootstrap(x,y,repetition=boot_rep)
         labels[label_id] += f'\n(p={np.round(pval,3)})'
@@ -97,14 +102,21 @@ def radarchart(p):
     ax.plot(angles, zeros, color='tab:orange', linewidth=2, linestyle='solid')
     ax.plot(angles, values, color='tab:blue', linewidth=2, linestyle='solid')
     ax.fill(angles, values, color='tab:blue', alpha=0.2)
+
+    # ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1))
+
+    plt.savefig('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/figures/radarchart_yeo/radarchart_yeo_{}_vs_{}.png'.format(states_wanted[0],states_wanted[1]))
     
     
     return df
 
-states_wanted = ['OpenPresence','RestingState']
-group = 'all'
-score_wanted = 'None'
+# states_wanted = ['control','meditation']
+# states_wanted = ['control','hypnose']
+states_wanted = ['meditation','hypnose']
+
+
 interaction = False
 df = radarchart(p)
+print(df)
 
 print("--- %s seconds ---" % (time.time() - start_time))

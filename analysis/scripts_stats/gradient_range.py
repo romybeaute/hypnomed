@@ -72,12 +72,13 @@ def two_sample_bootstrap_std(x,y,repetition=10000):
     for rep_id in range(repetition):
         current_x = rng.choice(np.vstack((x,y)),x.shape[0],axis=0)
         current_y = rng.choice(np.vstack((x,y)),y.shape[0],axis=0)
-        current_stat = std_diff(current_x,current_y)
+        current_stat = std_diff(current_x,current_y) #stat value for each repetition
 
-        stat_list[rep_id] = current_stat
+        stat_list[rep_id] = current_stat #len(stat_list)=repetition
 
 
     pval = (np.sum(np.abs(stat_list)>=test_stat))/(repetition)
+    print('pval : {}    (n={} repetitions)'.format(pval,repetition))
 
     return stat_list,pval
 
@@ -102,55 +103,42 @@ p.networks_wanted = ['Vis', 'SM', 'DA', 'VA','Lim', 'FP','MTC','IFG','AG','MPFC'
 p.order = np.array(['Vis', 'SM', 'DA', 'VA','FP','Lim','MTC','IFG','AG','PMC','MPFC'])
 
 
-states_wanted = ['control','meditation']
+# states_wanted = ['control','meditation']
+# states_wanted = ['control','hypnose']
+# states_wanted = ['meditation','hypnose']
 # group = 'all'
 # score_wanted = 'DDS'
 
+
+comparisons = [['control','meditation'],['control','hypnose'],['meditation','hypnose']]
+
+for states_wanted in comparisons :
     
-diff_emb = load_data(p,0,states_wanted)
-diff_emb.emb = diff_emb.emb[:,diff_emb.emb[0,:]!=0] #shape(76,18715) : without white matter
-n_embs = diff_emb.emb.shape[0] #nb subjetcs * 2 (for each condition)
-n_subjs_in_group = n_embs//2 #nb of subjects in each diff emb gradient
+    
+    diff_emb = load_data(p,0,states_wanted)
+    diff_emb.emb = diff_emb.emb[:,diff_emb.emb[0,:]!=0] #shape(76,18715) : without white matter
+    n_embs = diff_emb.emb.shape[0] #nb subjetcs * 2 (for each condition)
+    n_subjs_in_group = n_embs//2 #nb of subjects in each diff emb gradient
 
-#define gradients based on condition
-x = diff_emb.emb[:n_subjs_in_group] #gradients for first condition (eg control)
-y = diff_emb.emb[n_subjs_in_group:] #gradients for second condition (eg meditation)
-
-
-'''
-# exp_median_score = np.median(df_quest['DDS'][df_quest['group']=='exp'])
-# nov_median_score = np.median(df_quest['DDS'][df_quest['group']=='nov'])
+    #define gradients based on condition
+    x = diff_emb.emb[:n_subjs_in_group] #gradients for first condition (eg control)
+    y = diff_emb.emb[n_subjs_in_group:] #gradients for second condition (eg meditation)
 
 
-# high_DDS_mask = duplicate_elements((df_quest['group']=='exp') & (df_quest['DDS']>=exp_median_score),len(states_wanted))
-# low_DDS_experts_mask = duplicate_elements((df_quest['group']=='exp') & (df_quest['DDS']<exp_median_score),len(states_wanted))
-# high_DDS_novices_mask = duplicate_elements((df_quest['group']=='nov') & (df_quest['DDS']>=nov_median_score),len(states_wanted))
-# low_DDS_novices_mask = duplicate_elements((df_quest['group']=='nov') & (df_quest['DDS']<nov_median_score),len(states_wanted))
+    sns.histplot((np.mean(x,0), np.mean(y,0)))
 
-# high_DDS_mask = high_DDS_experts_mask + high_DDS_novices_mask
-# low_DDS_mask = low_DDS_experts_mask + low_DDS_novices_mask
+    fig, ax = plt.subplots(figsize=(15, 7))
+    repetitions = 10000
+    stat_list,pval = two_sample_bootstrap_std(x,y,repetitions)
+    print(pval) #1.32e-01 (for control vs meditation)
 
-#get gradient range for experts and novices
-# range_x = np.max(diff_emb.emb[high_DDS_mask,:],1) - np.min(diff_emb.emb[high_DDS_mask,:],1)
-# range_y = np.max(diff_emb.emb[low_DDS_mask,:],1) - np.min(diff_emb.emb[low_DDS_mask,:],1)
+    #get variance for condition 1 and condition 2
+    x,y = np.var(x,1), np.var(y,1)
 
-#define gradients based on mask
-x = diff_emb.emb[high_DDS_mask,:]
-y = diff_emb.emb[low_DDS_mask,:]
+    data = {}
 
-
-
-'''
-sns.histplot((np.mean(x,0), np.mean(y,0)))
-
-fig, ax = plt.subplots(figsize=(15, 7))
-stat_list,pval = two_sample_bootstrap_std(x,y)
-print(pval)
-#get variance for novices and experts
-x,y = np.var(x,1), np.var(y,1)
-
-data = {}
-data = {'data':np.hstack((x,y)),'groups':np.hstack((['control']*len(x),['meditation']*len(y)))}
-df = pd.DataFrame(data)
-sns.violinplot(x="groups", y="data", data=df)
-ax.set_ylabel('Principal Gradient STD')
+    data = {'data':np.hstack((x,y)),'conditions':np.hstack(([states_wanted[0]]*len(x),[states_wanted[1]]*len(y)))}
+    df = pd.DataFrame(data)
+    sns.violinplot(x="conditions", y="data", data=df)
+    ax.set_ylabel('Principal Gradient STD\n (pval = {}, n={} repetitions)'.format(pval,repetitions))
+    plt.savefig('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/figures/violonplots/PG_std_{}_vs_{}.png'.format(states_wanted[0],states_wanted[1]))
