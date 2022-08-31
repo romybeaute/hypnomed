@@ -5,9 +5,11 @@
 Created on Mon May 30 17:20:48 2022
 
 @author: sebastien
+@modified : romy
 """
 import numpy as np
-import os
+import os,sys
+sys.path.append('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/')
 from embedding import embedding
 from misc_functions import *
 import matplotlib.pyplot as plt 
@@ -85,13 +87,13 @@ class p:
     pass
 
 
-p.data_path = '/media/sebastien/LaCie/CosmoMVPA/scripts/data'
-p.results_path = '/media/sebastien/LaCie/CosmoMVPA/scripts/results/emb_decoding'
-p.surf_path = '/media/sebastien/LaCie/ERC_Antoine/fmriprep_preprocessing_step/recon_all_success/freesurfer/fsaverage5'
-p.DMN_mask_path = '/media/sebastien/LaCie/CosmoMVPA/scripts/data/DMN_mask'
+p.data_path = '/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/data'
+p.results_path = '/home/romy.beaute/projects/hypnomed/analysis/results'
+p.surf_path = '/home/romy.beaute/projects/hypnomed/fsaverage5'
+p.DMN_mask_path = '/home/romy.beaute/projects/hypnomed/data/DMN_mask'
 
 
-p.outliers = [50,73,32,65,90,102]
+p.outliers = [27,32]
 
 p.radius = 1
 
@@ -100,46 +102,55 @@ p.networks_wanted = ['Vis', 'SM', 'DA', 'VA','Lim', 'FP','MTC','IFG','AG','MPFC'
 p.order = np.array(['Vis', 'SM', 'DA', 'VA','FP','Lim','MTC','IFG','AG','PMC','MPFC'])
 
 
-states_wanted = ['OpenPresence','RestingState']
-group = 'all'
-score_wanted = 'DDS'
+states_wanted = ['control','meditation']
+# group = 'all'
+# score_wanted = 'DDS'
 
     
-diff_emb, df_quest = load_data(p,0,states_wanted,group,score_wanted)
-diff_emb.emb = diff_emb.emb[:,diff_emb.emb[0,:]!=0]
-    
+diff_emb = load_data(p,0,states_wanted)
+diff_emb.emb = diff_emb.emb[:,diff_emb.emb[0,:]!=0] #shape(76,18715) : without white matter
+n_embs = diff_emb.emb.shape[0] #nb subjetcs * 2 (for each condition)
+n_subjs_in_group = n_embs//2 #nb of subjects in each diff emb gradient
 
-exp_median_score = np.median(df_quest['DDS'][df_quest['group']=='exp'])
-nov_median_score = np.median(df_quest['DDS'][df_quest['group']=='nov'])
+#define gradients based on condition
+x = diff_emb.emb[:n_subjs_in_group] #gradients for first condition (eg control)
+y = diff_emb.emb[n_subjs_in_group:] #gradients for second condition (eg meditation)
 
 
-high_DDS_experts_mask = duplicate_elements((df_quest['group']=='exp') & (df_quest['DDS']>=exp_median_score),len(states_wanted))
-low_DDS_experts_mask = duplicate_elements((df_quest['group']=='exp') & (df_quest['DDS']<exp_median_score),len(states_wanted))
-high_DDS_novices_mask = duplicate_elements((df_quest['group']=='nov') & (df_quest['DDS']>=nov_median_score),len(states_wanted))
-low_DDS_novices_mask = duplicate_elements((df_quest['group']=='nov') & (df_quest['DDS']<nov_median_score),len(states_wanted))
+'''
+# exp_median_score = np.median(df_quest['DDS'][df_quest['group']=='exp'])
+# nov_median_score = np.median(df_quest['DDS'][df_quest['group']=='nov'])
 
-high_DDS_mask = high_DDS_experts_mask + high_DDS_novices_mask
-low_DDS_mask = low_DDS_experts_mask + low_DDS_novices_mask
+
+# high_DDS_mask = duplicate_elements((df_quest['group']=='exp') & (df_quest['DDS']>=exp_median_score),len(states_wanted))
+# low_DDS_experts_mask = duplicate_elements((df_quest['group']=='exp') & (df_quest['DDS']<exp_median_score),len(states_wanted))
+# high_DDS_novices_mask = duplicate_elements((df_quest['group']=='nov') & (df_quest['DDS']>=nov_median_score),len(states_wanted))
+# low_DDS_novices_mask = duplicate_elements((df_quest['group']=='nov') & (df_quest['DDS']<nov_median_score),len(states_wanted))
+
+# high_DDS_mask = high_DDS_experts_mask + high_DDS_novices_mask
+# low_DDS_mask = low_DDS_experts_mask + low_DDS_novices_mask
 
 #get gradient range for experts and novices
-range_x = np.max(diff_emb.emb[high_DDS_mask,:],1) - np.min(diff_emb.emb[high_DDS_mask,:],1)
-range_y = np.max(diff_emb.emb[low_DDS_mask,:],1) - np.min(diff_emb.emb[low_DDS_mask,:],1)
+# range_x = np.max(diff_emb.emb[high_DDS_mask,:],1) - np.min(diff_emb.emb[high_DDS_mask,:],1)
+# range_y = np.max(diff_emb.emb[low_DDS_mask,:],1) - np.min(diff_emb.emb[low_DDS_mask,:],1)
 
 #define gradients based on mask
 x = diff_emb.emb[high_DDS_mask,:]
 y = diff_emb.emb[low_DDS_mask,:]
 
+
+
+'''
 sns.histplot((np.mean(x,0), np.mean(y,0)))
 
 fig, ax = plt.subplots(figsize=(15, 7))
 stat_list,pval = two_sample_bootstrap_std(x,y)
 print(pval)
 #get variance for novices and experts
-x,y = np.var(diff_emb.emb[high_DDS_mask,:],1), np.var(diff_emb.emb[low_DDS_mask,:],1)
+x,y = np.var(x,1), np.var(y,1)
 
 data = {}
-data = {'data':np.hstack((x,y)),'groups':np.hstack((['High_DDS']*len(x),['Low_DDS']*len(y)))}
+data = {'data':np.hstack((x,y)),'groups':np.hstack((['control']*len(x),['meditation']*len(y)))}
 df = pd.DataFrame(data)
 sns.violinplot(x="groups", y="data", data=df)
 ax.set_ylabel('Principal Gradient STD')
-

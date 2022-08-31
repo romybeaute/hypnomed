@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE GIFTI SYSTEM "http://gifti.projects.nitrc.org/gifti.dtd">
+<GIFTI Version="1.0"  NumberOfDataArrays="1">
+   <MetaData>
+      <MD>
+         <Name><![CDATA[UserName]]></Name>
+         <Value><![CDATA[sebastien]]></Value>
+      </MD>
+      <MD>
+         <Name><![CDATA[Date]]></Name>
+         <Value><![CDATA[Tue Sep  7 17:31:36 2021]]></Value>
+      </MD>
+      <MD>
+         <Name><![CDATA[gifticlib-version]]></Name>
+         <Value><![CDATA[gifti library version 1.09, 28 June, 2010]]></Value>
+      </MD>
+   </MetaData>
+   <LabelTable/>
+   <DataArray Intent="NIFTI_INTENT_NONE"
+              DataType="NIFTI_TYPE_FLOAT32"
+              ArrayIndexingOrder="RowMajorOrder"
+              Dimensionality="1"
+              Dim0="10242"
+              Encoding="GZipBase64Binary"
+              Endian="LittleEndian"
+              ExternalFileName=""
+              ExternalFileOffset="">
+      <MetaData/>
+      <Data>eJzt3bGL01AcwPFO6thV6OBwtzh1OIQiea+gS0FUhE4iKLd6pedfkM126dDhREEQQYfe2p6DNxRUuvSW3iRFQV2l1/sPzMtr2qRN0zbt5WL4fiAcSa6XXJu8vPd7v/eaSsVJW1z2Gfgz5Xqvj+v/tQ5TnnTvrfm+JMW7BH6+8VN5eXWF603ds+7F38cP2/LrlztcxzFxPiwbs1uDP0Ngk3R5oK63G67y4+FS1+BqZRSQTFY5LtT9Uq1UjP7R3tx7Qpf3pk+ZD4TTajYF9QUA2AirPH0qZ9vUpjz+fNuzbj3P5YO/dxe2u1c3OUautitfHRwQcwECUQdCUs0+i5aJ985z2ntEjBFYk76PHGWp4qGnvd7cupqKD01t4h4EAMSKfo5N6pfWs0ssrof6x0y+3X8+6l+8aG2Rq/2xzjNPvARApLYLdUOXk0FMyiYkGv0VANZh1eMvMU/Kvy2T6exPb1P5XLLV3FFtm022b+y/X98qXEDfMoD/kepf0Pl+ABCe/9ijqCyOG58NSvKwcdO1LbuxOtDPH0/GdTfqVwCAaJiGjm3M7wc4GwxEtXJNqPHazrZWcydUvX/yOnt8p1HqH9nrnf2M/dxTfRZOf6k6bphjAAAAAACA6Kl2vBqbPh3b1uOPTFnq37K3F4vFlfO5l1l0vve8/WXXT2ecfd7ZL5I+P85JtytUP66K75wPh3a8xennUH271nZ732ReLvomAAAAlrPJcTbuumvWU18NGu8fxDt3AAD4yY/z4VTbkfnbAQAAoqVj9dml+0I+7T0O3K+/QyMvR2MSXEsU8+Us4nzvlTnuqzlsNOx5gN68vm6tp2NwjgCAZMiP5lLg2QIAiLvwuXLvj6941sOO8wtxzvZxdA6ak4dXljpvEAAAYNNUjn86MLdd5cD715lSQuVCRBgj9xxjNF8CdSQAAAAAAABgRH8flO5X9M5LMju/hY77uZnG9+pbY1E/6otMR8zm0K62/P71bIXfVznAbeHkAjuvLdS3iA36UHOb6Nipm2k475vOq1bSzhhbkavtJnouGABAtP4BakODbw==</Data>
+   </DataArray>
+</GIFTI>

@@ -4,6 +4,7 @@
 Created on Wed Feb 17 18:03:27 2021
 
 @author: sebastien
+@modified: romy
 """
 import numpy as np
 import pandas as pd 
@@ -17,10 +18,10 @@ import sys
 import os.path
 
 class embedding:
-    def __init__(self, data_path, emb_file, expertise_file, states_file, sub_file):
+    def __init__(self, data_path, emb_file, states_file, sub_file):
         self.data_path = data_path
         self.emb = loadmat(os.path.join(data_path, emb_file))['emb']
-        self.expertise = pd.read_csv(os.path.join(data_path, expertise_file))
+        # self.expertise = pd.read_csv(os.path.join(data_path, expertise_file))
         self.states = pd.read_csv(os.path.join(data_path, states_file))
         self.sub = pd.read_csv(os.path.join(data_path, sub_file))
          
@@ -33,23 +34,23 @@ class embedding:
         #remove subs based on their ids
         # sub_ids needs to be a list or a tupple
         outliers_mask = ~self.sub['Subs_ID'].isin(sub_ids)
-        self.expertise = self.expertise[outliers_mask]
+        # self.expertise = self.expertise[outliers_mask]
         self.states = self.states[outliers_mask]
         self.sub = self.sub[outliers_mask]
         self.emb = self.emb[outliers_mask, :, :]
 
-    def get_expertise(self, group):
-        #keep group wanted 
-        #group should be one of 'novices', 'experts' or 'all'
-        if group == 'novices':
-            sub_ids = list(self.sub['Subs_ID'][self.expertise.Novices == 0])
-            self.remove_sub(sub_ids)
-        elif group == 'experts':
-            sub_ids = list(self.sub['Subs_ID'][self.expertise.Experts == 0])
-            self.remove_sub(sub_ids)
-        elif group != 'all':
-            sys.exit(
-                'error in p.group, group not recognized ! Should be novices, experts or all')
+    # def get_expertise(self, group):
+    #     #keep group wanted 
+    #     #group should be one of 'novices', 'experts' or 'all'
+    #     if group == 'novices':
+    #         sub_ids = list(self.sub['Subs_ID'][self.expertise.Novices == 0])
+    #         self.remove_sub(sub_ids)
+    #     elif group == 'experts':
+    #         sub_ids = list(self.sub['Subs_ID'][self.expertise.Experts == 0])
+    #         self.remove_sub(sub_ids)
+    #     elif group != 'all':
+    #         sys.exit(
+    #             'error in p.group, group not recognized ! Should be novices, experts or all')
 
     def get_states(self, states_wanted):
         #keep states wanted
@@ -60,7 +61,7 @@ class embedding:
         for states_id in range(len(states_wanted)):
             states_mask = states_mask + self.states[states_wanted[states_id]]
         self.states = self.states[states_wanted]
-        self.expertise = self.expertise[states_mask != 0]
+        # self.expertise = self.expertise[states_mask != 0]
         self.states = self.states[states_mask != 0]
         self.sub = self.sub[states_mask != 0]
         self.emb = self.emb[states_mask != 0, :, :]

@@ -4,6 +4,7 @@
 Created on Wed May 18 12:51:03 2022
 
 @author: sebastien
+@modification: romy
 """
 import os
 import numpy as np
@@ -15,90 +16,97 @@ from statsmodels.formula.api import ols
 from embedding import embedding
 from scipy.stats import ttest_ind
 
-def load_pheno_data(states_wanted): #load phenomenological data harvested during fMRI scans
-    states_correspondance = {'RestingState':'Rs_',
-                             'Meditation':'Med_',
-                             'Hypnosis':'Hyp_'} #maps the states correspondance with the .csv files
-    for state_id, state in enumerate(states_wanted):
+# def load_pheno_data(states_wanted): #load phenomenological data harvested during fMRI scans
+#     states_correspondance = {'RestingState':'Rs_',
+#                              'Meditation':'Med_',
+#                              'Hypnosis':'Hyp_'} #maps the states correspondance with the .csv files
+#     for state_id, state in enumerate(states_wanted):
 
-        for quest_id in range(len(p.quest_names)):
-            current_df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires',p.quest_names [quest_id]+'.csv'),sep=';')
+#         for quest_id in range(len(p.quest_names)):
+#             current_df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires',p.quest_names [quest_id]+'.csv'),sep=';')
 
-            if quest_id == 0:
-                current_df_quest_state = current_df_quest[['Subject','Expertise']].copy()
-                current_df_quest_state = current_df_quest_state.rename(columns={"Subject": "id", "Expertise":"group"})
-                current_df_quest_state['state'] = [state]*current_df_quest_state.shape[0]
+#             if quest_id == 0:
+#                 current_df_quest_state = current_df_quest[['Subject','Expertise']].copy()
+#                 current_df_quest_state = current_df_quest_state.rename(columns={"Subject": "id", "Expertise":"group"})
+#                 current_df_quest_state['state'] = [state]*current_df_quest_state.shape[0]
 
-            quest_column = states_correspondance[state]+p.quest_names[quest_id].capitalize()
-            current_df_quest_state[p.quest_names[quest_id]] = current_df_quest[quest_column]
-        if state_id ==0:
-            df_quest = current_df_quest_state.copy()
+#             quest_column = states_correspondance[state]+p.quest_names[quest_id].capitalize()
+#             current_df_quest_state[p.quest_names[quest_id]] = current_df_quest[quest_column]
+#         if state_id ==0:
+#             df_quest = current_df_quest_state.copy()
             
-        else:
-            df_quest = df_quest.append(current_df_quest_state)
+#         else:
+#             df_quest = df_quest.append(current_df_quest_state)
             
-    return df_quest
+#     return df_quest
 
-def load_scores(p,score_wanted,states_wanted):
+# def load_scores(p,score_wanted,states_wanted):
     
-    if score_wanted == 'pheno':
-        df_quest = load_pheno_data(states_wanted)
+#     if score_wanted == 'pheno':
+#         df_quest = load_pheno_data(states_wanted)
         
-    elif score_wanted == 'composite':
-        df_quest = pd.read_pickle(os.path.join(p.data_path,'questionnaires','composite_score.pkl'))
+#     elif score_wanted == 'composite':
+#         df_quest = pd.read_pickle(os.path.join(p.data_path,'questionnaires','composite_score.pkl'))
         
-    elif score_wanted == 'MAIA':
-        df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires','QUEST_scores_MAIA_2020-02-29.csv'),sep=',')
-        df_quest = df_quest[np.isnan(df_quest['NOT'])==False]
+#     elif score_wanted == 'MAIA':
+#         df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires','QUEST_scores_MAIA_2020-02-29.csv'),sep=',')
+#         df_quest = df_quest[np.isnan(df_quest['NOT'])==False]
         
-    elif score_wanted == 'FFMQ':
-        df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires','QUEST_scores_FFMQ_2020-02-29.csv'),sep='\t')
-        df_quest = df_quest[np.isnan(df_quest['OBS'])==False]
+#     elif score_wanted == 'FFMQ':
+#         df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires','QUEST_scores_FFMQ_2020-02-29.csv'),sep='\t')
+#         df_quest = df_quest[np.isnan(df_quest['OBS'])==False]
         
-    elif score_wanted == 'DDS':
-        df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires','QUEST_scores_2018-12-03.tsv'),sep='\t')
-        df_quest = df_quest[np.isnan(df_quest['DDS'])==False]
-    elif score_wanted == 'HOURS':
-        df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires','QUEST_scores_2018-12-03.tsv'),sep='\t')
-        df_quest = df_quest[np.isnan(df_quest['HOURS'])==False]
-    elif score_wanted == "PAIN":
-        df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires','PAR_defusion_data.csv'), sep=',')
-        df_quest = df_quest[~np.isnan(df_quest['int'])]
+#     elif score_wanted == 'DDS':
+#         df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires','QUEST_scores_2018-12-03.tsv'),sep='\t')
+#         df_quest = df_quest[np.isnan(df_quest['DDS'])==False]
+#     elif score_wanted == 'HOURS':
+#         df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires','QUEST_scores_2018-12-03.tsv'),sep='\t')
+#         df_quest = df_quest[np.isnan(df_quest['HOURS'])==False]
+#     elif score_wanted == "PAIN":
+#         df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires','PAR_defusion_data.csv'), sep=',')
+#         df_quest = df_quest[~np.isnan(df_quest['int'])]
 
-    elif score_wanted == 'None':
-        df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires','QUEST_scores_2018-12-03.tsv'),sep='\t')
-    else:
+#     elif score_wanted == 'None':
+#         df_quest = pd.read_csv(os.path.join(p.data_path,'questionnaires','QUEST_scores_2018-12-03.tsv'),sep='\t')
+#     else:
         
-        print('score_wanted should be either "pheno", "composite", "MAIA" or "FFMQ"')
+#         print('score_wanted should be either "pheno", "composite", "MAIA" or "FFMQ"')
         
-    return df_quest
+#     return df_quest
 
 
-def load_data(p,dimension,states_wanted,group,score_wanted):
-    #load diffusion mebedding and questionnaires data and remove unwanted subjects or missing data
+''''''
+states = ['control','hypnose','meditation']
+blocks = ['run-1','run-2','run-3']
+emb_mat_path  = '/home/romy.beaute/projects/hypnomed/diffusion_embedding/emb_matrices/group'
+''''''
+
+
+
+def load_data(p,dimension,states_wanted):
+    #load diffusion mebedding data and remove unwanted subjects or missing data
     diff_emb = embedding(p.data_path,
-                         'co_om_rs_group_embedding_new.mat',
-                         'expertise_covs.csv',
+                         'group_control_meditation_hypnose_embedding.mat',
                          'state_covs.csv',
                          'subject_covs.csv')
     
-    if 'Med_mean' in states_wanted:
-        med_mean = np.mean([diff_emb.emb[diff_emb.states['OpenPresence']==1],diff_emb.emb[diff_emb.states['Compassion']==1]] ,0)
-        diff_emb.states = diff_emb.states.rename(columns={'Compassion':'Med_mean'})
-        diff_emb.emb[diff_emb.states['Med_mean']==1] = med_mean
-    elif 'med' in [x.lower() for x in states_wanted]:
-        # careful, hard coded here!!
-        diff_emb.states.columns = ['Med', 'Med2', 'RestingState']
-        diff_emb.states['Med'][diff_emb.states['Med2'] != 0] = 1
+    # if 'Med_mean' in states_wanted:
+    #     med_mean = np.mean([diff_emb.emb[diff_emb.states['OpenPresence']==1],diff_emb.emb[diff_emb.states['Compassion']==1]] ,0)
+    #     diff_emb.states = diff_emb.states.rename(columns={'Compassion':'Med_mean'})
+    #     diff_emb.emb[diff_emb.states['Med_mean']==1] = med_mean
+    # elif 'med' in [x.lower() for x in states_wanted]:
+    #     # careful, hard coded here!!
+    #     diff_emb.states.columns = ['Med', 'Med2', 'RestingState']
+    #     diff_emb.states['Med'][diff_emb.states['Med2'] != 0] = 1
         
         
     diff_emb.get_states(states_wanted)
-    diff_emb.get_expertise(group)
+    # diff_emb.get_expertise(group)
 
-    df_quest = load_scores(p,score_wanted,states_wanted)
-    commun_sub_id = np.array(list(set(np.unique(diff_emb.sub)) & set(df_quest['id'].to_numpy())))
+    # df_quest = load_scores(p,score_wanted,states_wanted)
+    commun_sub_id = np.array(list(set(np.unique(diff_emb.sub))))
     commun_sub_id = commun_sub_id[~np.in1d(commun_sub_id,p.outliers)]
-    df_quest = df_quest[df_quest['id'].isin(commun_sub_id)]
+    # df_quest = df_quest[df_quest['id'].isin(commun_sub_id)]
     outliers = np.hstack((p.outliers,(np.unique(diff_emb.sub['Subs_ID'][~diff_emb.sub.isin(commun_sub_id).to_numpy()[:,0]]))))
 
     diff_emb.remove_sub(outliers)
@@ -107,35 +115,37 @@ def load_data(p,dimension,states_wanted,group,score_wanted):
     #get diff emb data into fsaverage5 rather than just the cortex; necessary to work with atlases
     diff_emb.get_neighborhood(p)
     diff_emb.get_surf_emb(p)
-    df_quest = df_quest.sort_values('id')
-    return diff_emb, df_quest
+    # df_quest = df_quest.sort_values('id')
+    return diff_emb
 
-def quest_stat_analysis(df_quest):
-    #perform a 2-way ANOVA then t-tests 
-    data = list()
-    subscore = list()
-    group = list()
+# def quest_stat_analysis(df_quest):
+#     #perform a 2-way ANOVA then t-tests 
+#     data = list()
+#     subscore = list()
+#     group = list()
     
-    sub_nb = df_quest['id'].shape[0]
-    for quest in df_quest.columns:
-        if quest not in ['group','id']:
-            data += list(df_quest[quest].to_numpy())
-            subscore += [quest]*sub_nb
-            group += list(df_quest['group'].to_numpy())
+#     sub_nb = df_quest['id'].shape[0]
+#     for quest in df_quest.columns:
+#         if quest not in ['group','id']:
+#             data += list(df_quest[quest].to_numpy())
+#             subscore += [quest]*sub_nb
+#             group += list(df_quest['group'].to_numpy())
             
-    test_df = pd.DataFrame({'data':data,'subscore':subscore,'group':group})
-    model = ols('data ~ C(subscore) + C(group) + C(subscore):C(group)', data=test_df).fit()
-    print('Anova results:')
-    print(sm.stats.anova_lm(model, typ=2))
-    print('\n t-test results: \n')
-    for quest in df_quest.columns:
-        if quest not in ['group','id']:
-            current_quest = df_quest[quest].to_numpy()
-            tval,pval = stats.ttest_ind(current_quest[df_quest['group']=='exp'],
-                            current_quest[df_quest['group']=='nov'])
-            diff = np.mean(current_quest[df_quest['group']=='exp']) - np.mean(current_quest[df_quest['group']=='nov'])
+#     test_df = pd.DataFrame({'data':data,'subscore':subscore,'group':group})
+#     model = ols('data ~ C(subscore) + C(group) + C(subscore):C(group)', data=test_df).fit()
+#     print('Anova results:')
+#     print(sm.stats.anova_lm(model, typ=2))
+#     print('\n t-test results: \n')
+#     for quest in df_quest.columns:
+#         if quest not in ['group','id']:
+#             current_quest = df_quest[quest].to_numpy()
+#             tval,pval = stats.ttest_ind(current_quest[df_quest['group']=='exp'],
+#                             current_quest[df_quest['group']=='nov'])
+#             diff = np.mean(current_quest[df_quest['group']=='exp']) - np.mean(current_quest[df_quest['group']=='nov'])
                             
-            print(quest,diff,pval)
+#             print(quest,diff,pval)
+
+            
             
 def duplicate_elements(old_list,n):
     #duplicate elements in a list such that 
