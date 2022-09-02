@@ -16,29 +16,40 @@ addpath(genpath('/home/romy.beaute/projects/hypnomed/softwares/surfstat/'));
 p.analysis_framework = 'Daniel';
 
 
-% contrast_id = 1; %don't forget to set up contrast
-% p.states_wanted = {'control','meditation'};
-% p.prefixe = 'control_vs_meditation';
+contrast_id = 1; %don't forget to set up contrast
+p.states_wanted = {'meditation','control'};
+p.prefixe = 'meditation_vs_control';
+% p.outliers = [08,13,15,22,27,32]; %outliers control_vs_meditation
 
 % contrast_id = 2; 
-% p.states_wanted = {'control','hypnose'};
-% p.prefixe = 'control_vs_hypnose';
+% p.states_wanted = {'hypnose','control'};
+% p.prefixe = 'hypnose_vs_control';
+% p.outliers = [05,10,15,22,27,32,34]; %outliers control_vs_hypnose
 
 
-contrast_id = 3; 
-p.states_wanted = {'meditation','hypnose'};
-p.prefixe = 'meditation_vs_hypnose';
+% contrast_id = 3; 
+% p.states_wanted = {'hypnose','meditation'};
+% p.prefixe = 'hypnose_vs_meditation';
+% p.outliers = [05,08,10,13,15,27,32,34]; %outliers meditation_vs_hypnose
 
 
+p.outliers = [27,32]; %subject number that you want to exclude from the analysis
 
 p.interaction = 0; %state_id to be removed from other state e.g. : OP-RS p.interaction = 3
 
 
 
 
-%exclude subjs 73 
-p.outliers = [27,32]; %subject number that you want to exclude from the analysis
-p.clusp = 0.05; %Set the clusters p-value 
+
+
+
+
+
+
+
+p.clusp = 0.05; %Set the clusters p-value --> seuil de significativité des clusters 
+
+
 p.col_lim_dim = [-4 4]; %Set max values for the figures
 p.diff_lim = [-1 1]; %Set max values for the interaction figures
 p.dims_wanted = [1];
@@ -120,7 +131,7 @@ for dim_id = 1:length(p.dims_wanted)
 end
 
 
-% make_figs(p,d,dim_id,emb_states,state_names,stats_p,stats_n,maskRoi)
+make_figs(p,d,dim_id,emb_states,state_names,stats_p,stats_n,maskRoi)
 
 
 
@@ -159,15 +170,15 @@ function [contrast,contrastsList] = get_contrast(d)
     contrast=zeros(size(d.emb,1),3);
 
     %Control vs Meditation
-    contrast(:,1) = d.state(1)-d.state(2);
+    contrast(:,1) = d.state(2)-d.state(1);
 
     %Control vs Hypnose
-    contrast(:,2) = d.state(1)-d.state(3);
+    contrast(:,2) = d.state(3)-d.state(1);
 
     %Meditation vs Hypnose
-    contrast(:,3) = d.state(2)-d.state(3);
+    contrast(:,3) = d.state(3)-d.state(2);
 
-    contrastsList = {'control_vs_meditation', 'control_vs_hypnose', 'meditation_vs_hypnose'};
+    contrastsList = {'meditation_vs_control', 'hypnose_vs_control', 'hypnose_vs_meditation'};
 
 end
 
@@ -224,7 +235,7 @@ function [tmp_file_name] = make_figs(p,d,dim_id,emb_states,state_names,stats_p,s
 
     report_description = {sprintf('%s analysis',p.prefixe)};  %,'',sprintf('Comparison between %s and %s (%s only)',state_names{1},state_names{2},p.prefixe)};
 
-    tmp_file_name = sprintf('figures/tmp_report_%s', p.prefixe);
+    tmp_file_name = sprintf('figures/tmp_reports/tmp_report_%s', p.prefixe);
     mean_state1_dim = emb_states{1};
     mean_state1_dim = mean(squeeze(mean_state1_dim(:,:,dim_id)),1);
     mean_state2_dim = emb_states{2};
