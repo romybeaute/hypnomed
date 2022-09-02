@@ -16,18 +16,18 @@ addpath(genpath('/home/romy.beaute/projects/hypnomed/softwares/surfstat/'));
 p.analysis_framework = 'Daniel';
 
 
-contrast_id = 1; %don't forget to set up contrast
-p.states_wanted = {'block-2','block-1'};
-p.prefixe = 'block-2_vs_block-1';
+% contrast_id = 1; %don't forget to set up contrast
+% p.states_wanted = {'block-2','block-1'};
+% p.prefixe = 'block-2_vs_block-1';
 
 % contrast_id = 2; %don't forget to set up contrast
 % p.states_wanted = {'block-3','block-1'};
 % p.prefixe = 'block-3_vs_block-1';
 
 
-% contrast_id = 3; %don't forget to set up contrast
-% p.states_wanted = {'block-3','block-2'};
-% p.prefixe = 'block-3_vs_block-2';
+contrast_id = 3; %don't forget to set up contrast
+p.states_wanted = {'block-3','block-2'};
+p.prefixe = 'block-3_vs_block-2';
 
 
 
@@ -120,7 +120,7 @@ for dim_id = 1:length(p.dims_wanted)
     
 end
 
-% make_figs(p,d,dim_id,emb_states,state_names,stats_p,stats_n,maskRoi)
+make_figs(p,d,dim_id,emb_states,state_names,stats_p,stats_n,maskRoi)
 
 
 
@@ -317,7 +317,7 @@ function [tmp_file_name] = make_figs(p,d,dim_id,emb_states,state_names,stats_p,s
     axes = SurfStatView((mean_state1_dim-mean_state2_dim), d.surf.pial,{sprintf('%s - %s mean gradient values (Dim%0d)',state_names{1},state_names{2}, dim_id)});
     SurfStatColormap('jet');
     SurfStatColLim(p.diff_lim);
-    ttl=title(sprintf('Difference of gradient between %s and %s',state_names{1},state_names{2}),'FontSize', 14);
+    ttl=title(sprintf('Difference of gradient between %s and %s (whole-brain)',state_names{1},state_names{2}),'FontSize', 14);
     ttl.Parent = axes(2);
     set(ttl,'position',get(ttl,'position')+[0 87 0]);
     export_fig(tmp_file_name,'-pdf','-append')  

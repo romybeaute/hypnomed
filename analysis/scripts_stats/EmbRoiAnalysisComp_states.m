@@ -16,9 +16,9 @@ addpath(genpath('/home/romy.beaute/projects/hypnomed/softwares/surfstat/'));
 p.analysis_framework = 'Daniel';
 
 
-contrast_id = 1; %don't forget to set up contrast
-p.states_wanted = {'meditation','control'};
-p.prefixe = 'meditation_vs_control';
+% contrast_id = 1; %don't forget to set up contrast
+% p.states_wanted = {'meditation','control'};
+% p.prefixe = 'meditation_vs_control';
 % p.outliers = [08,13,15,22,27,32]; %outliers control_vs_meditation
 
 % contrast_id = 2; 
@@ -27,9 +27,9 @@ p.prefixe = 'meditation_vs_control';
 % p.outliers = [05,10,15,22,27,32,34]; %outliers control_vs_hypnose
 
 
-% contrast_id = 3; 
-% p.states_wanted = {'hypnose','meditation'};
-% p.prefixe = 'hypnose_vs_meditation';
+contrast_id = 3; 
+p.states_wanted = {'hypnose','meditation'};
+p.prefixe = 'hypnose_vs_meditation';
 % p.outliers = [05,08,10,13,15,27,32,34]; %outliers meditation_vs_hypnose
 
 
@@ -328,7 +328,7 @@ function [tmp_file_name] = make_figs(p,d,dim_id,emb_states,state_names,stats_p,s
     axes = SurfStatView((mean_state1_dim-mean_state2_dim), d.surf.pial,{sprintf('%s - %s mean gradient values (Dim%0d)',state_names{1},state_names{2}, dim_id)});
     SurfStatColormap('jet');
     SurfStatColLim(p.diff_lim);
-    ttl=title(sprintf('Difference of gradient between %s and %s',state_names{1},state_names{2}),'FontSize', 14);
+    ttl=title(sprintf('Difference of gradient between %s and %s (whole-brain)',state_names{1},state_names{2}),'FontSize', 14);
     ttl.Parent = axes(2);
     set(ttl,'position',get(ttl,'position')+[0 87 0]);
     export_fig(tmp_file_name,'-pdf','-append')  
