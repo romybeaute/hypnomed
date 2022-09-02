@@ -16,18 +16,18 @@ addpath(genpath('/home/romy.beaute/projects/hypnomed/softwares/surfstat/'));
 p.analysis_framework = 'Daniel';
 
 
-% contrast_id = 1; %don't forget to set up contrast
-% p.states_wanted = {'block-1','block-2'};
-% p.prefixe = 'block-1_vs_block-2';
+contrast_id = 1; %don't forget to set up contrast
+p.states_wanted = {'block-2','block-1'};
+p.prefixe = 'block-2_vs_block-1';
 
-contrast_id = 2; %don't forget to set up contrast
-p.states_wanted = {'block-1','block-3'};
-p.prefixe = 'block-1_vs_block-3';
+% contrast_id = 2; %don't forget to set up contrast
+% p.states_wanted = {'block-3','block-1'};
+% p.prefixe = 'block-3_vs_block-1';
 
 
 % contrast_id = 3; %don't forget to set up contrast
-% p.states_wanted = {'block-2','block-3'};
-% p.prefixe = 'block-2_vs_block-3';
+% p.states_wanted = {'block-3','block-2'};
+% p.prefixe = 'block-3_vs_block-2';
 
 
 
@@ -36,7 +36,6 @@ p.interaction = 0; %state_id to be removed from other state e.g. : OP-RS p.inter
 
 
 
-%exclude subjs 73 
 p.outliers = [27,32]; %subject number that you want to exclude from the analysis
 p.clusp = 0.05; %Set the clusters p-value 
 p.col_lim_dim = [-4 4]; %Set max values for the figures
@@ -121,7 +120,7 @@ for dim_id = 1:length(p.dims_wanted)
     
 end
 
-make_figs(p,d,dim_id,emb_states,state_names,stats_p,stats_n,maskRoi)
+% make_figs(p,d,dim_id,emb_states,state_names,stats_p,stats_n,maskRoi)
 
 
 
@@ -160,15 +159,15 @@ function [contrast,contrastsList] = get_contrast(d)
     contrast=zeros(size(d.emb,1),3);
 
     %Block-1 vs Block-2
-    contrast(:,1) = d.state(1)-d.state(2);
+    contrast(:,1) = d.state(2)-d.state(1);
 
     %Block-1 vs Block-3
-    contrast(:,2) = d.state(1)-d.state(3);
+    contrast(:,2) = d.state(3)-d.state(1);
 
     %Block-2 vs Block-3
-    contrast(:,3) = d.state(2)-d.state(3);
+    contrast(:,3) = d.state(3)-d.state(2);
 
-    contrastsList = {'block-1_vs_block-2', 'block-1_vs_block-3', 'block-2_vs_block-3'};
+    contrastsList = {'block-2_vs_block-1', 'block-3_vs_block-1', 'block-3_vs_block-2'};
 
 end
 
@@ -225,7 +224,7 @@ function [tmp_file_name] = make_figs(p,d,dim_id,emb_states,state_names,stats_p,s
 
     report_description = {sprintf('%s analysis',p.prefixe)};  %,'',sprintf('Comparison between %s and %s (%s only)',state_names{1},state_names{2},p.prefixe)};
 
-    tmp_file_name = sprintf('figures/tmp_report_%s', p.prefixe);
+    tmp_file_name = sprintf('figures/tmp_reports/tmp_report_%s', p.prefixe);
     mean_state1_dim = emb_states{1};
     mean_state1_dim = mean(squeeze(mean_state1_dim(:,:,dim_id)),1);
     mean_state2_dim = emb_states{2};
