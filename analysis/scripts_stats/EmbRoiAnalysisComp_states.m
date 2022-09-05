@@ -19,29 +19,21 @@ p.analysis_framework = 'Daniel';
 % contrast_id = 1; %don't forget to set up contrast
 % p.states_wanted = {'meditation','control'};
 % p.prefixe = 'meditation_vs_control';
-% p.outliers = [08,13,15,22,27,32]; %outliers control_vs_meditation
+
 
 % contrast_id = 2; 
 % p.states_wanted = {'hypnose','control'};
 % p.prefixe = 'hypnose_vs_control';
-% p.outliers = [05,10,15,22,27,32,34]; %outliers control_vs_hypnose
 
 
 contrast_id = 3; 
 p.states_wanted = {'hypnose','meditation'};
 p.prefixe = 'hypnose_vs_meditation';
-% p.outliers = [05,08,10,13,15,27,32,34]; %outliers meditation_vs_hypnose
 
 
-p.outliers = [27,32]; %subject number that you want to exclude from the analysis
+p.outliers = [15,27,32,40]; %subject number that you want to exclude from the analysis
 
 p.interaction = 0; %state_id to be removed from other state e.g. : OP-RS p.interaction = 3
-
-
-
-
-
-
 
 
 

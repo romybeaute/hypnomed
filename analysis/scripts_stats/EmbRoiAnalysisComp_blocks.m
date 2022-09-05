@@ -36,7 +36,7 @@ p.interaction = 0; %state_id to be removed from other state e.g. : OP-RS p.inter
 
 
 
-p.outliers = [27,32]; %subject number that you want to exclude from the analysis
+p.outliers = [15,27,32,40]; %subject number that you want to exclude from the analysis
 p.clusp = 0.05; %Set the clusters p-value 
 p.col_lim_dim = [-4 4]; %Set max values for the figures
 p.diff_lim = [-1 1]; %Set max values for the interaction figures
