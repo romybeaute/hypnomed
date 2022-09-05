@@ -20,14 +20,14 @@ p.analysis_framework = 'Daniel';
 % p.states_wanted = {'block-2','block-1'};
 % p.prefixe = 'block-2_vs_block-1';
 
-% contrast_id = 2; %don't forget to set up contrast
-% p.states_wanted = {'block-3','block-1'};
-% p.prefixe = 'block-3_vs_block-1';
+contrast_id = 2; %don't forget to set up contrast
+p.states_wanted = {'block-3','block-1'};
+p.prefixe = 'block-3_vs_block-1';
 
 
-contrast_id = 3; %don't forget to set up contrast
-p.states_wanted = {'block-3','block-2'};
-p.prefixe = 'block-3_vs_block-2';
+% contrast_id = 3; %don't forget to set up contrast
+% p.states_wanted = {'block-3','block-2'};
+% p.prefixe = 'block-3_vs_block-2';
 
 
 
