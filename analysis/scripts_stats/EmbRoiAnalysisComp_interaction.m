@@ -1,10 +1,22 @@
 
 %% Initialize variables
 
-% matlab -nodisplay -nosplash -nodesktop -r "run('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/EmbRoiAnalysisComp_interactions.m');exit;"
+% matlab -nodisplay -nosplash -nodesktop -r "run('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/EmbRoiAnalysisComp_interaction.m');exit;"
 
-% matlab -nodisplay -nosplash -nodesktop -r "run('/mnt/data/romy/hypnomed/git/analysis/scripts_stats/EmbRoiAnalysisComp_interactions.m');exit;"
+% matlab -nodisplay -nosplash -nodesktop -r "run('/mnt/data/romy/hypnomed/git/analysis/scripts_stats/EmbRoiAnalysisComp_interaction.m');exit;"
     
+
+
+% ------------------------------------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+% G1 : Meditation 2nd block and Hypnose 3rd block (code : MH)
+% G2 : Meditation 3rd block and Hypnose 2nd block (code : HM)
+
+% ------------------------------------------------------------------------------------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 clear
 close all
 
@@ -15,13 +27,17 @@ addpath(genpath('/home/romy.beaute/projects/hypnomed/softwares/surfstat/'));
 
 p.analysis_framework = 'Daniel';
 
-
-contrast_id = 1; %don't forget to set up contrast
-p.states_wanted = {'meditation','hypnose'};
+% Comparison MEDITATION G1 vs G2
+contrast_id = 6; %don't forget to set up contrast
+p.states_wanted = {'meditation','meditation'};
 p.groups_wanted = {'MH','HM'};
 p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
 
-
+% % Comparison HYPNOSE G1 vs G2
+% contrast_id = 7; %don't forget to set up contrast
+% p.states_wanted = {'hypnose','hypnose'};
+% p.groups_wanted = {'MH','HM'};
+% p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
 
 % contrast_id = 2; 
 % p.states_wanted = {'meditation','hypnose'};
@@ -74,7 +90,7 @@ d.cortex = squeeze(d.cortex.cortex') + 1;
 %cf create_csv_files.m to see how they were created
 d.state =dlmread('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/state_covs.csv',',',1,0);
 d.subject =dlmread('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/subject_covs.csv',',',1,0);
-d.expertise = dlmread('./expertise_covs.csv',',',1,0);
+d.expertise = dlmread('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/expertise_covs.csv',',',1,0);
 
 for outlier_index = 1:length(p.outliers)
     outlier_index_in_csv = d.subject==p.outliers(outlier_index);
