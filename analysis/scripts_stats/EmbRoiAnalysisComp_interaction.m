@@ -28,21 +28,37 @@ addpath(genpath('/home/romy.beaute/projects/hypnomed/softwares/surfstat/'));
 p.analysis_framework = 'Daniel';
 
 % Comparison MEDITATION G1 vs G2
-contrast_id = 6; %don't forget to set up contrast
-p.states_wanted = {'meditation','meditation'};
-p.groups_wanted = {'MH','HM'};
-p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
+% contrast_id = 6; %don't forget to set up contrast
+% p.states_wanted = {'meditation','meditation'};
+% p.groups_wanted = {'HM','MH'};
+% p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
 
-% % Comparison HYPNOSE G1 vs G2
+% % % Comparison HYPNOSE G1 vs G2
 % contrast_id = 7; %don't forget to set up contrast
 % p.states_wanted = {'hypnose','hypnose'};
 % p.groups_wanted = {'MH','HM'};
 % p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
 
-% contrast_id = 2; 
-% p.states_wanted = {'meditation','hypnose'};
-% p.groups_wanted = {'HM','HM'};
+% % Comparison CONTROL G1 vs G2
+% contrast_id = 8; %don't forget to set up contrast
+% p.states_wanted = {'control','control'};
+% p.groups_wanted = {'MH','HM'};
 % p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
+
+% contrast_id = 14; %don't forget to set up contrast
+% p.states_wanted = {'block1','block3'};
+% p.groups_wanted = {'MH','HM'};
+% p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
+
+% contrast_id = 4; 
+% p.states_wanted = {'hypnose','meditation'};
+% p.groups_wanted = {'MH','MH'};
+% p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
+
+contrast_id = 5; 
+p.states_wanted = {'hypnose','meditation'};
+p.groups_wanted = {'HM','HM'};
+p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
 
 
 % contrast_id = 3; 
@@ -206,7 +222,7 @@ end
 
 function [contrast,contrastsList] = get_contrast(d)
     
-    contrast=zeros(size(d.emb,1),13);
+    contrast=zeros(size(d.emb,1),14);
 
     % ---------- Contrast : Individual states ----------
 
@@ -223,10 +239,10 @@ function [contrast,contrastsList] = get_contrast(d)
 
     % ---------- Contrast : compare MEDITATION vs HYPNOSE for each (block-type) group ----------
 
-    %MH.meditation vs MH.hypnose (M vs H comparison for group 1)
-    contrast(:,4) = d.expertise(1).*(d.state(2)-d.state(3));
+    %MH.hypnose vs MH.meditation (M vs H comparison for group 1)
+    contrast(:,4) = d.expertise(1).*(d.state(3)-d.state(2));  
 
-    %HM.meditation vs HM.hypnose (M vs H comparison for group 2)
+    %HM.hypnose vs HM.meditation (M vs H comparison for group 2)
     contrast(:,5) = d.expertise(2).*(d.state(2)-d.state(3));
 
 
@@ -235,7 +251,7 @@ function [contrast,contrastsList] = get_contrast(d)
     % ---------- Contrast : compare MEDITATION across (block-type) groups ----------
 
     %MH.meditation vs HM.meditation 
-    contrast(:,6) = d.expertise(1).*(d.state(2))-d.expertise(2).*(d.state(2));
+    contrast(:,6) = d.expertise(2).*(d.state(2))-d.expertise(1).*(d.state(2));
 
     % ---------- Contrast : compare HYPNOSE across (block-type) groups ----------
 
@@ -243,31 +259,37 @@ function [contrast,contrastsList] = get_contrast(d)
     contrast(:,7) = d.expertise(1).*(d.state(3))-d.expertise(2).*(d.state(3));
 
 
+    % ---------- Contrast : compare CONTROL across (block-type) groups ----------
+
+    %MH.control vs HM.control
+    contrast(:,8) = d.expertise(1).*(d.state(1))-d.expertise(2).*(d.state(1));
+
+
     % ---------- Contrast : compare BLOCK 3 et BLOCK 1 pour chaque état ----------
 
     % MH.block3 - MH.cont (le groupe MH a eu Hypnose en block 3 donc comparaison avec d.state(3))
-    contrast(:,8) = d.expertise(1).*(d.state(3))-d.expertise(1).*(d.state(1));
+    contrast(:,9) = d.expertise(1).*(d.state(3))-d.expertise(1).*(d.state(1));
 
     % HM.block3 - HM.cont (le groupe HM a eu Meditation en block 3 donc comparaison avec d.state(3))
-    contrast(:,9) = d.expertise(2).*(d.state(2))-d.expertise(2).*(d.state(1));
+    contrast(:,10) = d.expertise(2).*(d.state(2))-d.expertise(2).*(d.state(1));
 
 
 
     % ---------- Interactions : compare STATES across (block-type) groups ----------
 
     % Interaction 1: MH med-cont (block 2 MH - block 1 MH) vs HM med-cont (block 3 HM - block 1 HM)
-    contrast(:,10) = d.expertise(1).*(d.state(2)-d.state(1))-d.expertise(2).*(d.state(2)-d.state(1));
+    contrast(:,11) = d.expertise(1).*(d.state(2)-d.state(1))-d.expertise(2).*(d.state(2)-d.state(1));
 
     % Interaction 2: MH hyp-cont vs HM hyp-cont (block 3 MH - block 1 MH) vs HM med-cont (block 2 HM - block 1 HM)
-    contrast(:,11) = d.expertise(1).*(d.state(3)-d.state(1))-d.expertise(2).*(d.state(3)-d.state(1));
+    contrast(:,12) = d.expertise(1).*(d.state(3)-d.state(1))-d.expertise(2).*(d.state(3)-d.state(1));
 
     % Interaction 3: MH med-hyp vs HM med-hyp (block 2 MH - block 3 MH) vs HM med-cont (block 3 HM - block 2 HM)
-    contrast(:,12) = d.expertise(1).*(d.state(2)-d.state(3))-d.expertise(2).*(d.state(2)-d.state(3));
+    contrast(:,13) = d.expertise(1).*(d.state(2)-d.state(3))-d.expertise(2).*(d.state(2)-d.state(3));
 
 
-    % ---------- Interactions : compare BLOCK 2 et BLOCK 3 pour chaque état ----------
+    % ---------- Interactions : compare BLOCK 1 et BLOCK 3 pour chaque état ----------
     % Interaction 4: MH.block3 - MH.cont  vs HM.block3 - HM.cont
-    contrast(:,13) = d.expertise(1).*(d.state(1)-d.state(3))-d.expertise(2).*(d.state(1)-d.state(2));
+    contrast(:,14) = d.expertise(1).*(d.state(3)-d.state(1))-d.expertise(2).*(d.state(2)-d.state(1));
 
 
 
@@ -275,7 +297,7 @@ function [contrast,contrastsList] = get_contrast(d)
 
 
 
-    contrastsList = {'meditation_vs_control', 'hypnose_vs_control', 'hypnose_vs_meditation','MH.meditation_vs_MH.hypnose','HM.meditation_vs_HM.hypnose','MH.meditation_vs_HM.meditation','MH.hypnose_vs_HM.hypnose','MH.block3_VS_MH.cont','HM.block3_VS_HM.cont','int1','int2','int3','MH.block3-MH.cont_vs_HM.block3-HM.cont'};
+    contrastsList = {'meditation_vs_control', 'hypnose_vs_control', 'hypnose_vs_meditation','MH.hypnose_vs_MH.meditation','HM.hypnose_vs_HM.meditation','MH.meditation_vs_HM.meditation','MH.hypnose_vs_HM.hypnose','MH.control_vs_HM.control','MH.block3_VS_MH.cont','HM.block3_VS_HM.cont','int1','int2','int3','MH.block3-MH.cont_vs_HM.block3-HM.cont'};
 
 end
 
