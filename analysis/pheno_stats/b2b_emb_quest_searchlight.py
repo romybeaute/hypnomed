@@ -342,8 +342,8 @@ def main(p):
 p = p()
 
 p.data_file = 'new'
-# p.outliers = np.array([15,27,32,40])  # subject(s) id that you want to exclude from the analysis
-p.outliers = np.array([10,11,15,17,20,27,31,32,39,40])
+p.outliers = np.array([15,27,32,40])  # subject(s) id that you want to exclude from the analysis
+# p.outliers = np.array([10,11,15,17,20,27,31,32,39,40])
 p.dimension = [0]  # dimension(s) that you want to study (0 for only principal gradient)
 p.repetitions_nb = 1
 p.n_splits = 50
@@ -353,19 +353,19 @@ p.radius = 6. #~41 voxels per sphere
 p.analysis_framework = [
     #states #'Med','RestingState'  //  'Compassion', 'OpenPresence'
     # group that you want to study : 'G1','G2','all'
-    {'states_wanted':['control','meditation','hypnose'],'group':'G1'},
-    {'states_wanted':['meditation','hypnose'],'group':'G1'},
-    {'states_wanted':['control'],'group':'G1'},
-    {'states_wanted':['meditation'],'group':'G1'},
-    {'states_wanted':['hypnose'],'group':'G1'},
+    # {'states_wanted':['control','meditation','hypnose'],'group':'G1'},
+    # {'states_wanted':['meditation','hypnose'],'group':'G1'},
+    # {'states_wanted':['control'],'group':'G1'},
+    # {'states_wanted':['meditation'],'group':'G1'},
+    # {'states_wanted':['hypnose'],'group':'G1'},
 
-    {'states_wanted':['control','meditation','hypnose'],'group':'G2'},
-    {'states_wanted':['meditation','hypnose'],'group':'G2'},
-    {'states_wanted':['control'],'group':'G2'},
-    {'states_wanted':['meditation'],'group':'G2'},
-    {'states_wanted':['hypnose'],'group':'G2'},
+    # {'states_wanted':['control','meditation','hypnose'],'group':'G2'},
+    # {'states_wanted':['meditation','hypnose'],'group':'G2'},
+    # {'states_wanted':['control'],'group':'G2'},
+    # {'states_wanted':['meditation'],'group':'G2'},
+    # {'states_wanted':['hypnose'],'group':'G2'},
     
-    {'states_wanted':['control','meditation','hypnose'],'group':'all'},
+    # {'states_wanted':['control','meditation','hypnose'],'group':'all'},
     {'states_wanted':['meditation','hypnose'],'group':'all'},
     {'states_wanted':['control'],'group':'all'},
     {'states_wanted':['meditation'],'group':'all'},
@@ -378,10 +378,10 @@ df = {'states_wanted':[],'group':[],'factors':[],'factors_random':[]}
 
 
 
-cluster = True
+cluster = False
 if cluster:
     # # careful on cluster, use path from root !!!!
-    job_id = sys.argv[1] #see associated batch file
+    job_id = '' #sys.argv[1] #see associated batch file
     p.data_path = '/mnt/data/romy/hypnomed/git/analysis/scripts_stats/data'
     p.results_path = '/mnt/data/romy/hypnomed/git/analysis/pheno_stats/results/searchlight_pheno'
 else:
@@ -401,23 +401,24 @@ else:
 #     df['factors'].append(factors)
 #     df['factors_random'].append(factors_random)
 
-analysis = {'states_wanted':['meditation','hypnose'],'group':'G1'}
 
-p.states_wanted = analysis['states_wanted']
-p.group = analysis['group']
+
+# analysis = {'states_wanted':['meditation','hypnose'],'group':'all'}
+
+# p.states_wanted = analysis['states_wanted']
+# p.group = analysis['group']
     
     
-diff_emb, factors, factors_random = main(p)
-df['states_wanted'].append(p.states_wanted)
-df['group'].append(p.group)
-df['factors'].append(factors)
-df['factors_random'].append(factors_random)
+# diff_emb, factors, factors_random = main(p)
+# df['states_wanted'].append(p.states_wanted)
+# df['group'].append(p.group)
+# df['factors'].append(factors)
+# df['factors_random'].append(factors_random)
 
     
-df = pd.DataFrame(df)
-df
-df.to_pickle(os.path.join(p.results_path,f'decoding_results_{job_id}.pkl'),compression='zip')
+# df = pd.DataFrame(df)
+# df
+# df.to_pickle(os.path.join(p.results_path,f'decoding_results_{job_id}.pkl'),compression='zip')
 
 
-print("--- %s seconds ---" % (time.time() - start_time))
-
+# print("--- %s seconds ---" % (time.time() - start_time))
