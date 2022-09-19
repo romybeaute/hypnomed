@@ -3,7 +3,7 @@
 Guide on the whole process from data preprocessing to data analysis. 
 
 Step 1: Conversion into BIDS format.
-For us to be able to use FMRIPREP pipeline (Step 3), we first need to convert the whole dataset into BIDS (=Brain Imaging Data Structure) format( https://bids.neuroimaging.io/).
+For us to be able to use FMRIPREP pipeline (Step 2), we first need to convert the whole dataset into BIDS (=Brain Imaging Data Structure) format( https://bids.neuroimaging.io/).
 For more information on how to specify directory structure and file names under BIDS format, please refer to bids_spec1.0.2.pdf
 
 Prior to performing this step, be sure to download dcm2niix package.
