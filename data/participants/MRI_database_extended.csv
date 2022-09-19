@@ -1,0 +1,44 @@
+sub_number;sub_name;sub_code;neucose_id;version ;ER runs;RS runs;check_FD (>0.15);comments;reorient;movement;quality check preproc (does the wT1 match the wwraRUN and MNI);Exclude >1.5mm movement;ER Level 1 ;RS level 1
+70;EH070;sub-01;NEUCOSE_ELSES07842;B;10  18  24;8  16  22;;bougé pendant T1, refait, utiliser 26/27;x;ok (small spikes);x;run M > exclude first part;almost none in H;ok
+87;LP087;sub-02;NEUCOSE_LECPA07862;A;10  18  24;8  16  22;;;x;ok;x;;ok;ok
+76;HM076;sub-03;NEUCOSE_HARMA07939;A;10  18  24;8  16  22;;;x;ok;x;;ok;ok
+43;BA043;sub-04;NEUCOSE_BUEAL07925;A;10  18  24;8  16  22;;petit cervelet;x;ok;x;;almost none in control;much movement in M
+93;BA093;sub-05;NEUCOSE_BLUAL07960;B;16  24 30;14 22  28;;reboot machine avant début;x;ok;x;;ok;ok (some movement)
+91;MP091;sub-06;NEUCOSE_MANPA07927;A;10  18  24;8  16  22;;Micro-endormissements;x;ok (some spikes);x;;ok;ok
+67;BL067;sub-07;NEUCOSE_BETLO07962;A;17  23  31;15 21 29;;;x;ok;x;;none in C;ok (activation in CSF)
+21;GM021;sub-08;NEUCOSE_MAUGI07290;B;10  16  24;8  14  22;;t2 refaite à la fin du protocole;x;ok;x;;ok;much movement in M
+29;NJ029;sub-09;NEUCOSE_NICJU06244;B;10  18  24;8  16  22;;;x;ok;x;;ok;ok (activation in eyes)
+82;BC082;sub-10;NEUCOSE_BOLCL07876;A;10  18  25;8  16  22;;beaucoup de mouvement lors du troisieme run ER. Mouvement sur T1. Perturbé par le bruit.;x;big spikes on run H, run M ok;x;run H;none in H;movement in M&H
+100;GP100;sub-11;NEUCOSE_GANPI08027;A;10  16  24;8  14  22;;probleme d’audio pendant le Bloc 3, son fluctuant;x;ok;x;;ok;ok
+64;FV064;sub-12;NEUCOSE_FEYVA07961;B;10  18  31;8  16  29;;pause protocole (toilettes) entre 2 et 3;x;ok;x;;ok;ok
+52;GN052;sub-13;NEUCOSE_GASNA07853;A;10  18  24;8  16  22;;;x;ok;x;;ok;ok
+46;PV046;sub-14;NEUCOSE_PETVE07999;A;10  16  24;8  14  22;;;x;ok;x;;none in run M;almost nothing
+89;VJ089;sub-15;NEUCOSE_VERJU08003;B;10  16  24;8  14  22;;micro pas fermé pendant le bloc 1. ;x;ok;x;;ok;ok
+60;LA060;sub-16;NEUCOSE_LUNAN07942;B;10  (18) 31 35;8 (16) 29 33;;arret du protocole pour tachycardie;x;ok;x;;almost none in M and none in H;ok
+24;PM024;sub-17;NEUCOSE_PEYMA07865;A;10  18  24;8  16  22;;resp signal fluctuant;x;ok;x;;ok;very clear acti
+94;LD094;sub-18;NEUCOSE_LARDE07926;B;10  18  24;8  16  22;;;x;ok;x;;ok;ok
+73;BF073;sub-19;NEUCOSE_BIAFR07234;A;10  16  24;8  14  22;;;x;ok;x;;none in M;ok
+38;BO038;sub-20;NEUCOSE_BUEOS07989;A;10  16  24;8  14  22;;;x;Large spikes, esp in RunH;x; run H;run M not well visible;movement in H
+25;CS025;sub-21;NEUCOSE_SPRCE07854;B;10  18  24;8  16  22;;;x;ok ;x;;ok;ok
+85;FM085;sub-22;NEUCOSE_FARMI07951;A;10  18  24;8  16  22;;;x;ok (oscillations);x;;ok;ok
+41;MA041;sub-23;NEUCOSE_MONAL07998;B;10  16  24;8  14  22;;respi un peu faible pendant bloc 1;x;ok;x;;ok;ok
+102;AB102;sub-24;NEUROCSE_ADOBE07864;B;13  21  27 ;11 19 25;;Probleme trigger lors de audio A, repris Audio A sans intro A. Respiration: plus de signal à partir de la 3ieme expo des images;x;ok ;x;;ok;ok
+1;KA001;sub-25;NEUCOSE_AARKR06757;B;12  20  26;8  18  24;;;x;ok;x;;ok;ok
+86;RJ086;sub-26;NEUCOSE_RODJO08030;A;10  16  24;8  14  22;;signal respi faible;x;ok;x;;ok (patchy);ok
+81;CF081;sub-27;NEUCOSE_CAMFA08095;B;11 (17) 28 36;9 (15) 26 34 ;FD = 0.175; pause protocole (toilettes) pendant images bloc 2. Refait Bloc 2 RS+ER. Quelques mouvements pendant la deuxième fois.  ;x;some big spikes;x;run M and Run H;ok;exclude for movement
+84;EC084;sub-28;NEUCOSE_ESQCH08073;A;10  16  24;8  14  22;;;x;ok;x;;almost none in M, none in H;some movement, activation in nasal cavity
+34;HR034;sub-29;NEUCOSE_HOYRO06133;B;10  16  24;8  14  22;;petit mouvement dans dernière ER bloc 3 (micro-endormissement);x;ok;x;;ok;movement in M
+62;CT062;sub-30;NEUCOSE_COMTH07661;B;12  20  26;10 18  24;;;x;ok;x;;ok;ok
+101;DM101;sub-31;NEUCOSE_DUPMU07953;B;10  18  24;8  16  22;;;x;several large spikes in runH and run M => exclude?;x;run M and Run H, run C?;none in M and H;ok
+44;SR044;sub-32;NEUCOSE_SALRA07868;A;10  18  24;8  16  22;;2 coupes superieures manquantes => make mask;x;ok;x;;ok;ok
+14;JC014;sub-33;NEUCOSE_CREJU07988;B;10  16  24;8  14  22;;;x;ok;x;;ok;ok
+7;AV007;sub-34;NEUCOSE_ANSVA07950;A;10  18  24;8  16  22;;;x;ok;x;;ok;ok
+51;PJ051;sub-35;NEUCOSE_PLAJA02876;B;10  18  24;8  16  22;;;x;ok;x;;ok;ok
+56;CE056;sub-36;NEUCOSE_CHAET07954;A;10  18  24;8  16  22;;;x;ok;x;;almost none in M and none in H;ok
+78;MG078;sub-37;NEUCOSE_MARGA07877;B;10  18  24;8  16  22;;leger mouvement T1;x;ok;x;;ok;much movement in M
+50;SC050;sub-38;NEUCOSE_SENCL07867;B;10  18  24;8  16  22;;;x;ok;x;;ok;ok
+96;BR096;sub-39;NEUCOSE_BUCRO07986;A;10  16  24;8  14  22;;quelques petits mouvements sur ER et RS;x;ok (some spikes);x;;patchy..;ok
+5;AV005;sub-40;NEUCOSE_VASAU07841;A;10  18  24;8  16  22;FD = 0.158;excl run M;x;several big spikes in run M;x;Run M;run M not visible;too much movement
+;;;;;;;;;;;;;;
+;;;;version A= CMH;;;;;;;;;;
+;;;;version B= CHM;;;;;;;;;;
