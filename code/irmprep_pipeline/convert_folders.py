@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-@author: sebastien
-@modified: romy
-"""
 
 import os
 import os.path
