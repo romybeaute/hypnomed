@@ -18,8 +18,6 @@ def load_fs(subject, ses, state):
 
     vol2surf_path = '/mnt/data/romy/hypnomed/git/diffusion_embedding/vol2surf_derivatives' 
     freesurfer_output = '/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest/sourcedata/freesurfer'
-    #'/mnt/data/sebastien/LONGIMED/raw_data/BIDS/derivatives/fmriprep-latest/sourcedata/freesurfer'
-
 
     data = []
     label = []
