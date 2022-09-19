@@ -1,0 +1,8 @@
+----------------------------------------------------------------------
+ Check Framewise Displacements, notably if >15% volumes is >0.5mm
+ Files come from fmriprep folder
+ (see Power et all., NeuroImage, 2012)
+----------------------------------------------------------------------
+- sub-40 for state rs_run-2 (mean FD = 0.1581196581196581)
+- sub-32 for state rs_run-3 (state not found or processed)
+- sub-27 for state rs_run-2 (mean FD = 0.1752136752136752)

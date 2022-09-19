@@ -1,0 +1,23 @@
+----------------------------------------------------------------------
+ Check Framewise Displacements, notably if >15% volumes is >0.5mm
+ Files come from fmriprep folder
+ (see Power et all., NeuroImage, 2012)
+----------------------------------------------------------------------
+
+Outcome from the script check_FD.py :
+
+- sub-40 (AV005) for state rs_run-2 (mean FD = 0.1581196581196581)
+- sub-32 (SR044) for state rs_run-3 (state not found or processed)
+- sub-27 (CF081) for state rs_run-2 (mean FD = 0.1752136752136752)
+
+
+Outcome from the MRI_database_logs : 
+
+CF081 :  "pause protocole (toilettes) pendant images bloc 2. Refait Bloc 2 RS+ER. Quelques mouvements pendant la deuxième fois".  
+
+BR096 : "quelques petits mouvements sur ER et RS"
+
+GP100 : "probleme d’audio pendant le Bloc 3, son fluctuant"
+
+BC082 : "beaucoup de mouvement lors du troisieme run ER. Mouvement sur T1. Perturbé par le bruit".
+
