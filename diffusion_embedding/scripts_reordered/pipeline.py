@@ -87,7 +87,7 @@ def main(subj):
 
                 #Step 2 : Compute correlation coefficient from normalized data K
                 A_mA = K - K.mean(1)[:,None] #Rowwise mean of input arrays & subtract from input arrays themeselves
-                ssA = (A_mA**2).sum(1)  Sum of squares across rows
+                ssA = (A_mA**2).sum(1)  #Sum of squares across rows
                 Asq = np.sqrt(np.dot(ssA[:,None],ssA[None]))
                 Adot = A_mA.dot(A_mA.T)
                 K = Adot/Asq #finally got K as the correlation coefficient (functional connectivity matrix)
