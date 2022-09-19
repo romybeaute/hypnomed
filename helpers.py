@@ -53,3 +53,12 @@ def load_embmat(emb_path,show_infos=True):
   if show_infos:
     print(' - shape embedding (n_subjects, n_voxels, n_dims): {}\n - n = {} subjects\n - condition : {}\n - path : {}\n'.format(b['emb'].shape,len(b['subs']),b['states'],emb_path))
   return b,b['emb'][:,:,0]
+
+
+
+def get_rs_condition(subj,state,df_path='/home/romy.beaute/projects/hypnomed/data/hypnomed.csv'):
+    """
+    Retrieve to which condition run_2 & rs_3 belong to (hypnose or meditation)
+    """
+    df = pd.read_csv(df_path,sep=';',index_col='sub_id')
+    return df.loc[subj][state]
