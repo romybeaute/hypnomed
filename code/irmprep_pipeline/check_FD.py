@@ -6,8 +6,6 @@ Created on Mon Jan 31 15:28:41 2022
 Check Framewise Displacements, notably if >15% volumes is >0.5mm
 Files come from fmriprep folder
 (see Power et all., NeuroImage, 2012)
-@author: sebastien
-@adapted:romy
 """
 
 import os
@@ -21,12 +19,9 @@ class parameters:
 outcome_path = '/home/romy.beaute/projects/hypnomed/code/irmprep_pipeline/infos'
 
 p = parameters()
-# p.sub_path = '/media/sebastien/LaCie/ERC_Antoine/fmriprep_preprocessing_step/recon_all_success/fmriprep'
-# p.sub_path = 'G:\ERC_Antoine/fmriprep_preprocessing_step/recon_all_success/fmriprep'
 p.sub_path = '/crnldata/eduwell/meditation/HYPNOMED/BIDS/derivatives/fmriprep-latest'
 
 p.data_path = 'ses-001/func'
-# p.states_name = ['openmonitoring','compassion','restingstate']
 p.states_name = ['rs_run-1','rs_run-2','rs_run-3']
 
 
