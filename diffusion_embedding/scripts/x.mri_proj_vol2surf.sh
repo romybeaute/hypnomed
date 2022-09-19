@@ -23,7 +23,6 @@ source $FREESURFER_HOME/SetUpFreeSurfer.sh
 #Set the path to your FMRIPREP output
 FMRIPREP_ROOT='/mnt/data/romy/hypnomed/MRI_raw/BIDS/derivatives/fmriprep-latest'
 #Set the path to your output
-# output=/mnt/data/sebastien/LONGIMED/embedding/vol2surf_derivatives
 dir=/mnt/data/romy/hypnomed/git/diffusion_embedding/vol2surf_derivatives
 
 # for subject in sub-01;do
