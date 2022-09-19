@@ -2,7 +2,7 @@
 #!/bin/python
 
 import sys, os
-sys.path.append("/mnt/data/romy/hypnomed/git/diffusion_embedding/") #("/mnt/data/sebastien/diffusion_embedding_step/")
+sys.path.append("/mnt/data/romy/hypnomed/git/diffusion_embedding/") 
 from load_fs import load_fs
 import numpy as np
 import nibabel as nib
@@ -27,7 +27,6 @@ def main(subj):
         # for state in ["rs1", "rs2", "rs3"]:
         for state in ["rs_run-1", "rs_run-2", "rs_run-3"]:
             if os.path.isfile(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy'):
-            # if os.path.isfile(f'/mnt/data/sebastien/diffusion_embedding_step/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy'):
 
                 emb = np.load(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy')
 
