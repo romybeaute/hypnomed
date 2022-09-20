@@ -72,9 +72,9 @@ p.analysis_framework = 'Daniel';
 % p.groups_wanted = {'MH','HM'};
 % p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
 
-contrast_id = 9; 
-p.states_wanted = {'hypnose','control'};
-p.groups_wanted = {'MH','MH'};
+contrast_id = 10; 
+p.states_wanted = {'meditation','control'};
+p.groups_wanted = {'HM','HM'};
 p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
 
 
