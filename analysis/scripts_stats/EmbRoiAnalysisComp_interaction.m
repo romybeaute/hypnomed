@@ -55,10 +55,10 @@ p.analysis_framework = 'Daniel';
 % p.groups_wanted = {'MH','MH'};
 % p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
 
-contrast_id = 5; 
-p.states_wanted = {'hypnose','meditation'};
-p.groups_wanted = {'HM','HM'};
-p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
+% contrast_id = 5; 
+% p.states_wanted = {'hypnose','meditation'};
+% p.groups_wanted = {'HM','HM'};
+% p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
 
 
 % contrast_id = 3; 
@@ -71,6 +71,11 @@ p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p
 % p.states_wanted = {'hypnose','hypnose'};
 % p.groups_wanted = {'MH','HM'};
 % p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
+
+contrast_id = 9; 
+p.states_wanted = {'hypnose','control'};
+p.groups_wanted = {'MH','MH'};
+p.prefixe = sprintf('%s_%s_vs_%s_%s',p.states_wanted{1,1},p.groups_wanted{1,1},p.states_wanted{1,2},p.groups_wanted{1,2});
 
 
 p.outliers = [15,27,32,40]; %subject number that you want to exclude from the analysis
@@ -96,8 +101,8 @@ d.emb = load('/home/romy.beaute/projects/hypnomed/diffusion_embedding/emb_matric
 d.emb = d.emb.emb;
 
 surfaces_path = '/home/romy.beaute/projects/hypnomed/data/template/fsaverage/surf';
-d.surf.inflated = SurfStatReadSurf({['/home/romy.beaute/projects/hypnomed/fsaverage5/surf/lh.inflated'],['/home/romy.beaute/projects/hypnomed/fsaverage5/surf/rh.inflated']});
-d.surf.pial = SurfStatReadSurf({['/home/romy.beaute/projects/hypnomed/fsaverage5/surf/lh.pial'],['/home/romy.beaute/projects/hypnomed/fsaverage5/surf/rh.pial']});
+d.surf.inflated = SurfStatReadSurf({['/home/romy.beaute/projects/hypnomed/data/fsaverage5/surf/lh.inflated'],['/home/romy.beaute/projects/hypnomed/data/fsaverage5/surf/rh.inflated']});
+d.surf.pial = SurfStatReadSurf({['/home/romy.beaute/projects/hypnomed/data/fsaverage5/surf/lh.pial'],['/home/romy.beaute/projects/hypnomed/data/fsaverage5/surf/rh.pial']});
 
 d.cortex = load('/home/romy.beaute/projects/hypnomed/data/cortex.mat');
 d.cortex = squeeze(d.cortex.cortex') + 1;
@@ -180,7 +185,7 @@ make_figs(p,d,dim_id,emb_states,state_names,stats_p,stats_n,maskRoi)
 function [emb_state,state_name] = get_state_group(d,state_wanted,group_wanted,interaction)
 
     if interaction>0
-        for state_id = 1:3
+        for state_id = 1:3 % control, meditation, hypnose
             d.emb(logical(d.state(state_id)),:,:) = d.emb(logical(d.state(state_id)),:,:) - d.emb(logical(d.state(interaction)),:,:);
         end
     end
@@ -269,9 +274,11 @@ function [contrast,contrastsList] = get_contrast(d)
 
     % MH.block3 - MH.cont (le groupe MH a eu Hypnose en block 3 donc comparaison avec d.state(3))
     contrast(:,9) = d.expertise(1).*(d.state(3))-d.expertise(1).*(d.state(1));
+    % contrast(:,9) = d.expertise(1).*(d.state(3)-d.state(1));  #revient à ça
 
     % HM.block3 - HM.cont (le groupe HM a eu Meditation en block 3 donc comparaison avec d.state(3))
     contrast(:,10) = d.expertise(2).*(d.state(2))-d.expertise(2).*(d.state(1));
+    % contrast(:,10) = d.expertise(2).*(d.state(2)-d.state(1));
 
 
 
@@ -287,17 +294,15 @@ function [contrast,contrastsList] = get_contrast(d)
     contrast(:,13) = d.expertise(1).*(d.state(2)-d.state(3))-d.expertise(2).*(d.state(2)-d.state(3));
 
 
-    % ---------- Interactions : compare BLOCK 1 et BLOCK 3 pour chaque état ----------
-    % Interaction 4: MH.block3 - MH.cont  vs HM.block3 - HM.cont
-    contrast(:,14) = d.expertise(1).*(d.state(3)-d.state(1))-d.expertise(2).*(d.state(2)-d.state(1));
+    % ---------- Interactions : MEDITATION et HYPNOSE en contrastant avec l'effet de block (block2 - block3) ----------
+    % Interaction 4: MH.meditation (block2) - HM.meditation (block3)  vs HM.hypnose (block2) - MH.hypnose (block3)
+    contrast(:,14) = d.state(2).*(d.expertise(1)-d.expertise(2))-d.state(3).*(d.expertise(2)-d.expertise(1));
 
 
 
 
 
-
-
-    contrastsList = {'meditation_vs_control', 'hypnose_vs_control', 'hypnose_vs_meditation','MH.hypnose_vs_MH.meditation','HM.hypnose_vs_HM.meditation','MH.meditation_vs_HM.meditation','MH.hypnose_vs_HM.hypnose','MH.control_vs_HM.control','MH.block3_VS_MH.cont','HM.block3_VS_HM.cont','int1','int2','int3','MH.block3-MH.cont_vs_HM.block3-HM.cont'};
+    contrastsList = {'meditation_vs_control', 'hypnose_vs_control', 'hypnose_vs_meditation','MH.hypnose_vs_MH.meditation','HM.hypnose_vs_HM.meditation','MH.meditation_vs_HM.meditation','MH.hypnose_vs_HM.hypnose','MH.control_vs_HM.control','MH.block3_VS_MH.cont','HM.block3_VS_HM.cont','int1','int2','int3','block2-block3_MEDITATION_vs_block2-block3_HYPNOSE'};
 
 end
 
