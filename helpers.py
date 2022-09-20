@@ -14,7 +14,7 @@ import matplotlib.image as mpimg
 import pathlib
 
 
-data_path = '/home/romy.beaute/projects/hypnomed/data'
+# data_path = '/home/romy.beaute/projects/hypnomed/data'
 
 
 
@@ -22,7 +22,7 @@ class embedding:
     def __init__(self, data_path, emb_file, group_file, states_file, sub_file):
         self.data_path = data_path
         self.emb = loadmat(os.path.join(data_path,'emb_matrices',emb_file))['emb']
-        self.group = pd.read_csv(os.path.join(data_path,'participants',expertise_file))
+        self.group = pd.read_csv(os.path.join(data_path,'participants',group_file))
         self.states = pd.read_csv(os.path.join(data_path, 'participants',states_file))
         self.sub = pd.read_csv(os.path.join(data_path, 'participants',sub_file))
 
