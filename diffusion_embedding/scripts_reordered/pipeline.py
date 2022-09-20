@@ -73,8 +73,6 @@ def main(subj):
         for state in ["rs_run-1", "rs_run-2", "rs_run-3"]:
             condition = get_rs_condition(subj,state) #re-ordered rs condition (control, hypnose or meditation)
             if os.path.isfile(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output/embedding_dense_emb.{subj}.{ses}.{condition}.npy'):
-            # if os.path.isfile(f'/mnt/data/sebastien/diffusion_embedding_step/emb_output/embedding_dense_emb.{subj}.{ses}.{state}.npy'):
-
                 emb = np.load(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output/embedding_dense_emb.{subj}.{ses}.{condition}.npy')
 
             else:
@@ -107,7 +105,6 @@ def main(subj):
 
                 np.save(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output_reordered/embedding_dense_emb.{subj}.{ses}.{condition}.npy', emb)
                 np.save(f'/mnt/data/romy/hypnomed/git/diffusion_embedding/emb_output_reordered/embedding_dense_res.{subj}.{ses}.{condition}.npy', res)
-
                 
                 
                 

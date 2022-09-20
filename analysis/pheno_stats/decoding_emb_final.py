@@ -24,7 +24,7 @@ start_time = time.time()
 
 
 
-self = diff_emb
+# self = diff_emb
 
 class embedding:
     def __init__(self, data_path, emb_file, expertise_file, states_file, sub_file):
@@ -55,10 +55,8 @@ class embedding:
                 'error in p.group, group not recognized ! Should be G1, G2 or all')
 
     def get_states(self, states_wanted):
-        self = diff_emb
         states_mask = np.zeros(self.emb.shape[0]) #revient à faire np.zeros(n_subjects)
-        for states_id in range(len(states_wanted)):
-            print(states_id) # iterate index for states wanted (eg if states_wanted = ['meditation','hypnose'] --> indx med == 0)
+        for states_id in range(len(states_wanted)): # iterate index for states wanted (eg if states_wanted = ['meditation','hypnose'] --> indx med == 0)
             states_mask = states_mask + self.states[states_wanted[states_id]] #pour chaque sujet defini mask si correspond à un state in state_wanted
         self.states = self.states[states_wanted]
         self.expertise = self.expertise[states_mask != 0] #rassemble le mask expertise et mask states : donne une liste de sujets 
@@ -91,19 +89,11 @@ class p:
 def load_data(p):
     data_path = p.data_path
     diff_emb = embedding(data_path, #data_path
-                         'group_control_meditation_hypnose_embedding.mat', #emb_file
+                         'group_{}_embedding.mat'.format(p.data_file), #emb_file
                          'expertise_covs.csv', #expertise_file (group in our case)
                          'state_covs.csv', #states_file
                          'subject_covs.csv') #subfile
     diff_emb.emb = diff_emb.emb[:, :, p.dimension] #keep only first dimension, corresp. to principal gradient (ie index 0)
-    # if 'Med_mean' in [x for x in p.states_wanted]:
-    #     med_mean = np.mean([diff_emb.emb[diff_emb.states['OpenPresence']==1],diff_emb.emb[diff_emb.states['Compassion']==1]] ,0)
-    #     diff_emb.states = diff_emb.states.rename(columns={'Compassion':'Med_mean'})
-    #     diff_emb.emb[diff_emb.states['Med_mean']==1] = med_mean
-    # elif 'med' in [x.lower() for x in p.states_wanted]:
-    #     # careful, hard coded here!!
-    #     diff_emb.states.columns = ['Med', 'Med2', 'RestingState']
-    #     diff_emb.states['Med'][diff_emb.states['Med2'] != 0] = 1
     diff_emb.get_states(p.states_wanted)
     diff_emb.remove_sub(p.outliers)
     diff_emb.get_expertise(p.group)
@@ -115,9 +105,9 @@ def create_labels(p, diff_emb):
     if p.analysis == 'states':
         states_labels = diff_emb.states.to_numpy()[:, 0] #state_label pour la première condition de chaque sujet
         Y = states_labels.T
-    elif p.analysis == 'expertise': #prend que les sujets qui ont eu expertise (groupe) d'intérêt
-        expertise_labels = diff_emb.expertise.G1.to_numpy()
-        Y = expertise_labels.T
+    elif p.analysis == 'blocks': #prend que les sujets qui ont eu expertise (groupe) d'intérêt
+        blocks_labels = diff_emb.expertise.G1.to_numpy()
+        Y = blocks_labels.T
     return Y
 
 
@@ -235,8 +225,15 @@ else:
     p.data_path = '/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/data'
     p.results_path = '/home/romy.beaute/projects/hypnomed/analysis/pheno_stats/results/emb_decoding'
 
+
+
+if p.analysis == 'states':
+    p.data_file = 'control_meditation_hypnose' #states analysis
+else: 
+    p.data_file = 'run-1_run-2_run-3' #block analysis 
+
     
-p.data_file = 'new'
+
 p.outliers = [15,27,32,40]  # subject(s) id that you want to exclude from the analysis
 p.dimension = [0]  # dimension(s) that you want to study (keep only principal gradient, ie dim 0)
 p.repetitions_nb = 1
@@ -249,23 +246,23 @@ p.n_splits = 5
 p.analysis_framework = [
     ###states analysis : group that you want to study : 'G1','G2','all'
     
-    {'states_wanted':['control','meditation','hypnose'],'group':'G1'},
+    {'states_wanted':['control','meditation','hypnose'],'group':'G1','analysis':'states'},
     {'states_wanted':['meditation','hypnose'],'group':'G1','analysis':'states'},
-    {'states_wanted':['control'],'group':'G1'},
-    {'states_wanted':['meditation'],'group':'G1'},
-    {'states_wanted':['hypnose'],'group':'G1'},
+    # {'states_wanted':['control'],'group':'G1','analysis':'states'},
+    # {'states_wanted':['meditation'],'group':'G1','analysis':'states'},
+    # {'states_wanted':['hypnose'],'group':'G1','analysis':'states'},
 
-    {'states_wanted':['control','meditation','hypnose'],'group':'G2'},
-    {'states_wanted':['meditation','hypnose'],'group':'G2'},
-    {'states_wanted':['control'],'group':'G2'},
-    {'states_wanted':['meditation'],'group':'G2'},
-    {'states_wanted':['hypnose'],'group':'G2'},
+    {'states_wanted':['control','meditation','hypnose'],'group':'G2','analysis':'states'},
+    {'states_wanted':['meditation','hypnose'],'group':'G2','analysis':'states'},
+    # {'states_wanted':['control'],'group':'G2'},
+    # {'states_wanted':['meditation'],'group':'G2'},
+    # {'states_wanted':['hypnose'],'group':'G2'},
     
-    {'states_wanted':['control','meditation','hypnose'],'group':'all'},
-    {'states_wanted':['meditation','hypnose'],'group':'all'},
-    {'states_wanted':['control'],'group':'all'},
-    {'states_wanted':['meditation'],'group':'all'},
-    {'states_wanted':['hypnose'],'group':'all'}
+    {'states_wanted':['control','meditation','hypnose'],'group':'all','analysis':'states'},
+    {'states_wanted':['meditation','hypnose'],'group':'all','analysis':'states'}
+    # {'states_wanted':['control'],'group':'all'},
+    # {'states_wanted':['meditation'],'group':'all'},
+    # {'states_wanted':['hypnose'],'group':'all'}
     ]
 
 df = {'states_wanted':[],'group':[],'analysis':[],'scores':[],'coefs':[]}
@@ -287,6 +284,7 @@ for analysis in p.analysis_framework:
 
     
 df = pd.DataFrame(df)
+print(df)
 df.to_pickle(os.path.join(p.results_path,f'decoding_results_{job_id}.pkl'))
 
 print("--- %s seconds ---" % (time.time() - start_time))
