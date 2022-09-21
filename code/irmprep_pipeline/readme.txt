@@ -1,5 +1,4 @@
 @author : Romy Beauté
-@contact : romybeaute.univ@gmail.com
 @date : 20/06/2022
 
 Donne les explications de chaque script, et de l'ordre de run/utilisation

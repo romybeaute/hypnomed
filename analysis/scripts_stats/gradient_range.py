@@ -1,12 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #%%
-"""
-Created on Mon May 30 17:20:48 2022
 
-@author: sebastien
-@modified : romy
-"""
 import numpy as np
 import os,sys
 sys.path.append('/home/romy.beaute/projects/hypnomed/analysis/scripts_stats/')
