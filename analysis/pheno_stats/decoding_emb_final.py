@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-Spyder Editor
 
-This is a temporary script file.
-"""
+
 import numpy as np
 import pandas as pd
 
@@ -239,9 +236,9 @@ p.dimension = [0]  # dimension(s) that you want to study (keep only principal gr
 p.repetitions_nb = 1
 p.n_splits = 5
 
-# p.states_wanted : states that you want to study : 'Med','RestingState' , 'Compassion', 'OpenPresence'
-# p.group : 'experts'  # group that you want to study : 'novices','experts','all'
-# p.analysis : 'states', 'expertise'
+# p.states_wanted : states that you want to study : 'control','meditation,'hypnosis'
+# p.group : 'experts'  # group that you want to study : 'G1','G2','all'
+# p.analysis : 'states', 'group'
 
 p.analysis_framework = [
     ###states analysis : group that you want to study : 'G1','G2','all'
