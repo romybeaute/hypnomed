@@ -1,0 +1,4 @@
+Subfolder HYPNOMED2.0 created on 12/11/25
+Create a clean version, with only files and scripts we need
+Copy pasted the Hypnomed_META folder, that was an earlier attempt to go back to the project.
+In HYPNOMED2.0, we keep only the useful content of Hypnomed_META (we should be able to delete Hypnomed_META after)
